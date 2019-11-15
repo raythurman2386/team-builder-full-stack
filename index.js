@@ -1,8 +1,16 @@
 // implement your API here
 const express = require("express");
-
+const cors = require("cors");
+const database = require("./data/db");
 const server = express();
 const port = 5000;
+
+server.use(express.json());
+server.use(cors());
+
+server.get("/", (req, res) => {
+  res.send("Hello from Express");
+});
 
 // POST request to /api/users
 // Creates a user using the information sent inside the request body
