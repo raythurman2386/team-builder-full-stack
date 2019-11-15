@@ -13,7 +13,7 @@ server.get("/", (req, res) => {
 });
 
 // POST request to /api/users
-// Creates a user using the information sent inside the request body
+// Creates a user using the info sent inside the request body
 server.post("/api/users", (req, res) => {});
 
 // GET request to /api/users
