@@ -44,7 +44,7 @@ server.delete("/api/users/:id", (req, res) => {
     if (!user) {
       res.status(404).json({ error: "User not found..." });
     } else {
-      db.remove(user).then(i => res.status(200).json(user));
+      db.remove(req.params.id).then(i => res.status(200).json(user));
     }
   });
 });
