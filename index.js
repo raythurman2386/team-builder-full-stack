@@ -14,7 +14,6 @@ server.get("/", (req, res) => {
 });
 
 // GET request to /api/users
-// Returns array of all user objects contained
 server.get("/api/users", (req, res) => {
   db.find().then(data => {
     if (!data) {
@@ -28,7 +27,6 @@ server.get("/api/users", (req, res) => {
 });
 
 // GET request to /api/users/:id
-// returns the user with specified id
 server.get("/api/users/:id", (req, res) => {
   db.findById(req.params.id).then(user => {
     if (!user) {
@@ -42,7 +40,6 @@ server.get("/api/users/:id", (req, res) => {
 });
 
 // POST request to /api/users
-// Creates a user using the info sent inside the request body
 server.post("/api/users", (req, res) => {
   if (!req.body.name || !req.body.bio) {
     return res
@@ -54,7 +51,7 @@ server.post("/api/users", (req, res) => {
     name: req.body.name,
     bio: req.body.bio,
     created_at: Date.now(),
-    updated_at: Date.now()
+    updated_at: null
   };
 
   db.insert(newUser).then(user => {
@@ -65,7 +62,6 @@ server.post("/api/users", (req, res) => {
 });
 
 // DELETE request to /api/users/:id
-// Deletes specified user
 server.delete("/api/users/:id", (req, res) => {
   db.findById(req.params.id).then(user => {
     if (!user) {
@@ -79,7 +75,6 @@ server.delete("/api/users/:id", (req, res) => {
 });
 
 // PUT request to /api/users/:id
-// updates the specified user with info from request body
 server.put("/api/users:id", (req, res) => {});
 
 server.listen(port, host, () => {
