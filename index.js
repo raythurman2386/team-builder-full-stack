@@ -23,7 +23,15 @@ server.get("/api/users", (req, res) => {
 
 // GET request to /api/users/:id
 // returns the user with specified id
-server.get("/api/users/:id", (req, res) => {});
+server.get("/api/users/:id", (req, res) => {
+  db.findById(req.params.id).then(user => {
+    if (!user) {
+      res.status(404).json({ error: "User not found..." });
+    } else {
+      res.status(200).json(user);
+    }
+  });
+});
 
 // POST request to /api/users
 // Creates a user using the info sent inside the request body
