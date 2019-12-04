@@ -39,7 +39,15 @@ server.post("/api/users", (req, res) => {});
 
 // DELETE request to /api/users/:id
 // Deletes specified user
-server.delete("/api/users/:id", (req, res) => {});
+server.delete("/api/users/:id", (req, res) => {
+  db.findById(req.params.id).then(user => {
+    if (!user) {
+      res.status(404).json({ error: "User not found..." });
+    } else {
+      db.remove(user).then(i => res.status(200).json(user));
+    }
+  });
+});
 
 // PUT request to /api/users/:id
 // updates the specified user with info from request body
