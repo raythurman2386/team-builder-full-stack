@@ -50,8 +50,6 @@ server.post("/api/users", (req, res) => {
       .json({ errorMessage: "Please provide name and bio for the user." });
   }
 
-  let id = 2;
-
   const newUser = {
     name: req.body.name,
     bio: req.body.bio,
