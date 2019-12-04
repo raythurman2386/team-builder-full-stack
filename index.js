@@ -17,7 +17,13 @@ server.get("/", (req, res) => {
 // Returns array of all user objects contained
 server.get("/api/users", (req, res) => {
   db.find().then(data => {
-    res.status(200).json(data);
+    if (!data) {
+      res.status(500).json({
+        errorMessage: "There was an error while saving the user to the database"
+      });
+    } else {
+      res.status(200).json(data);
+    }
   });
 });
 
@@ -26,7 +32,9 @@ server.get("/api/users", (req, res) => {
 server.get("/api/users/:id", (req, res) => {
   db.findById(req.params.id).then(user => {
     if (!user) {
-      res.status(404).json({ error: "User not found..." });
+      res
+        .status(404)
+        .json({ message: "The user with the specified ID does not exist." });
     } else {
       res.status(200).json(user);
     }
@@ -35,14 +43,35 @@ server.get("/api/users/:id", (req, res) => {
 
 // POST request to /api/users
 // Creates a user using the info sent inside the request body
-server.post("/api/users", (req, res) => {});
+server.post("/api/users", (req, res) => {
+  if (!req.body.name || !req.body.bio) {
+    return res
+      .status(400)
+      .json({ errorMessage: "Please provide name and bio for the user." });
+  }
+
+  let id = 2;
+
+  const newUser = {
+    name: req.body.name,
+    bio: req.body.bio,
+    created_at: Date.now(),
+    updated_at: Date.now()
+  };
+
+  db.insert(newUser).then(user => {
+    res.status(200).json(user);
+  });
+});
 
 // DELETE request to /api/users/:id
 // Deletes specified user
 server.delete("/api/users/:id", (req, res) => {
   db.findById(req.params.id).then(user => {
     if (!user) {
-      res.status(404).json({ error: "User not found..." });
+      res
+        .status(404)
+        .json({ message: "The user with the specified ID does not exist." });
     } else {
       db.remove(req.params.id).then(i => res.status(200).json(user));
     }
