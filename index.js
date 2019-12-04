@@ -60,7 +60,9 @@ server.post("/api/users", (req, res) => {
   };
 
   db.insert(newUser).then(user => {
-    res.status(200).json(user);
+    res
+      .status(200)
+      .json({ user, addedUser: newUser, message: "You added a user!" });
   });
 });
 
