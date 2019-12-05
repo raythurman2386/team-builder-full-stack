@@ -18,6 +18,10 @@ const TeamMemberCard = styled.div`
   width: 400px;
   min-height: 250px;
   background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   padding: 1.5rem;
   box-shadow: 0 10px 6px -6px #777;
   margin: 2rem auto;
@@ -35,12 +39,10 @@ const TeamMemberCard = styled.div`
   h2 {
     text-align: center;
     margin: 2rem 0;
-  }
-
-  h3 {
-    text-align: center;
-    margin: 4rem 0;
-    font-size: 2rem;
+    width: 80%;
+    overflow: hidden;
+    text-wrap: wrap;
+    word-wrap: normal;
   }
 
   button {
@@ -48,6 +50,7 @@ const TeamMemberCard = styled.div`
     margin-left: 10px;
     font-size: 1.4rem;
     font-weight: 500;
+    width: 80%;
     border: none;
     box-shadow: 0 5px 5px #777;
     cursor: pointer;
