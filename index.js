@@ -9,10 +9,6 @@ const port = 5000;
 server.use(express.json());
 server.use(cors());
 
-server.get("/", (req, res) => {
-  res.send("Hello from Express");
-});
-
 // GET request to /api/users
 server.get("/api/users", (req, res) => {
   db.find().then(data => {
