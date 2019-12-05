@@ -75,25 +75,25 @@ server.delete("/api/users/:id", (req, res) => {
 });
 
 // PUT request to /api/users/:id
-// server.put("/api/users:id", (req, res) => {
-//   if (!req.body.name || !req.body.bio) {
-//     return res
-//       .status(400)
-//       .json({ message: "Please provide a name and a bio for the user" });
-//   }
+server.put("/api/users:id", (req, res) => {
+  if (!req.body.name || !req.body.bio) {
+    return res
+      .status(400)
+      .json({ message: "Please provide a name and a bio for the user" });
+  }
 
-//   db.update(req.params.id, req.body)
-//     .then(user => {
-//       return user !== 0
-//         ? res.status(200).json({ ...req.body })
-//         : res.status(404).json({ message: "That user does not exist!" });
-//     })
-//     .catch(() => {
-//       return res
-//         .status(500)
-//         .json({ error: "The user information could not be modified." });
-//     });
-// });
+  db.update(req.body)
+    .then(user => {
+      return user !== 0
+        ? res.status(200).json({ ...user, ...req.body })
+        : res.status(404).json({ message: "That user does not exist!" });
+    })
+    .catch(() => {
+      return res
+        .status(500)
+        .json({ error: "The user information could not be modified." });
+    });
+});
 
 server.listen(port, host, () => {
   console.log(`Server running at http://${host}:${port}`);
