@@ -1,24 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { animated } from "react-spring";
 import { useAnimation } from "../../hooks/useAnimation";
 import Axios from "axios";
 
-const TeamForm = ({ history, setUpdating }) => {
+const UpdateForm = ({ setUpdating, history, match }) => {
   const { linkAnimation } = useAnimation();
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
 
+  useEffect(() => {
+    Axios.get(`http://127.0.0.1:5000/api/users/${match.params.id}`)
+      .then(res => {
+        setName(res.data.name);
+        setBio(res.data.bio);
+        setUpdating(true);
+      })
+      .catch(err => console.log(err));
+  }, [match.params.id]);
+
   const handleSubmit = e => {
     e.preventDefault();
-    setUpdating(true);
-    const newUser = {
+    const updatedUser = {
       name,
       bio
     };
 
-    Axios.post("http://127.0.0.1:5000/api/users", newUser)
-      .then(res => setUpdating(false))
+    setUpdating(false);
+
+    Axios.put(`http://127.0.0.1:5000/api/users/${match.params.id}`, updatedUser)
       .then(() => history.push("/"))
       .catch(err => console.log(err));
   };
@@ -48,7 +58,7 @@ const TeamForm = ({ history, setUpdating }) => {
   );
 };
 
-export default TeamForm;
+export default UpdateForm;
 
 const Wrapper = styled(animated.div)`
   max-width: 1120px;

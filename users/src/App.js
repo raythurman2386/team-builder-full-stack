@@ -6,6 +6,7 @@ import { Route, Switch } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import GlobalStyle from "./styles/Global";
 import TeamForm from "./components/form/Form";
+import UpdateForm from "./components/form/UpdateForm";
 import Team from "./components/team/Team";
 import TeamPlaceholder from "./components/team/TeamPlaceholder";
 // Hooks
@@ -15,6 +16,7 @@ function App(props) {
   // Hook for just the navbar
   const [navBarOpen, handleNavbar] = useNavbar();
   const [teamList, setTeamList] = useState([]);
+  const [updating, setUpdating] = useState(false);
 
   // Grab the team members from api
   useEffect(() => {
@@ -28,7 +30,7 @@ function App(props) {
         }
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [updating]);
 
   return (
     <div className="App">
@@ -44,12 +46,13 @@ function App(props) {
           />
           <Route
             path="/add-member"
+            render={props => <TeamForm {...props} setUpdating={setUpdating} />}
+          />
+          <Route
+            path="/update-member/:id"
             render={props => (
-              <TeamForm
-                {...props}
-                teamList={teamList}
-                setTeamList={setTeamList}
-              />
+              // @ts-ignore
+              <UpdateForm {...props} setUpdating={setUpdating} />
             )}
           />
           <Route path="/no-members" component={TeamPlaceholder} />

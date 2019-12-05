@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const TeamMember = ({ member, handleDelete }) => {
   return (
     <TeamMemberCard>
       <h1>{member.name}</h1>
       <h2>{member.bio}</h2>
-      <button>Edit</button>
-      <button onClick={() => handleDelete(member.id)}>Delete</button>
+      <Link to={`/update-member/${member.id}`}>Edit</Link>
+      <button onClick={id => handleDelete(member.id)}>Delete</button>
     </TeamMemberCard>
   );
 };
