@@ -75,17 +75,18 @@ server.delete("/api/users/:id", (req, res) => {
 });
 
 // PUT request to /api/users/:id
-server.put("/api/users:id", (req, res) => {
+server.put("/api/users/:id", (req, res) => {
   if (!req.body.name || !req.body.bio) {
     return res
       .status(400)
       .json({ message: "Please provide a name and a bio for the user" });
   }
 
-  db.update(req.body)
+  db.update(req.params.id, req.body)
     .then(user => {
       return user !== 0
-        ? res.status(200).json({ ...user, ...req.body })
+        ? // @ts-ignore
+          res.status(200).json({ ...user, ...req.body, updated_at: Date.now() })
         : res.status(404).json({ message: "That user does not exist!" });
     })
     .catch(() => {
