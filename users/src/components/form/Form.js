@@ -1,17 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { animated } from "react-spring";
 import { useAnimation } from "../../hooks/useAnimation";
+import Axios from "axios";
 
 const TeamForm = ({ teamList, setTeamList, history }) => {
   const { linkAnimation } = useAnimation();
-  // set the values to state from app
+  const [name, setName] = useState("");
+  const [bio, setBio] = useState("");
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const newUser = {
+      name,
+      bio
+    };
+
+    Axios.post("http://127.0.0.1:5000/api/users", newUser)
+      .then(res => setTeamList([...teamList, newUser]))
+      .then(() => history.push("/"))
+      .catch(err => console.log(err));
+  };
 
   return (
     <Wrapper style={linkAnimation}>
-      <FormWrapper>
-        <Input type="text" name="name" placeholder="Name" required />
-        <Input type="text" name="bio" placeholder="Bio" required />
+      <FormWrapper onSubmit={e => handleSubmit(e)}>
+        <Input
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={name}
+          onChange={e => setName(e.target.value)}
+          required
+        />
+        <Input
+          type="text"
+          name="bio"
+          placeholder="Bio"
+          value={bio}
+          onChange={e => setBio(e.target.value)}
+          required
+        />
         <ButtonWrapper type="submit">Submit</ButtonWrapper>
       </FormWrapper>
     </Wrapper>
