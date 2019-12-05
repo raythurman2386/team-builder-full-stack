@@ -38,7 +38,9 @@ function App(props) {
           <Route
             exact
             path="/"
-            render={props => <Team {...props} teamList={teamList} />}
+            render={props => (
+              <Team {...props} teamList={teamList} setTeamList={setTeamList} />
+            )}
           />
           <Route
             path="/add-member"
