@@ -59,7 +59,7 @@ const TeamMemberCard = styled.div`
     color: white;
     :hover {
       color: #fdcb6e;
-      border-bottom: 1px solid #fdcb6e;
+      border-bottom: .5px solid #fdcb6e;
       transition: 0.5s ease;
     }
 `;
@@ -78,7 +78,7 @@ const StyledLink = styled(Link)`
   color: white;
   :hover {
     color: #fdcb6e;
-    border-bottom: 1px solid #fdcb6e;
+    border-bottom: 0.5px solid #fdcb6e;
     transition: 0.5s ease;
   }
 `;
