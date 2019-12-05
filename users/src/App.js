@@ -68,4 +68,7 @@ export default App;
 const Wrapper = styled.div`
   max-width: 1120px;
   margin: 60px auto 0;
+  @media (max-width: 769px) {
+    margin-top: 140px;
+  }
 `;
