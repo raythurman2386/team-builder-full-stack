@@ -86,6 +86,7 @@ server.put("/api/users/:id", (req, res) => {
     .then(user => {
       return user !== 0
         ? // @ts-ignore
+          // @ts-ignore
           res.status(200).json({ ...user, ...req.body, updated_at: Date.now() })
         : res.status(404).json({ message: "That user does not exist!" });
     })
