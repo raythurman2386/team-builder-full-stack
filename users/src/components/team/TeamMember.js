@@ -7,7 +7,7 @@ const TeamMember = ({ member, handleDelete }) => {
     <TeamMemberCard>
       <h1>{member.name}</h1>
       <h2>{member.bio}</h2>
-      <Link to={`/update-member/${member.id}`}>Edit</Link>
+      <StyledLink to={`/update-member/${member.id}`}>Edit</StyledLink>
       <button onClick={id => handleDelete(member.id)}>Delete</button>
     </TeamMemberCard>
   );
@@ -62,5 +62,23 @@ const TeamMemberCard = styled.div`
       border-bottom: 1px solid #fdcb6e;
       transition: 0.5s ease;
     }
+`;
+const StyledLink = styled(Link)`
+  padding: 6px 12px;
+  margin-left: 10px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  width: 80%;
+  border: none;
+  box-shadow: 0 5px 5px #777;
+  cursor: pointer;
+  background-color: #333;
+  color: white;
+  :hover {
+    color: #fdcb6e;
+    border-bottom: 1px solid #fdcb6e;
+    transition: 0.5s ease;
   }
 `;

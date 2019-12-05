@@ -23,7 +23,7 @@ function App(props) {
     axios
       .get("http://127.0.0.1:5000/api/users")
       .then(res => {
-        if (res.data.length === 0) {
+        if (res.data.length === []) {
           props.history.push("/no-members");
         } else {
           setTeamList(res.data);
