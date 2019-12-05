@@ -1,19 +1,18 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
-const TeamMember = ({ member, handleEdit, handleDelete }) => {
+const TeamMember = ({ member }) => {
   return (
     <TeamMemberCard>
-      <h1 contentEditable={member.isEditable}>{member.name}</h1>
-      <h2>{member.email}</h2>
-      <h3>{member.role}</h3>
-      <button onClick={() => handleEdit(member.id)}>Edit</button>
-      <button onClick={() => handleDelete(member.id)}>Delete</button>
+      <h1>{member.name}</h1>
+      <h2>{member.bio}</h2>
+      <button>Edit</button>
+      <button>Delete</button>
     </TeamMemberCard>
-  )
-}
+  );
+};
 
-export default TeamMember
+export default TeamMember;
 
 const TeamMemberCard = styled.div`
   width: 400px;
@@ -60,4 +59,4 @@ const TeamMemberCard = styled.div`
       transition: 0.5s ease;
     }
   }
-`
+`;
