@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-const TeamMember = ({ member }) => {
+const TeamMember = ({ member, handleDelete }) => {
   return (
     <TeamMemberCard>
       <h1>{member.name}</h1>
       <h2>{member.bio}</h2>
       <button>Edit</button>
-      <button>Delete</button>
+      <button onClick={() => handleDelete(member.id)}>Delete</button>
     </TeamMemberCard>
   );
 };
