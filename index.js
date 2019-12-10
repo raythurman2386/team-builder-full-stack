@@ -1,5 +1,3 @@
-// implement your API here
-// code away!
 require("dotenv").config();
 const server = require("./api/server");
 
