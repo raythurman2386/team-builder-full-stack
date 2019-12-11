@@ -21,9 +21,9 @@ function App(props) {
   // Grab the team members from api
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:5000/api/users")
+      .get("https://team-builder-api.herokuapp.com/api/users")
       .then(res => {
-        if (res.data.length === []) {
+        if (res.data.length === 0) {
           props.history.push("/no-members");
         } else {
           setTeamList(res.data);
@@ -52,7 +52,12 @@ function App(props) {
             path="/update-member/:id"
             render={props => (
               // @ts-ignore
-              <UpdateForm {...props} setUpdating={setUpdating} />
+              <UpdateForm
+                {...props}
+                setUpdating={setUpdating}
+                teamList={teamList}
+                setTeamList={setTeamList}
+              />
             )}
           />
           <Route path="/no-members" component={TeamPlaceholder} />

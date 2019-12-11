@@ -17,7 +17,7 @@ const TeamForm = ({ history, setUpdating }) => {
       bio
     };
 
-    Axios.post("http://127.0.0.1:5000/api/users", newUser)
+    Axios.post("https://team-builder-api.herokuapp.com/api/users", newUser)
       .then(res => setUpdating(false))
       .then(() => history.push("/"))
       .catch(err => console.log(err));

@@ -11,7 +11,7 @@ const Team = props => {
   const { linkAnimation } = useAnimation();
 
   const handleDelete = id => {
-    Axios.delete(`http://127.0.0.1:5000/api/users/${id}`)
+    Axios.delete(`https://team-builder-api.herokuapp.com/api/users/${id}`)
       .then(res => {
         let updatedTeam = props.teamList.filter(member => member.id !== id);
         props.setTeamList(updatedTeam);
