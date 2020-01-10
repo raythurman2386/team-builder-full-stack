@@ -1,11 +1,11 @@
+require('dotenv').config();
+
 module.exports = {
   development: {
-    client: 'sqlite3',
-    connection: { filename: './data/lambda.db3' },
-    useNullAsDefault: true,
+    client: 'pg',
+    connection: process.env.DB_URL,
     migrations: {
       directory: './data/migrations',
-      tableName: 'dbmigrations',
     },
     seeds: { directory: './data/seeds' },
   },
