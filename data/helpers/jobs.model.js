@@ -1,7 +1,7 @@
 const db = require('../db');
 
 function getJobs() {
-  return db('jobs').select();
+  return db('jobs');
 }
 
 function getJobById(job_id) {
@@ -10,19 +10,12 @@ function getJobById(job_id) {
     .first();
 }
 
-function getTechnicianJobs(tech) {
-  return db('jobs')
-    .join('technicians as T', 'jobs.tech_id', 'T.id')
-    .where({ tech_id: tech })
-    .select('T.name', 'jobs.machine', 'jobs.complaint')
-}
-
 async function addJob(newJob) {
   const [id] = await db('jobs').insert(newJob);
   return getJobById(id);
 }
 
-async function updateJob(changes, job_id) {
+function updateJob(job_id, changes) {
   return db('jobs').where({ id: job_id }).update(changes)
 }
 
@@ -37,7 +30,6 @@ async function deleteJob(job_id) {
 module.exports = {
   getJobs,
   getJobById,
-  getTechnicianJobs,
   addJob,
   updateJob,
   deleteJob
