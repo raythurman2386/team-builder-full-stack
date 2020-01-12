@@ -1,16 +1,14 @@
 const db = require('../db');
 
-function getTechs() { }
+function getTechs() {
+  return db('technicians').select();
+}
 
-function getTechById(tech_id) { }
-
-function updateTech(changes, tech_id) { }
-
-function deleteTech(tech_id) { }
+function getTechById(tech_id) {
+  return db('technicians').where({ id: tech_id }).first()
+}
 
 module.exports = {
   getTechs,
-  getTechById,
-  updateTech,
-  deleteTech
+  getTechById
 }
