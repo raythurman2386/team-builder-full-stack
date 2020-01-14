@@ -24,11 +24,10 @@ const Sidebar = () => {
 export default Sidebar
 
 const SidebarWrapper = styled(animated.div)`
-  ${elevation[3]}
   background: #362f2d;
-  position: fixed;
+  padding-top: 50px;
   color: white;
-  width: 320px;
+  width: 300px;
   height: 100vh;
   display: flex;
   flex-direction: column;
