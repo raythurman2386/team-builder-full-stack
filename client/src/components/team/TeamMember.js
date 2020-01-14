@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import React from 'react'
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const TeamMember = ({ member, handleDelete }) => {
   return (
@@ -10,10 +10,10 @@ const TeamMember = ({ member, handleDelete }) => {
       <StyledLink to={`/update-member/${member.id}`}>Edit</StyledLink>
       <button onClick={id => handleDelete(member.id)}>Delete</button>
     </TeamMemberCard>
-  );
-};
+  )
+}
 
-export default TeamMember;
+export default TeamMember
 
 const TeamMemberCard = styled.div`
   width: 400px;
@@ -62,7 +62,7 @@ const TeamMemberCard = styled.div`
       border-bottom: .5px solid #fdcb6e;
       transition: 0.5s ease;
     }
-`;
+`
 const StyledLink = styled(Link)`
   padding: 6px 12px;
   margin-left: 10px;
@@ -81,4 +81,4 @@ const StyledLink = styled(Link)`
     border-bottom: 0.5px solid #fdcb6e;
     transition: 0.5s ease;
   }
-`;
+`

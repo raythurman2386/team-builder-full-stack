@@ -1,15 +1,15 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
-import logo from "../../logo-min.png";
+import logo from '../../logo-min.png'
 
 const Brand = () => {
-  return <Image src={logo} alt="Company Logo" />;
-};
+  return <Image src={logo} alt='Company Logo' />
+}
 
-export default Brand;
+export default Brand
 
 const Image = styled.img`
   height: 85%;
   margin: auto 0;
-`;
+`
