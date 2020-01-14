@@ -5,7 +5,7 @@ import { animated } from 'react-spring'
 import image from '../../assets/workers-team.svg'
 import { useAnimation } from '../../hooks/useAnimation'
 
-const TeamPlaceholder = () => {
+const Placeholder = () => {
   const { linkAnimation } = useAnimation()
 
   return (
@@ -17,18 +17,16 @@ const TeamPlaceholder = () => {
   )
 }
 
-export default TeamPlaceholder
+export default Placeholder
 
 const Wrapper = styled(animated.div)`
-  width: 100%;
-  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex: 1 0 0;
 
   img {
-    margin: 0 auto;
     width: 500px;
     color: #2d3436;
     padding: 0;

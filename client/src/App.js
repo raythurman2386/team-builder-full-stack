@@ -4,8 +4,9 @@ import { Route, Switch } from 'react-router-dom'
 // Components
 import Navbar from './components/navbar/Navbar'
 import Sidebar from './components/sidebar/Sidebar'
+import Jobs from './components/Jobs/Jobs'
 import GlobalStyle from './styles/Global'
-import TeamPlaceholder from './components/team/TeamPlaceholder'
+import Placeholder from './components/Jobs/Placeholder'
 // Hooks
 import { useNavbar } from './hooks/useNavbar'
 
@@ -14,27 +15,29 @@ function App(props) {
   const [navBarOpen, handleNavbar] = useNavbar()
 
   return (
-    <div className='App'>
+    <AppWrapper>
       <Navbar navbarState={navBarOpen} handleNavbar={handleNavbar} />
       <Wrapper>
         <Sidebar />
         <Switch>
-          <Route exact path='/' component={TeamPlaceholder} />
+          <Route exact path='/' component={Jobs} />
         </Switch>
         <GlobalStyle />
       </Wrapper>
-    </div>
+    </AppWrapper>
   )
 }
 
 export default App
 
+const AppWrapper = styled.div`
+  display: flex;
+`
+
 const Wrapper = styled.div`
   width: 100%;
-  margin: 50px auto 0;
   display: flex;
-  flex: 1 0 0;
   @media (max-width: 769px) {
-    margin-top: 140px;
+    /* margin-top: 140px; */
   }
 `
