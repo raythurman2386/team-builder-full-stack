@@ -8,6 +8,7 @@ import BurgerMenu from './BurgerMenu'
 import CollapseMenu from './CollapseMenu'
 
 import { useAnimation } from '../../hooks/useAnimation'
+import elevation from '../../styles/elevation'
 
 const Navbar = props => {
   const { linkAnimation, barAnimation } = useAnimation()
@@ -19,7 +20,8 @@ const Navbar = props => {
           <Brand />
           <NavLinks style={linkAnimation}>
             <Link to='/'>Home</Link>
-            <Link to='/add-member'>Add Team Member</Link>
+            <Link to='/add-member'>Add Technician</Link>
+            <Link to='/add-job'>Add Job</Link>
           </NavLinks>
           <BurgerWrapper>
             <BurgerMenu
@@ -45,12 +47,13 @@ const NavBar = styled(animated.nav)`
   top: 0;
   left: 0;
   background: #2d3436;
-  z-index: 1;
+  z-index: 2;
   font-size: 1.4rem;
+  ${elevation[2]}
 `
 
 const FlexContainer = styled.div`
-  max-width: 120rem;
+  max-width: 98%;
   display: flex;
   margin: auto;
   padding: 0 2rem;

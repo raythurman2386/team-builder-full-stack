@@ -29,7 +29,12 @@ const CollapseMenu = props => {
           </li>
           <li>
             <Link to='/add-member' onClick={props.handleNavbar}>
-              Add Team Member
+              Add Technician
+            </Link>
+          </li>
+          <li>
+            <Link to='/add-job' onClick={props.handleNavbar}>
+              Add Job
             </Link>
           </li>
         </NavLinks>

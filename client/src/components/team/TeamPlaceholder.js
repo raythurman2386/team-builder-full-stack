@@ -11,8 +11,8 @@ const TeamPlaceholder = () => {
   return (
     <Wrapper style={linkAnimation}>
       <img src={image} alt='One Team' />
-      <h1>Oh dear! It appears you don't have a team!</h1>
-      <p>How about adding your team members?</p>
+      <h1>Oh dear! It appears you don't have any jobs!</h1>
+      <p>How about adding some jobs?</p>
     </Wrapper>
   )
 }
