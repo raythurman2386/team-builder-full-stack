@@ -59,5 +59,6 @@ const ListItem = styled.li`
   &:hover {
     color: #fdcb6e;
     border-bottom: 1px solid #fdcb6e;
+    ${elevation[3]}
   }
 `
