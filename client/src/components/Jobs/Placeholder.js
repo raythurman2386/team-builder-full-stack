@@ -27,6 +27,7 @@ const Wrapper = styled(animated.div)`
   flex: 1 0 0;
 
   img {
+    max-width: 500px;
     width: 60%;
     color: #2d3436;
     padding: 0;
@@ -42,7 +43,7 @@ const Wrapper = styled(animated.div)`
     font-size: 1.5rem;
     padding: 1rem;
   }
-    @media (max-width: 840px) {
+  @media (max-width: 840px) {
     h1 {
       font-size: 2rem;
     }
