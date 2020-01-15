@@ -27,7 +27,7 @@ const SidebarWrapper = styled(animated.div)`
   background: #362f2d;
   padding-top: 50px;
   color: white;
-  width: 300px;
+  width: 250px;
   height: 100vh;
   display: flex;
   flex-direction: column;
