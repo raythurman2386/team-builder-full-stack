@@ -16,7 +16,7 @@ export const useAnimation = () => {
   barAnimation = useSpring({
     from: { transform: 'translate3d(0, -10rem, 0)' },
     transform: 'translate3d(0, 0, 0)',
-    delay: 300
+    delay: 300,
   })
 
   sidebarAnimation = useSpring({

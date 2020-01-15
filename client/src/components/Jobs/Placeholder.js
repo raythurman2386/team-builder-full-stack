@@ -11,8 +11,8 @@ const Placeholder = () => {
   return (
     <Wrapper style={linkAnimation}>
       <img src={image} alt='One Team' />
-      <h1>Oh dear! It appears you don't have any jobs!</h1>
-      <p>How about adding some jobs?</p>
+      <h1>It appears you don't have any jobs!</h1>
+      <p>How about adding some?</p>
     </Wrapper>
   )
 }
@@ -27,7 +27,7 @@ const Wrapper = styled(animated.div)`
   flex: 1 0 0;
 
   img {
-    width: 500px;
+    width: 60%;
     color: #2d3436;
     padding: 0;
   }
@@ -41,5 +41,14 @@ const Wrapper = styled(animated.div)`
   p {
     font-size: 1.5rem;
     padding: 1rem;
+  }
+    @media (max-width: 840px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+    }
   }
 `
