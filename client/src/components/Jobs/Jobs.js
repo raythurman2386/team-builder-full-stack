@@ -14,6 +14,7 @@ const Team = props => {
   useEffect(() => {
     Axios.get('http://127.0.0.1:4000/api/jobs/')
       .then(res => {
+        console.log(res.data)
         setJobs(res.data)
       })
       .catch(err => console.log(err))

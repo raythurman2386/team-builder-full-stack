@@ -7,6 +7,7 @@ const TeamMember = ({ job, handleDelete }) => {
     <TeamMemberCard>
       <h1>{job.machine}</h1>
       <h2>{job.complaint}</h2>
+      <h2>{job.name}</h2>
       <StyledLink to={`/update-member/${job.id}`}>Edit</StyledLink>
       <button onClick={id => handleDelete(job.id)}>Delete</button>
     </TeamMemberCard>
