@@ -9,6 +9,7 @@ exports.up = async function (knex) {
     tbl.increments('id')
     tbl.string('machine').notNullable;
     tbl.string('complaint')
+    tbl.datetime('job_date')
     tbl
       .integer('tech_id')
       .references('id')
