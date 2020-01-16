@@ -19,8 +19,9 @@ const Team = props => {
   }, [])
 
   const handleDelete = id => {
+    const newJobs = jobs.filter(job => job.id !== id);
     Axios.delete(`http://127.0.0.1:4000/api/jobs/${id}`)
-      .then()
+      .then(res => setJobs(newJobs))
       .catch(err => console.log(err))
   }
 
