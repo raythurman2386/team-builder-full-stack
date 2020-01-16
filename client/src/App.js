@@ -20,7 +20,7 @@ function App(props) {
       <Wrapper>
         <Sidebar />
         <Switch>
-          <Route exact path='/' component={Placeholder} />
+          <Route exact path='/' component={Jobs} />
         </Switch>
         <GlobalStyle />
       </Wrapper>

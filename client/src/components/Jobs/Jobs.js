@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import styled from 'styled-components'
 import { animated } from 'react-spring'
 
 // Team member
-import TeamMember from './JobItem'
+import JobItem from './JobItem'
 import { useAnimation } from '../../hooks/useAnimation'
 
 const Team = props => {
   const { linkAnimation } = useAnimation()
+  const [jobs, setJobs] = useState([])
 
   useEffect(() => {
     Axios.get('http://127.0.0.1:4000/api/jobs/')
       .then(res => {
-        console.log(res.data)
+        setJobs(res.data)
       })
       .catch(err => console.log(err))
   }, [])
@@ -26,9 +27,9 @@ const Team = props => {
 
   return (
     <TeamWrapper style={linkAnimation}>
-      {props.teamList &&
-        props.teamList.map((team, index) => (
-          <TeamMember key={index} member={team} handleDelete={handleDelete} />
+      {jobs &&
+        jobs.map((job) => (
+          <JobItem key={job.id} job={job} handleDelete={handleDelete} />
         ))}
     </TeamWrapper>
   )
@@ -42,6 +43,6 @@ const TeamWrapper = styled(animated.div)`
   justify-content: space-evenly;
   align-items: center;
   min-height: 20rem;
-  margin: auto;
+  margin: 5rem auto;
   width: 100%;
 `

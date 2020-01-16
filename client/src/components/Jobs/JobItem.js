@@ -2,13 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-const TeamMember = ({ member, handleDelete }) => {
+const TeamMember = ({ job, handleDelete }) => {
   return (
     <TeamMemberCard>
-      <h1>{member.name}</h1>
-      <h2>{member.bio}</h2>
-      <StyledLink to={`/update-member/${member.id}`}>Edit</StyledLink>
-      <button onClick={id => handleDelete(member.id)}>Delete</button>
+      <h1>{job.machine}</h1>
+      <h2>{job.complaint}</h2>
+      <StyledLink to={`/update-member/${job.id}`}>Edit</StyledLink>
+      <button onClick={id => handleDelete(job.id)}>Delete</button>
     </TeamMemberCard>
   )
 }
@@ -16,7 +16,7 @@ const TeamMember = ({ member, handleDelete }) => {
 export default TeamMember
 
 const TeamMemberCard = styled.div`
-  width: 400px;
+  width: 250px;
   min-height: 250px;
   background-color: #f2f2f2;
   display: flex;
@@ -42,7 +42,6 @@ const TeamMemberCard = styled.div`
     margin: 2rem 0;
     width: 80%;
     overflow: hidden;
-    text-wrap: wrap;
     word-wrap: normal;
   }
 
@@ -62,6 +61,7 @@ const TeamMemberCard = styled.div`
       border-bottom: .5px solid #fdcb6e;
       transition: 0.5s ease;
     }
+  }
 `
 const StyledLink = styled(Link)`
   padding: 6px 12px;
