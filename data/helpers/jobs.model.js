@@ -1,7 +1,7 @@
 const db = require('../db');
 
 function getJobs() {
-  return db('jobs');
+  return db('jobs as J').join('technicians as T', 'J.tech_id', '=', 'T.id').select('J.id', 'J.machine', 'J.complaint', 'T.name');
 }
 
 function getJobById(job_id) {
