@@ -1,15 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import elevation from '../../styles/elevation'
 
 const TeamMember = ({ job, handleDelete }) => {
   return (
     <TeamMemberCard>
       <h1>{job.machine}</h1>
-      <h2>{job.complaint}</h2>
-      <h2>{job.name}</h2>
+      <h2>Complaint: {job.complaint}</h2>
+      <h2>Tech: {job.name}</h2>
       <StyledLink to={`/update-member/${job.id}`}>Edit</StyledLink>
-      <button onClick={id => handleDelete(job.id)}>Delete</button>
+      <button onClick={id => handleDelete(job.id)}>Completed</button>
     </TeamMemberCard>
   )
 }
@@ -17,6 +18,7 @@ const TeamMember = ({ job, handleDelete }) => {
 export default TeamMember
 
 const TeamMemberCard = styled.div`
+  box-sizing: border-box;
   width: 250px;
   min-height: 250px;
   background-color: #f2f2f2;
@@ -25,10 +27,10 @@ const TeamMemberCard = styled.div`
   justify-content: space-around;
   align-items: center;
   padding: 1.5rem;
-  box-shadow: 0 10px 6px -6px #777;
+  ${elevation[1]}
   margin: 2rem auto;
   :hover {
-    box-shadow: 0 10px 16px -6px #777;
+    ${elevation[4]}
     transition: 0.4s ease;
   }
 
@@ -40,7 +42,6 @@ const TeamMemberCard = styled.div`
 
   h2 {
     text-align: center;
-    margin: 2rem 0;
     width: 80%;
     overflow: hidden;
     word-wrap: normal;
@@ -53,9 +54,10 @@ const TeamMemberCard = styled.div`
     font-weight: 500;
     width: 80%;
     border: none;
-    box-shadow: 0 5px 5px #777;
+    ${elevation[1]}
     cursor: pointer;
     background-color: #333;
+    border-bottom: 0.5px solid #333;
     color: white;
     :hover {
       color: #fdcb6e;
@@ -73,10 +75,11 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   width: 80%;
   border: none;
-  box-shadow: 0 5px 5px #777;
+  ${elevation[1]}
   cursor: pointer;
   background-color: #333;
   color: white;
+  border-bottom: 0.5px solid #333;
   :hover {
     color: #fdcb6e;
     border-bottom: 0.5px solid #fdcb6e;

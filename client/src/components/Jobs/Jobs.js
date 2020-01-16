@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import styled from 'styled-components'
 import { animated } from 'react-spring'
-
-// Team member
 import JobItem from './JobItem'
 import { useAnimation } from '../../hooks/useAnimation'
 
