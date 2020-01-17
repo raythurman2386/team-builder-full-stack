@@ -10,7 +10,9 @@ const UpdateForm = ({ setUpdating, history, match }) => {
   const [bio, setBio] = useState('')
 
   useEffect(() => {
-    Axios.get(`http://127.0.0.1:5000/api/users/${match.params.id}`)
+    Axios.get(
+      `https://team-builder-api.herokuapp.com/api/users/${match.params.id}`
+    )
       .then(res => {
         setName(res.data.name)
         setBio(res.data.bio)
