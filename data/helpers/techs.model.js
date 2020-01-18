@@ -15,9 +15,14 @@ function getTechnicianJobs(tech) {
     .select('T.name', 'jobs.machine', 'jobs.complaint')
 }
 
+function insert(tech) {
+  return db('technicians').insert(tech).returning('*')
+}
+
 
 module.exports = {
   getTechs,
   getTechById,
-  getTechnicianJobs
+  getTechnicianJobs,
+  insert
 }
