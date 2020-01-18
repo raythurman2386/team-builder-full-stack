@@ -1,21 +1,29 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { animated } from 'react-spring'
+import axios from 'axios'
 import elevation from '../../styles/elevation'
 import { useAnimation } from '../../hooks/useAnimation'
 
 const Sidebar = () => {
   const { sidebarAnimation } = useAnimation()
+  const [techs, setTechs] = useState([])
+
+  useEffect(() => {
+    axios
+      .get('http://127.0.0.1:4000/api/technicians')
+      .then(res => {
+        console.log(res.data)
+        setTechs(res.data)
+      })
+      .catch(err => console.log(err))
+  }, [])
 
   return (
     <SidebarWrapper style={sidebarAnimation}>
       <HeaderWrapper>Technicians</HeaderWrapper>
       <ListWrapper>
-        <ListItem>Josh</ListItem>
-        <ListItem>Herb</ListItem>
-        <ListItem>Jason</ListItem>
-        <ListItem>Devon</ListItem>
-        <ListItem>Noah</ListItem>
+        {techs && techs.map(tech => <ListItem key={tech.id}>{tech.name}</ListItem>)}
       </ListWrapper>
     </SidebarWrapper>
   )
