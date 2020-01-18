@@ -23,7 +23,8 @@ const Sidebar = () => {
     <SidebarWrapper style={sidebarAnimation}>
       <HeaderWrapper>Technicians</HeaderWrapper>
       <ListWrapper>
-        {techs && techs.map(tech => <ListItem key={tech.id}>{tech.name}</ListItem>)}
+        {techs &&
+          techs.map(tech => <ListItem key={tech.id}>{tech.name}</ListItem>)}
       </ListWrapper>
     </SidebarWrapper>
   )
