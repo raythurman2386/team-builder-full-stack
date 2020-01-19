@@ -1,3 +1,4 @@
+
 exports.up = async function (knex) {
   await knex.schema.createTable('technicians', tbl => {
     tbl.increments('id');
