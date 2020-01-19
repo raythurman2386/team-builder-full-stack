@@ -1,26 +1,16 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { animated } from 'react-spring'
-import { useAnimation } from '../../hooks/useAnimation'
 import Axios from 'axios'
+import { useAnimation } from '../../hooks/useAnimation'
 
-const TeamForm = ({ history, setUpdating }) => {
+const AddJob = () => {
   const { linkAnimation } = useAnimation()
-  const [name, setName] = useState('')
-  const [bio, setBio] = useState('')
+  const [machine, setMachine] = useState('')
+  const [complaint, setComplaint] = useState('')
 
   const handleSubmit = e => {
     e.preventDefault()
-    setUpdating(true)
-    const newUser = {
-      name,
-      bio,
-    }
-
-    Axios.post('http://127.0.0.1:5000/api/users', newUser)
-      .then(res => setUpdating(false))
-      .then(() => history.push('/'))
-      .catch(err => console.log(err))
   }
 
   return (
@@ -28,27 +18,29 @@ const TeamForm = ({ history, setUpdating }) => {
       <FormWrapper onSubmit={e => handleSubmit(e)}>
         <Input
           type='text'
-          name='name'
-          placeholder='Name'
-          value={name}
-          onChange={e => setName(e.target.value)}
+          name='machine'
+          placeholder='Machine'
+          value={machine}
+          onChange={e => setMachine(e.target.value)}
           required
         />
         <Input
           type='text'
-          name='bio'
-          placeholder='Bio'
-          value={bio}
-          onChange={e => setBio(e.target.value)}
+          name='complaint'
+          placeholder='Complaint'
+          value={complaint}
+          onChange={e => setComplaint(e.target.value)}
           required
         />
+        {/* TODO: Date */}
+        {/* TODO: Technician */}
         <ButtonWrapper type='submit'>Submit</ButtonWrapper>
       </FormWrapper>
     </Wrapper>
   )
 }
 
-export default TeamForm
+export default AddJob
 
 const Wrapper = styled(animated.div)`
   max-width: 1120px;
