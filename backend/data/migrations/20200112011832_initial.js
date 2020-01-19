@@ -7,11 +7,12 @@ exports.up = async function (knex) {
 
   await knex.schema.createTable('jobs', tbl => {
     tbl.increments('id')
-    tbl.string('machine').notNullable;
-    tbl.string('complaint')
-    tbl.datetime('job_date')
+    tbl.string('machine').notNullable()
+    tbl.string('complaint').notNullable()
+    tbl.date('job_date').nullable()
     tbl
       .integer('tech_id')
+      .unsigned()
       .references('id')
       .inTable('technicians')
       .onDelete('CASCADE')

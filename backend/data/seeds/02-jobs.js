@@ -77,5 +77,15 @@ exports.seed = async function (knex) {
       complaint: 'DEF in HYD',
       tech_id: 5
     },
+    {
+      machine: 'D5K',
+      complaint: 'DEF in HYD',
+      tech_id: null
+    },
+    {
+      machine: 'D5K',
+      complaint: 'DEF in HYD',
+      tech_id: null
+    },
   ])
 };

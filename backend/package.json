@@ -8,6 +8,8 @@
     "server": "nodemon index.js",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
+    "migrate:prod": "knex migrate:latest --env production",
+    "rollback:prod": "knex migrate:rollback --env production",
     "seed": "knex seed:run"
   },
   "repository": {
