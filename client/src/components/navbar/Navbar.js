@@ -10,7 +10,7 @@ import CollapseMenu from './CollapseMenu'
 import { useAnimation } from '../../hooks/useAnimation'
 import elevation from '../../styles/elevation'
 
-const Navbar = props => {
+const Navbar = ({ navbarState, handleNavbar }) => {
   const { linkAnimation, barAnimation } = useAnimation()
 
   return (
@@ -20,21 +20,15 @@ const Navbar = props => {
           <Brand />
           <NavLinks style={linkAnimation}>
             <Link to='/'>Home</Link>
-            <Link to='/add-member'>Add Technician</Link>
+            <Link to='/techs'>Add Technician</Link>
             <Link to='/add-job'>Add Job</Link>
           </NavLinks>
           <BurgerWrapper>
-            <BurgerMenu
-              navbarState={props.navbarState}
-              handleNavbar={props.handleNavbar}
-            />
+            <BurgerMenu navbarState={navbarState} handleNavbar={handleNavbar} />
           </BurgerWrapper>
         </FlexContainer>
       </NavBar>
-      <CollapseMenu
-        navbarState={props.navbarState}
-        handleNavbar={props.handleNavbar}
-      />
+      <CollapseMenu navbarState={navbarState} handleNavbar={handleNavbar} />
     </>
   )
 }

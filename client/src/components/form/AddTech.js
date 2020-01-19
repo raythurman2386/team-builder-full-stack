@@ -1,37 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { animated } from 'react-spring'
+import axios from 'axios'
 import { useAnimation } from '../../hooks/useAnimation'
-import Axios from 'axios'
 
-const UpdateForm = ({ setUpdating, history, match }) => {
+const AddTech = () => {
   const { linkAnimation } = useAnimation()
   const [name, setName] = useState('')
-  const [bio, setBio] = useState('')
-
-  useEffect(() => {
-    Axios.get(
-      `https://team-builder-api.herokuapp.com/api/users/${match.params.id}`
-    )
-      .then(res => {
-        setName(res.data.name)
-        setBio(res.data.bio)
-        setUpdating(true)
-      })
-      .catch(err => console.log(err))
-  }, [match.params.id])
 
   const handleSubmit = e => {
     e.preventDefault()
-    const updatedUser = {
-      name,
-      bio,
-    }
-
-    setUpdating(false)
-
-    Axios.put(`http://127.0.0.1:5000/api/users/${match.params.id}`, updatedUser)
-      .then(() => history.push('/'))
+    axios
+      .post('https://localhost:4000/api/technicians', { name })
+      .then(res => console.log(res))
       .catch(err => console.log(err))
   }
 
@@ -46,21 +27,13 @@ const UpdateForm = ({ setUpdating, history, match }) => {
           onChange={e => setName(e.target.value)}
           required
         />
-        <Input
-          type='text'
-          name='bio'
-          placeholder='Bio'
-          value={bio}
-          onChange={e => setBio(e.target.value)}
-          required
-        />
         <ButtonWrapper type='submit'>Submit</ButtonWrapper>
       </FormWrapper>
     </Wrapper>
   )
 }
 
-export default UpdateForm
+export default AddTech
 
 const Wrapper = styled(animated.div)`
   max-width: 1120px;
