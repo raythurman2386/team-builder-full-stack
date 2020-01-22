@@ -1,4 +1,15 @@
 require('dotenv').config();
+
+const localPg = {
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS
+};
+const pg = require('pg');
+pg.defaults.ssl = true;
+
+const dbConnection = process.env.DATABASE_URL || localPg;
 // Update with your config settings.
 
 module.exports = {
@@ -24,7 +35,7 @@ module.exports = {
   },
   production: {
     client: 'pg',
-    connection: process.env.DATABASE_URL,
+    connection: dbConnection,
     useNullAsDefault: true,
     migrations: {
       directory: './data/migrations'
