@@ -14,44 +14,38 @@ const AddJob = () => {
   }
 
   return (
-    <Wrapper style={linkAnimation}>
-      <FormWrapper onSubmit={e => handleSubmit(e)}>
-        <Input
-          type='text'
-          name='machine'
-          placeholder='Machine'
-          value={machine}
-          onChange={e => setMachine(e.target.value)}
-          required
-        />
-        <Input
-          type='text'
-          name='complaint'
-          placeholder='Complaint'
-          value={complaint}
-          onChange={e => setComplaint(e.target.value)}
-          required
-        />
-        {/* TODO: Date */}
-        {/* TODO: Technician */}
-        <ButtonWrapper type='submit'>Submit</ButtonWrapper>
-      </FormWrapper>
-    </Wrapper>
+    <FormWrapper onSubmit={e => handleSubmit(e)} style={linkAnimation}>
+      <Input
+        type='text'
+        name='machine'
+        placeholder='Machine'
+        value={machine}
+        onChange={e => setMachine(e.target.value)}
+        required
+      />
+      <Input
+        type='text'
+        name='complaint'
+        placeholder='Complaint'
+        value={complaint}
+        onChange={e => setComplaint(e.target.value)}
+        required
+      />
+      {/* TODO: Date */}
+      {/* TODO: Technician */}
+      <ButtonWrapper type='submit'>Submit</ButtonWrapper>
+    </FormWrapper>
   )
 }
 
 export default AddJob
 
-const Wrapper = styled(animated.div)`
-  max-width: 1120px;
-  margin: 60px auto 0;
-`
-
 const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
-  margin: auto;
+  justify-content: center;
   align-items: center;
+  flex: 1 0 0;
 `
 
 const Input = styled.input`

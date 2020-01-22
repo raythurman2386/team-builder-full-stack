@@ -36,8 +36,12 @@ const AddTech = () => {
 export default AddTech
 
 const Wrapper = styled(animated.div)`
-  max-width: 1120px;
-  margin: 60px auto 0;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 1 0 0;
 `
 
 const FormWrapper = styled.form`

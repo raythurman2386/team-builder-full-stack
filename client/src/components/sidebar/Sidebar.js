@@ -37,10 +37,12 @@ const SidebarWrapper = styled(animated.div)`
   padding-top: 50px;
   color: white;
   width: 250px;
+  max-width: 250px;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-grow: 1;
   z-index: 1;
   @media (max-width: 769px) {
     display: none;
