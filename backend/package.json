@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "server": "nodemon index.js",
+    "server": "cross-env NODE_ENV=development nodemon index.js",
+    "test": "cross-env NODE_ENV=test jest --watch --verbose",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "migrate:prod": "knex migrate:latest --env production",
@@ -24,10 +25,13 @@
   },
   "homepage": "https://github.com/LambdaSchool/webapi-i-challenge#readme",
   "devDependencies": {
-    "nodemon": "^1.19.4"
+    "jest": "^25.1.0",
+    "nodemon": "^1.19.4",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "cross-env": "^6.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^3.21.2",
@@ -35,5 +39,8 @@
     "morgan": "^1.9.1",
     "pg": "^7.17.1",
     "sqlite3": "^4.1.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
