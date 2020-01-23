@@ -17,8 +17,8 @@ function App() {
   return (
     <AppWrapper>
       <Navbar navbarState={navBarOpen} handleNavbar={handleNavbar} />
+      <Sidebar />
       <Wrapper>
-        <Sidebar />
         <Switch>
           <Route exact path='/' component={Jobs} />
           <Route exact path='/techs' component={AddTech} />
@@ -37,8 +37,10 @@ const AppWrapper = styled.div`
 
 const Wrapper = styled.div`
   width: 100%;
+  margin-left: 25rem;
+  margin-top: 7rem;
   display: flex;
   @media (max-width: 769px) {
-    /* margin-top: 140px; */
+    margin: 7.5rem auto 0;
   }
 `

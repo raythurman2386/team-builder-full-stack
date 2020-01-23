@@ -11,7 +11,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     axios
-      .get('http://127.0.0.1:4000/api/technicians')
+      .get('https://team-builder-pg.herokuapp.com/api/technicians')
       .then(res => {
         console.log(res.data)
         setTechs(res.data)
@@ -37,12 +37,12 @@ const SidebarWrapper = styled(animated.div)`
   padding-top: 50px;
   color: white;
   width: 250px;
-  max-width: 250px;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-grow: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
   z-index: 1;
   @media (max-width: 769px) {
     display: none;
@@ -51,6 +51,7 @@ const SidebarWrapper = styled(animated.div)`
 
 const HeaderWrapper = styled.h2`
   margin: 1rem auto;
+  text-align: center;
   font-size: 2.5rem;
 `
 
