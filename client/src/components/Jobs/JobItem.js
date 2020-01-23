@@ -3,22 +3,21 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import elevation from '../../styles/elevation'
 
-const TeamMember = ({ job, handleDelete }) => {
+const JobItem = ({ job, handleDelete }) => {
   return (
-    <TeamMemberCard>
+    <JobItemCard>
       <h1>{job.machine}</h1>
       <h2>Complaint: {job.complaint}</h2>
       <h2>Tech: {job.name}</h2>
       <StyledLink to={`/update-member/${job.id}`}>Edit</StyledLink>
       <button onClick={id => handleDelete(job.id)}>Completed</button>
-    </TeamMemberCard>
+    </JobItemCard>
   )
 }
 
-export default TeamMember
+export default JobItem
 
-const TeamMemberCard = styled.div`
-  box-sizing: border-box;
+const JobItemCard = styled.div`
   width: 250px;
   min-height: 250px;
   background-color: #f2f2f2;
@@ -57,7 +56,7 @@ const TeamMemberCard = styled.div`
     ${elevation[1]}
     cursor: pointer;
     background-color: #333;
-    border-bottom: 0.5px solid #333;
+    border-bottom: 1px solid #333;
     color: white;
     :hover {
       color: #fdcb6e;

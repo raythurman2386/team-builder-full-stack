@@ -5,12 +5,12 @@ import { animated } from 'react-spring'
 import JobItem from './JobItem'
 import { useAnimation } from '../../hooks/useAnimation'
 
-const Team = props => {
+const Team = () => {
   const { linkAnimation } = useAnimation()
   const [jobs, setJobs] = useState([])
 
   useEffect(() => {
-    Axios.get('http://127.0.0.1:4000/api/jobs/')
+    Axios.get('https://team-builder-pg.herokuapp.com/api/jobs/')
       .then(res => {
         console.log(res.data)
         setJobs(res.data)
@@ -20,7 +20,7 @@ const Team = props => {
 
   const handleDelete = id => {
     const newJobs = jobs.filter(job => job.id !== id)
-    Axios.delete(`http://127.0.0.1:4000/api/jobs/${id}`)
+    Axios.delete(`https://team-builder-pg.herokuapp.com/api/jobs/${id}`)
       .then(res => setJobs(newJobs))
       .catch(err => console.log(err))
   }
@@ -42,7 +42,5 @@ const TeamWrapper = styled(animated.div)`
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
-  min-height: 20rem;
-  margin: 5rem auto;
   width: 100%;
 `
