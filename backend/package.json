@@ -7,12 +7,15 @@
     "start": "node index.js",
     "server": "cross-env NODE_ENV=development nodemon index.js",
     "test": "cross-env NODE_ENV=test jest --watch --verbose",
-    "migrate": "knex migrate:latest",
-    "rollback": "knex migrate:rollback",
-    "migrate:prod": "knex migrate:latest --env production",
-    "rollback:prod": "knex migrate:rollback --env production",
+    "migrate": "cross-env NODE_ENV=development knex migrate:latest",
+    "rollback": "cross-env NODE_ENV=development knex migrate:rollback",
+    "migrate:test": "cross-env NODE_ENV=test knex migrate:latest",
+    "rollback:test": "cross-env NODE_ENV=test knex migrate:rollback",
+    "migrate:prod": "cross-env NODE_ENV=production knex migrate:latest",
+    "rollback:prod": "cross-env NODE_ENV=production knex migrate:rollback",
     "seed": "knex seed:run",
-    "seed:prod": "knex seed:run --env production"
+    "seed:test": "cross-env NODE_ENV=test knex seed:run",
+    "seed:prod": "cross-env NODE_ENV=production knex seed:run"
   },
   "repository": {
     "type": "git",

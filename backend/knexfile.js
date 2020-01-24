@@ -8,7 +8,7 @@ const localPg = {
   password: process.env.DB_PASS
 };
 
-pg.defaults.ssl = true;
+// pg.defaults.ssl = true;
 
 const dbConnection = process.env.DATABASE_URL || localPg;
 // Update with your config settings.
@@ -34,14 +34,20 @@ module.exports = {
     connection: {
       filename: './data/test.db3'
     },
-    useNullAsDefalut: true,
+    useNullAsDefault: true,
     migrations: {
       directory: './data/migrations'
     },
     seeds: {
       directory: './data/seeds'
+    },
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done);
+      }
     }
   },
+
   production: {
     client: 'pg',
     connection: dbConnection,
