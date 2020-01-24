@@ -2,44 +2,44 @@ const jobsRouter = require('express').Router();
 const db = require('../../data/helpers/jobs.model');
 
 jobsRouter
-  .get('/', async (req, res) => {
+  .get('/', async (req, res, next) => {
     try {
       const jobs = await db.getJobs();
       return res.status(200).json(jobs);
     } catch (error) {
-      return res.status(500).json({ message: 'Something went wrong' });
+      next(error)
     }
   })
-  .get('/:id', async (req, res) => {
+  .get('/:id', async (req, res, next) => {
     try {
       const job = await db.getJobById(req.params.id);
       return res.status(200).json(job);
     } catch (error) {
-      return res.status(500).json({ message: 'Something went wrong' });
+      next(error)
     }
   })
-  .post('/', async (req, res) => {
+  .post('/', async (req, res, next) => {
     try {
       const id = await db.addJob(req.body);
       return res.status(201).json(id)
     } catch (error) {
-      return res.status(500).json({ message: 'Something went wrong' });
+      next(error)
     }
   })
-  .put('/:id', async (req, res) => {
+  .put('/:id', async (req, res, next) => {
     try {
       const updated = await db.updateJob(req.params.id, req.body);
       return res.status(200).json(req.body);
     } catch (error) {
-      return res.status(500).json({ message: 'Something went wrong' });
+      next(error)
     }
   })
-  .delete('/:id', async (req, res) => {
+  .delete('/:id', async (req, res, next) => {
     try {
       const deleted = await db.deleteJob(req.params.id);
       return res.status(200).json({ message: 'Deleted' })
     } catch (error) {
-      return res.status(500).json({ message: 'Something went wrong' });
+      next(error)
     }
   })
 
