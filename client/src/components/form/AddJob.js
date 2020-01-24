@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { animated } from 'react-spring'
-import Axios from 'axios'
 import { useAnimation } from '../../hooks/useAnimation'
 
 const AddJob = () => {
