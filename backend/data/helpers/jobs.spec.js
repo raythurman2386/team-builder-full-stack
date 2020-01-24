@@ -5,7 +5,7 @@ beforeEach(async () => {
   await db.seed.run()
 })
 
-describe("jobs models", async () => {
+describe("jobs models", () => {
   test("testing", () => {
     expect(2 + 2).toBe(4)
   })
