@@ -2,14 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-// import for react spring
 import { useSpring, animated } from 'react-spring'
 
-const CollapseMenu = props => {
-  const { open } = useSpring({ open: props.navbarState ? 0 : 1 })
+const CollapseMenu = ({ navbarState, handleNavbar }) => {
+  const { open } = useSpring({ open: navbarState ? 0 : 1 })
 
-  // if the navbar is collapsed, returns the hamburger menu
-  if (props.navbarState === true) {
+  if (navbarState === true) {
     return (
       <CollapseWrapper
         style={{
@@ -21,28 +19,33 @@ const CollapseMenu = props => {
             .interpolate(openValue => `translate3d(0, ${openValue}px, 0`),
         }}
       >
-        <NavLinks>
-          <li>
-            <Link to='/' onClick={props.handleNavbar}>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to='/techs' onClick={props.handleNavbar}>
-              Add Technician
-            </Link>
-          </li>
-          <li>
-            <Link to='/add-job' onClick={props.handleNavbar}>
-              Add Job
-            </Link>
-          </li>
-        </NavLinks>
+        <NavList />
       </CollapseWrapper>
     )
   }
-  // returns null if the navbar is not collapsed
   return null
+}
+
+const NavList = () => {
+  return (
+    <NavLinks>
+      <li>
+        <Link to='/' onClick={handleNavbar}>
+          Home
+        </Link>
+      </li>
+      <li>
+        <Link to='/techs' onClick={handleNavbar}>
+          Add Technician
+        </Link>
+      </li>
+      <li>
+        <Link to='/add-job' onClick={handleNavbar}>
+          Add Job
+        </Link>
+      </li>
+    </NavLinks>
+  )
 }
 
 export default CollapseMenu
