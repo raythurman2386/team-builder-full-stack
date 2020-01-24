@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
@@ -19,34 +20,32 @@ const CollapseMenu = ({ navbarState, handleNavbar }) => {
             .interpolate(openValue => `translate3d(0, ${openValue}px, 0`),
         }}
       >
-        <NavList />
+        <NavList handleNavbar={handleNavbar} />
       </CollapseWrapper>
     )
   }
   return null
 }
 
-const NavList = () => {
-  return (
-    <NavLinks>
-      <li>
-        <Link to='/' onClick={handleNavbar}>
-          Home
-        </Link>
-      </li>
-      <li>
-        <Link to='/techs' onClick={handleNavbar}>
-          Add Technician
-        </Link>
-      </li>
-      <li>
-        <Link to='/add-job' onClick={handleNavbar}>
-          Add Job
-        </Link>
-      </li>
-    </NavLinks>
-  )
-}
+const NavList = ({ handleNavbar }) => (
+  <NavLinks>
+    <li>
+      <Link to='/' onClick={handleNavbar}>
+        Home
+      </Link>
+    </li>
+    <li>
+      <Link to='/techs' onClick={handleNavbar}>
+        Add Technician
+      </Link>
+    </li>
+    <li>
+      <Link to='/add-job' onClick={handleNavbar}>
+        Add Job
+      </Link>
+    </li>
+  </NavLinks>
+)
 
 export default CollapseMenu
 
