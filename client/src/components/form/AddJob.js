@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { animated } from 'react-spring'
 import { useAnimation } from '../../hooks/useAnimation'
 
 const AddJob = () => {
@@ -39,7 +40,7 @@ const AddJob = () => {
 
 export default AddJob
 
-const FormWrapper = styled.form`
+const FormWrapper = styled(animated.form)`
   display: flex;
   flex-direction: column;
   justify-content: center;
