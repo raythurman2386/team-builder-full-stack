@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { animated } from 'react-spring'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import elevation from '../../styles/elevation'
 import { useAnimation } from '../../hooks/useAnimation'
@@ -13,7 +14,6 @@ const Sidebar = () => {
     axios
       .get('https://team-builder-pg.herokuapp.com/api/technicians')
       .then(res => {
-        console.log(res.data)
         setTechs(res.data)
       })
       .catch(err => console.log(err))
@@ -24,7 +24,11 @@ const Sidebar = () => {
       <HeaderWrapper>Technicians</HeaderWrapper>
       <ListWrapper>
         {techs &&
-          techs.map(tech => <ListItem key={tech.id}>{tech.name}</ListItem>)}
+          techs.map(tech => (
+            <ListItem key={tech.id}>
+              <StyledLink to={`/tech/${tech.id}`}>{tech.name}</StyledLink>
+            </ListItem>
+          ))}
       </ListWrapper>
     </SidebarWrapper>
   )
@@ -68,8 +72,15 @@ const ListItem = styled.li`
   transition: all 300ms linear 0s;
   border-bottom: 1px solid #362f2d;
   &:hover {
-    color: #fdcb6e;
     border-bottom: 1px solid #fdcb6e;
     ${elevation[3]}
+  }
+`
+
+const StyledLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+  &:hover {
+    color: #fdcb6e;
   }
 `

@@ -11,7 +11,7 @@ const AddTech = () => {
   const handleSubmit = e => {
     e.preventDefault()
     axios
-      .post('https://localhost:4000/api/technicians', { name })
+      .post('https://team-builder-pg.herokuapp.com/api/technicians', { name })
       .then(res => console.log(res))
       .catch(err => console.log(err))
   }
@@ -19,6 +19,7 @@ const AddTech = () => {
   return (
     <Wrapper style={linkAnimation}>
       <FormWrapper onSubmit={e => handleSubmit(e)}>
+        <h2>Add a Technician</h2>
         <Input
           type='text'
           name='name'
@@ -37,17 +38,17 @@ export default AddTech
 
 const Wrapper = styled(animated.div)`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
   width: 100%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  flex: 1 0 0;
 `
 
 const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   margin: auto;
+  width: 100%;
   align-items: center;
 `
 

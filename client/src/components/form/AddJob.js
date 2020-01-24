@@ -13,6 +13,7 @@ const AddJob = () => {
 
   return (
     <FormWrapper onSubmit={e => handleSubmit(e)} style={linkAnimation}>
+      <h2>Add a New Job</h2>
       <Input
         type='text'
         name='machine'
@@ -43,7 +44,7 @@ const FormWrapper = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex: 1 0 0;
+  width: 100%;
 `
 
 const Input = styled.input`

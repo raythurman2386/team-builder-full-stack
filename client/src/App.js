@@ -9,6 +9,8 @@ import GlobalStyle from './styles/Global'
 // Hooks
 import { useNavbar } from './hooks/useNavbar'
 import AddTech from './components/form/AddTech'
+import AddJob from './components/form/AddJob'
+import TechsJobs from './components/Jobs/TechsJobs'
 
 function App() {
   // Hook for just the navbar
@@ -22,6 +24,8 @@ function App() {
         <Switch>
           <Route exact path='/' component={Jobs} />
           <Route exact path='/techs' component={AddTech} />
+          <Route exact path='/add-job' component={AddJob} />
+          <Route exact path='/tech/:id' component={TechsJobs} />
         </Switch>
         <GlobalStyle />
       </Wrapper>

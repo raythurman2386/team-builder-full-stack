@@ -12,7 +12,6 @@ const Team = () => {
   useEffect(() => {
     Axios.get('https://team-builder-pg.herokuapp.com/api/jobs/')
       .then(res => {
-        console.log(res.data)
         setJobs(res.data)
       })
       .catch(err => console.log(err))
@@ -37,7 +36,7 @@ const Team = () => {
 
 export default Team
 
-const TeamWrapper = styled(animated.div)`
+export const TeamWrapper = styled(animated.div)`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
