@@ -8,7 +8,7 @@ const localPg = {
   password: process.env.DB_PASS
 };
 
-// pg.defaults.ssl = true;
+pg.defaults.ssl = true;
 
 const dbConnection = process.env.DATABASE_URL || localPg;
 // Update with your config settings.
