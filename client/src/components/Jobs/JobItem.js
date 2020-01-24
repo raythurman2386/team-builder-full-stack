@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
@@ -7,10 +8,12 @@ const JobItem = ({ job, handleDelete }) => {
   return (
     <JobItemCard>
       <h1>{job.machine}</h1>
-      <h2>Complaint: {job.complaint}</h2>
+      <h2>{job.complaint}</h2>
       <h2>Tech: {job.name}</h2>
       <StyledLink to={`/update-member/${job.id}`}>Edit</StyledLink>
-      <button onClick={id => handleDelete(job.id)}>Completed</button>
+      <button type='submit' onClick={() => handleDelete(job.id)}>
+        Completed
+      </button>
     </JobItemCard>
   )
 }
