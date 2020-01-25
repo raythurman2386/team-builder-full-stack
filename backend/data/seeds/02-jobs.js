@@ -1,6 +1,5 @@
 
 exports.seed = async function (knex) {
-  // Deletes ALL existing entries
   await knex('jobs').insert([
     {
       machine: '259d',

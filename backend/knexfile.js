@@ -8,7 +8,9 @@ const localPg = {
   password: process.env.DB_PASS
 };
 
-pg.defaults.ssl = true;
+if (process.env.NODE_ENV === 'production') {
+  pg.defaults.ssl = true;
+}
 
 const dbConnection = process.env.DATABASE_URL || localPg;
 // Update with your config settings.

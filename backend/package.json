@@ -1,7 +1,7 @@
 {
   "name": "webapi-i-challenge",
   "version": "1.0.0",
-  "description": "WEB API I Challenge",
+  "description": "Project that tracks technicians and jobs",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,20 +9,19 @@
     "test": "cross-env NODE_ENV=test jest --watch --verbose",
     "migrate": "cross-env NODE_ENV=development knex migrate:latest",
     "rollback": "cross-env NODE_ENV=development knex migrate:rollback",
-    "migrate:test": "cross-env NODE_ENV=test knex migrate:latest",
-    "rollback:test": "cross-env NODE_ENV=test knex migrate:rollback",
     "migrate:prod": "cross-env NODE_ENV=production knex migrate:latest",
     "rollback:prod": "cross-env NODE_ENV=production knex migrate:rollback",
     "seed": "knex seed:run",
-    "seed:test": "cross-env NODE_ENV=test knex seed:run",
     "seed:prod": "cross-env NODE_ENV=production knex seed:run"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LambdaSchool/webapi-i-challenge.git"
   },
-  "keywords": [],
-  "author": "Lambda School",
+  "keywords": [
+    "react, context, node, express"
+  ],
+  "author": "Ray Thurman",
   "bugs": {
     "url": "https://github.com/LambdaSchool/webapi-i-challenge/issues"
   },
