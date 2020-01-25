@@ -8,7 +8,7 @@ beforeEach(async () => {
 describe("techs models", () => {
   test("get techs", async () => {
     const res = await techsModel.getTechs()
-    expect(res.length).toBe(6)
+    expect(res.length).toBe(7)
   })
 
   test("get tech by id", async () => {
