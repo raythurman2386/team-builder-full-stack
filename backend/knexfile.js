@@ -8,17 +8,12 @@ const localPg = {
   password: process.env.DB_PASS
 };
 
-if (process.env.NODE_ENV === "production") {
-  pg.defaults.ssl = true;
-} else {
-  pg.defaults.ssl = false;
-}
+pg.defaults.ssl = true;
 
 const dbConnection = process.env.DATABASE_URL || localPg;
 // Update with your config settings.
 
 module.exports = {
-
   development: {
     client: 'pg',
     connection: localPg,
@@ -34,10 +29,8 @@ module.exports = {
     },
   },
   test: {
-    client: 'sqlite3',
-    connection: {
-      filename: './data/test.db3'
-    },
+    client: 'pg',
+    connection: localPg,
     useNullAsDefault: true,
     migrations: {
       directory: './data/migrations'
@@ -46,10 +39,8 @@ module.exports = {
       directory: './data/seeds'
     },
     pool: {
-      afterCreate: (conn, done) => {
-        conn.run('PRAGMA foreign_keys = ON', done);
-      }
-    }
+      min: 2, max: 10
+    },
   },
 
   production: {
