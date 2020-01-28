@@ -8,6 +8,10 @@ function getTechById(tech_id) {
   return db('technicians').where({ id: tech_id }).first()
 }
 
+function getTechBy(filter) {
+  return db('technicians').where(filter).first()
+}
+
 function getTechnicianJobs(tech) {
   return db('jobs')
     .join('technicians as T', 'jobs.tech_id', 'T.id')
@@ -23,6 +27,7 @@ function insert(tech) {
 module.exports = {
   getTechs,
   getTechById,
+  getTechBy,
   getTechnicianJobs,
   insert
 }

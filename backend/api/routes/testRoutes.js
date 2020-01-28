@@ -1,14 +1,12 @@
-const express = require("express");
-
-const router = express.Router();
+const testRouter = require("express").Router();
 
 // Test routes
-router.get("/", (req, res) => {
-  res.status(200).json({ message: "API is properly connected" });
-});
+testRouter
+  .get("/", (req, res) => {
+    res.status(200).json({ message: "API is properly connected" });
+  })
+  .get("/api", (req, res) => {
+    res.status(200).json({ message: "Welcome To the Team Builder API!" });
+  });
 
-router.get("/api", (req, res) => {
-  res.status(200).json({ message: "Welcome To the Team Builder API!" });
-});
-
-module.exports = router;
+module.exports = testRouter;

@@ -1,4 +1,5 @@
 const db = require('../db');
+const techs = require('./techs.model');
 
 function getJobs() {
   return db('jobs as J')
@@ -12,19 +13,22 @@ function getJobById(job_id) {
     .first();
 }
 
-async function addJob(newJob) {
-  const id = await db('jobs').insert(newJob).returning('*');
+async function addJob({ name, ...newJob }) {
+  let tech = await techs.getTechBy({ name })
+  newJob.tech_id = tech.id
+
+  const [id] = await db('jobs').insert(newJob).returning('*');
   return getJobById(id);
 }
 
-function updateJob(job_id, changes) {
-  return db('jobs').where({ id: job_id }).update(changes)
+function updateJob(id, changes) {
+  return db('jobs').where({ id }).update(changes)
 }
 
-async function deleteJob(job_id) {
-  const deletedJob = await getJobById(job_id);
+async function deleteJob(id) {
+  const deletedJob = await getJobById(id);
 
-  await db('jobs').where({ id: job_id }).del();
+  await db('jobs').where({ id }).del();
 
   return deletedJob;
 }
