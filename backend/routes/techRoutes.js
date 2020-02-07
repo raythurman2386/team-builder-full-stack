@@ -1,5 +1,5 @@
 const techRouter = require('express').Router();
-const Techs = require('../../data/helpers/techs.model');
+const Techs = require('../data/helpers/techs.model');
 
 techRouter
   .get('/', async (req, res, next) => {
