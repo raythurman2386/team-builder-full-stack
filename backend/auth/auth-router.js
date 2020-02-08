@@ -20,6 +20,19 @@ authRouter
   })
   .post('/login', async (req, res, next) => {
     try {
+      const { username, password } = req.body
+      const user = await User.findBy({ username })
+      const verify = await bcrypt.compare(password, user.password)
+
+      if (user && verify) {
+        const token = generateToken(user)
+        return res.status(200).json({
+          message: `Welcome ${user.username}`,
+          token
+        })
+      } else {
+        return res.status(401).json({ message: 'Invalid Credentials' })
+      }
     } catch (error) {
       next(error)
     }
