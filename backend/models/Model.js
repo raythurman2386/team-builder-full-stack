@@ -10,7 +10,9 @@ class Model {
   }
 
   findBy(filter) {
-    return db(this.tableName).where(filter)
+    return db(this.tableName)
+      .where(filter)
+      .first()
   }
 
   add(newItem) {
@@ -33,8 +35,21 @@ class Model {
   }
 }
 
+class Technician extends Model {
+  constructor(tableName) {
+    super(tableName)
+    this.tableName = tableName
+  }
+
+  findTechJobs(id) {
+    return db(this.tableName)
+      .join('jobs', 'jobs.tech_id', '=', 'technicians.id')
+      .where({ tech_id: id })
+  }
+}
+
 const User = new Model('users')
-const Tech = new Model('technicians')
+const Tech = new Technician('technicians')
 const Job = new Model('jobs')
 
 module.exports = {
