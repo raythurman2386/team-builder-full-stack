@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "server": "cross-env NODE_ENV=development nodemon index.js",
+    "server": "cross-env NODE_ENV=production nodemon index.js",
     "test": "cross-env NODE_ENV=test jest --watch --verbose",
     "migrate": "cross-env NODE_ENV=development knex migrate:latest",
     "rollback": "cross-env NODE_ENV=development knex migrate:rollback",
