@@ -3,11 +3,11 @@ exports.up = async function(knex) {
     tbl.increments('id')
     tbl.string('name').notNullable()
     tbl
-      .string('email')
+      .string('username')
       .notNullable()
       .unique()
     tbl
-      .string('username')
+      .string('email')
       .notNullable()
       .unique()
     tbl.string('password').notNullable()
