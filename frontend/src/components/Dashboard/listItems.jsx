@@ -6,35 +6,35 @@ import PersonIcon from "@material-ui/icons/Person"
 
 export const mainListItems = (
   <div>
-    <ListItem button align="center">
+    <ListItem button align='center'>
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
-      <ListItemText primary="Herb" />
+      <ListItemText primary='Herb' />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
-      <ListItemText primary="Devon" />
+      <ListItemText primary='Devon' />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
-      <ListItemText primary="Jason" />
+      <ListItemText primary='Jason' />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
-      <ListItemText primary="Josh" />
+      <ListItemText primary='Josh' />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
-      <ListItemText primary="Noah" />
+      <ListItemText primary='Noah' />
     </ListItem>
   </div>
 )

@@ -43,19 +43,19 @@ export default function Chart() {
             left: 24
           }}
         >
-          <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
+          <XAxis dataKey='time' stroke={theme.palette.text.secondary} />
           <YAxis stroke={theme.palette.text.secondary}>
             <Label
               angle={270}
-              position="left"
+              position='left'
               style={{ textAnchor: "middle", fill: theme.palette.text.primary }}
             >
               Sales ($)
             </Label>
           </YAxis>
           <Line
-            type="monotone"
-            dataKey="amount"
+            type='monotone'
+            dataKey='amount'
             stroke={theme.palette.primary.main}
             dot={false}
           />

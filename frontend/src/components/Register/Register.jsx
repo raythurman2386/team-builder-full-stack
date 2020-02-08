@@ -13,9 +13,9 @@ import Container from "@material-ui/core/Container"
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant='body2' color='textSecondary' align='center'>
       {"Copyright © "}
-      <Link color="inherit" href="https://raythurman.com">
+      <Link color='inherit' href='https://raythurman.com'>
         Ray Thurman
       </Link>{" "}
       {new Date().getFullYear()}
@@ -48,72 +48,72 @@ export default function Register() {
   const classes = useStyles()
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component='h1' variant='h5'>
           Register
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
-            variant="outlined"
-            margin="normal"
+            variant='outlined'
+            margin='normal'
             required
             fullWidth
-            id="name"
-            label="Name"
-            name="name"
-            autoComplete="name"
+            id='name'
+            label='Name'
+            name='name'
+            autoComplete='name'
             autoFocus
           />
           <TextField
-            variant="outlined"
-            margin="normal"
+            variant='outlined'
+            margin='normal'
             required
             fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            autoComplete="username"
+            id='username'
+            label='Username'
+            name='username'
+            autoComplete='username'
             autoFocus
           />
           <TextField
-            variant="outlined"
-            margin="normal"
+            variant='outlined'
+            margin='normal'
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id='email'
+            label='Email Address'
+            name='email'
+            autoComplete='email'
             autoFocus
           />
           <TextField
-            variant="outlined"
-            margin="normal"
+            variant='outlined'
+            margin='normal'
             required
             fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
+            name='password'
+            label='Password'
+            type='password'
+            id='password'
+            autoComplete='current-password'
           />
           <Button
-            type="submit"
+            type='submit'
             fullWidth
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
             className={classes.submit}
           >
             Register
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="/login" variant="body2">
+              <Link href='/login' variant='body2'>
                 {"Already have an account? Log In"}
               </Link>
             </Grid>

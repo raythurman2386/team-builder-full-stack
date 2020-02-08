@@ -7,13 +7,13 @@ import Dashboard from "./components/Dashboard/Dashboard"
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <CssBaseline />
       <Switch>
-        <Route exact path="/" component={<h1>Hello</h1>} />
-        <Route exact path="/login" component={SignInSide} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path='/' component={<h1>Hello</h1>} />
+        <Route exact path='/login' component={SignInSide} />
+        <Route exact path='/register' component={Register} />
+        <Route exact path='/dashboard' component={Dashboard} />
       </Switch>
     </div>
   )

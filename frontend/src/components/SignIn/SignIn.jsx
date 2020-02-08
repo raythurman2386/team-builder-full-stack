@@ -15,9 +15,9 @@ import { makeStyles } from "@material-ui/core/styles"
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant='body2' color='textSecondary' align='center'>
       {"Copyright © "}
-      <Link color="inherit" href="https://raythurman.com">
+      <Link color='inherit' href='https://raythurman.com'>
         Ray Thurman
       </Link>{" "}
       {new Date().getFullYear()}
@@ -63,7 +63,7 @@ export default function SignInSide() {
   const classes = useStyles()
 
   return (
-    <Grid container component="main" className={classes.root}>
+    <Grid container component='main' className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -71,53 +71,53 @@ export default function SignInSide() {
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component='h1' variant='h5'>
             Sign in
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
-              variant="outlined"
-              margin="normal"
+              variant='outlined'
+              margin='normal'
               required
               fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
+              id='username'
+              label='Username'
+              name='username'
+              autoComplete='username'
               autoFocus
             />
             <TextField
-              variant="outlined"
-              margin="normal"
+              variant='outlined'
+              margin='normal'
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
+              name='password'
+              label='Password'
+              type='password'
+              id='password'
+              autoComplete='current-password'
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              control={<Checkbox value='remember' color='primary' />}
+              label='Remember me'
             />
             <Button
-              type="submit"
+              type='submit'
               fullWidth
-              variant="contained"
-              color="primary"
+              variant='contained'
+              color='primary'
               className={classes.submit}
             >
               Sign In
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="/start-reset" variant="body2">
+                <Link href='/start-reset' variant='body2'>
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/register" variant="body2">
+                <Link href='/register' variant='body2'>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

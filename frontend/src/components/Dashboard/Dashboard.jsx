@@ -23,9 +23,9 @@ import Jobs from "./Jobs"
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant='body2' color='textSecondary' align='center'>
       {"Copyright © "}
-      <Link color="inherit" href="https://raythurman.com/">
+      <Link color='inherit' href='https://raythurman.com/'>
         Ray Thurman
       </Link>{" "}
       {new Date().getFullYear()}
@@ -126,14 +126,14 @@ export default function Dashboard() {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
-        position="absolute"
+        position='absolute'
         className={clsx(classes.appBar, open && classes.appBarShift)}
       >
         <Toolbar className={classes.toolbar}>
           <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
+            edge='start'
+            color='inherit'
+            aria-label='open drawer'
             onClick={handleDrawer}
             className={clsx(
               classes.menuButton,
@@ -143,23 +143,23 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
+            component='h1'
+            variant='h6'
+            color='inherit'
             noWrap
             className={classes.title}
           >
             Dashboard
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
+          <IconButton color='inherit'>
+            <Badge badgeContent={4} color='secondary'>
               <NotificationsIcon />
             </Badge>
           </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
-        variant="permanent"
+        variant='permanent'
         classes={{
           paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
         }}
@@ -175,7 +175,7 @@ export default function Dashboard() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
+        <Container maxWidth='lg' className={classes.container}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>

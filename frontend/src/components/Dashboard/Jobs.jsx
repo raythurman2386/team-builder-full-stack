@@ -36,13 +36,13 @@ export default function Jobs() {
   return (
     <React.Fragment>
       <Title>Recent Jobs</Title>
-      <Table size="small">
+      <Table size='small'>
         <TableHead>
           <TableRow>
             <TableCell>Machine</TableCell>
             <TableCell>Complaint</TableCell>
             <TableCell>Serial Number</TableCell>
-            <TableCell align="center">Technician</TableCell>
+            <TableCell align='center'>Technician</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -51,13 +51,13 @@ export default function Jobs() {
               <TableCell>{row.machine}</TableCell>
               <TableCell>{row.complaint}</TableCell>
               <TableCell>{row.serial_number}</TableCell>
-              <TableCell align="center">{row.tech}</TableCell>
+              <TableCell align='center'>{row.tech}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
       <div className={classes.seeMore}>
-        <Link color="primary" href="#" onClick={preventDefault}>
+        <Link color='primary' href='#' onClick={preventDefault}>
           See more Jobs
         </Link>
       </div>
