@@ -8,10 +8,20 @@ import TableRow from "@material-ui/core/TableRow"
 import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined"
 import Title from "./Title"
 import { JobContext } from "../../context/context"
+import { axiosWithAuth as axios } from "../../utils/axiosConfig"
 
 function Jobs() {
-  const { jobs } = useContext(JobContext)
+  let { jobs, setJobs } = useContext(JobContext)
   const classes = useStyles()
+
+  const handleDelete = id => {
+    setJobs(jobs.filter(job => job.id !== id))
+
+    axios()
+      .delete(`http://localhost:4000/api/jobs/${id}`)
+      .then(res => console.log(res))
+      .catch(err => console.log(err.response))
+  }
 
   return (
     <React.Fragment>
@@ -34,7 +44,11 @@ function Jobs() {
                 <TableCell>{job.complaint}</TableCell>
                 <TableCell>{job.serial_number}</TableCell>
                 <TableCell align='center'>{job.tech_id}</TableCell>
-                <TableCell align='center'>
+                <TableCell
+                  align='center'
+                  className={classes.delete}
+                  onClick={e => handleDelete(job.id)}
+                >
                   <DeleteForeverOutlinedIcon color='secondary' />
                 </TableCell>
               </TableRow>
@@ -48,7 +62,7 @@ function Jobs() {
 export default Jobs
 
 const useStyles = makeStyles(theme => ({
-  seeMore: {
-    marginTop: theme.spacing(3)
+  delete: {
+    cursor: "pointer"
   }
 }))

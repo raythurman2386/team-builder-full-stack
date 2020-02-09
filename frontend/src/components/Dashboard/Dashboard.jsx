@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import clsx from "clsx"
 import { makeStyles } from "@material-ui/core/styles"
 import CssBaseline from "@material-ui/core/CssBaseline"
@@ -19,10 +19,17 @@ import MainListItems from "./listItems"
 import Copyright from "../Copyright/Copyright"
 import Jobs from "./Jobs"
 import useToggle from "../../hooks/useToggle"
+import { MessageContext } from "../../context/context"
 
-function Dashboard() {
+function Dashboard(props) {
   const classes = useStyles()
+  const { message } = useContext(MessageContext)
   const [open, handleOpen] = useToggle()
+
+  const handleLogout = () => {
+    localStorage.removeItem("token")
+    props.history.push("/login")
+  }
 
   return (
     <div className={classes.root}>
@@ -51,13 +58,18 @@ function Dashboard() {
             noWrap
             className={classes.title}
           >
-            Dashboard
+            {message}
           </Typography>
           <IconButton color='inherit'>
             <Typography className={classes.title} color='inherit' noWrap>
               Add Job
             </Typography>
             <AddCircleOutlineIcon color='secondary' />
+          </IconButton>
+          <IconButton color='inherit' onClick={handleLogout}>
+            <Typography className={classes.title} color='inherit' noWrap>
+              Logout
+            </Typography>
           </IconButton>
         </Toolbar>
       </AppBar>

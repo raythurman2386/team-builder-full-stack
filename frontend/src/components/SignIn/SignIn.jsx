@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import Avatar from "@material-ui/core/Avatar"
 import Button from "@material-ui/core/Button"
 import CssBaseline from "@material-ui/core/CssBaseline"
@@ -15,9 +15,11 @@ import { makeStyles } from "@material-ui/core/styles"
 import Copyright from "../Copyright/Copyright"
 import Logo from "../../assets/dozer5.jpg"
 import { axiosWithAuth as axios } from "../../utils/axiosConfig"
+import { MessageContext } from "../../context/context"
 
 function SignIn(props) {
   const classes = useStyles()
+  const { setMessage } = useContext(MessageContext)
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
@@ -25,7 +27,11 @@ function SignIn(props) {
     e.preventDefault()
     axios()
       .post("http://localhost:4000/api/auth/login", { username, password })
-      .then(res => localStorage.setItem("token", res.data.token))
+      .then(res => {
+        localStorage.setItem("token", res.data.token)
+        localStorage.setItem("message", res.data.message)
+        setMessage(res.data.message)
+      })
       .then(data => props.history.push("/dashboard"))
       .catch(err => console.log(err.response))
   }

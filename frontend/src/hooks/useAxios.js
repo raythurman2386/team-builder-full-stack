@@ -11,5 +11,5 @@ export const useAxios = url => {
       .catch(err => console.log(err.response))
   }, [url])
 
-  return [value]
+  return [value, setValue]
 }
