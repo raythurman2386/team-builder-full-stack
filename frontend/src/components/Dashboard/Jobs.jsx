@@ -5,6 +5,7 @@ import TableBody from "@material-ui/core/TableBody"
 import TableCell from "@material-ui/core/TableCell"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
+import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined"
 import Title from "./Title"
 import { JobContext } from "../../context/context"
 
@@ -22,6 +23,7 @@ function Jobs() {
             <TableCell>Complaint</TableCell>
             <TableCell>Serial Number</TableCell>
             <TableCell align='center'>Technician</TableCell>
+            <TableCell align='center'>Complete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -32,6 +34,9 @@ function Jobs() {
                 <TableCell>{job.complaint}</TableCell>
                 <TableCell>{job.serial_number}</TableCell>
                 <TableCell align='center'>{job.tech_id}</TableCell>
+                <TableCell align='center'>
+                  <DeleteForeverOutlinedIcon color='secondary' />
+                </TableCell>
               </TableRow>
             ))}
         </TableBody>
