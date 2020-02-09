@@ -20,10 +20,12 @@ import Copyright from "../Copyright/Copyright"
 import Jobs from "./Jobs"
 import useToggle from "../../hooks/useToggle"
 import { MessageContext } from "../../context/context"
+import SpringModal from "../../utils/SpringModal"
 
 function Dashboard(props) {
   const classes = useStyles()
   const { message } = useContext(MessageContext)
+  const [openSide, handleOpenSide] = useToggle()
   const [open, handleOpen] = useToggle()
 
   const handleLogout = () => {
@@ -36,17 +38,17 @@ function Dashboard(props) {
       <CssBaseline />
       <AppBar
         position='absolute'
-        className={clsx(classes.appBar, open && classes.appBarShift)}
+        className={clsx(classes.appBar, openSide && classes.appBarShift)}
       >
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge='start'
             color='inherit'
             aria-label='open drawer'
-            onClick={handleOpen}
+            onClick={handleOpenSide}
             className={clsx(
               classes.menuButton,
-              open && classes.menuButtonHidden
+              openSide && classes.menuButtonHidden
             )}
           >
             <MenuIcon />
@@ -60,12 +62,14 @@ function Dashboard(props) {
           >
             {message}
           </Typography>
-          <IconButton color='inherit'>
-            <Typography className={classes.title} color='inherit' noWrap>
-              Add Job
-            </Typography>
-            <AddCircleOutlineIcon color='secondary' />
-          </IconButton>
+          <SpringModal open={open} handleOpen={handleOpen}>
+            <IconButton color='inherit' onClick={handleOpen}>
+              <Typography className={classes.title} color='inherit' noWrap>
+                Add Job
+              </Typography>
+              <AddCircleOutlineIcon color='secondary' />
+            </IconButton>
+          </SpringModal>
           <IconButton color='inherit' onClick={handleLogout}>
             <Typography className={classes.title} color='inherit' noWrap>
               Logout
@@ -76,12 +80,15 @@ function Dashboard(props) {
       <Drawer
         variant='permanent'
         classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
+          paper: clsx(
+            classes.drawerPaper,
+            !openSide && classes.drawerPaperClose
+          )
         }}
-        open={open}
+        open={openSide}
       >
         <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleOpen}>
+          <IconButton onClick={handleOpenSide}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
