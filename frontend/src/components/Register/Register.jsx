@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Avatar from "@material-ui/core/Avatar"
 import Button from "@material-ui/core/Button"
 import CssBaseline from "@material-ui/core/CssBaseline"
@@ -11,9 +11,24 @@ import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
 import Container from "@material-ui/core/Container"
 import Copyright from "../Copyright/Copyright"
+import { axiosWithAuth as axios } from "../../utils/axiosConfig"
 
-function Register() {
+function Register(props) {
   const classes = useStyles()
+  const [name, setName] = useState("")
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("")
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    let user = { name, username, password, email }
+
+    axios()
+      .post("http://localhost:4000/api/auth/register", user)
+      .then(res => props.history.push("/login"))
+      .catch(err => console.log(err.response))
+  }
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -25,7 +40,7 @@ function Register() {
         <Typography component='h1' variant='h5'>
           Register
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit} noValidate>
           <TextField
             variant='outlined'
             margin='normal'
@@ -36,6 +51,8 @@ function Register() {
             name='name'
             autoComplete='name'
             autoFocus
+            value={name}
+            onChange={e => setName(e.target.value)}
           />
           <TextField
             variant='outlined'
@@ -47,6 +64,8 @@ function Register() {
             name='username'
             autoComplete='username'
             autoFocus
+            value={username}
+            onChange={e => setUsername(e.target.value)}
           />
           <TextField
             variant='outlined'
@@ -58,6 +77,8 @@ function Register() {
             name='email'
             autoComplete='email'
             autoFocus
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
           <TextField
             variant='outlined'
@@ -69,6 +90,8 @@ function Register() {
             type='password'
             id='password'
             autoComplete='current-password'
+            value={password}
+            onChange={e => setPassword(e.target.value)}
           />
           <Button
             type='submit'

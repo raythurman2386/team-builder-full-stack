@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Avatar from "@material-ui/core/Avatar"
 import Button from "@material-ui/core/Button"
 import CssBaseline from "@material-ui/core/CssBaseline"
@@ -13,12 +13,21 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
 import Copyright from "../Copyright/Copyright"
+import Logo from "../../assets/dozer5.jpg"
+import { axiosWithAuth as axios } from "../../utils/axiosConfig"
 
-function SignIn() {
+function SignIn(props) {
   const classes = useStyles()
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
 
   const handleSubmit = e => {
     e.preventDefault()
+    axios()
+      .post("http://localhost:4000/api/auth/login", { username, password })
+      .then(res => localStorage.setItem("token", res.data.token))
+      .then(data => props.history.push("/dashboard"))
+      .catch(err => console.log(err.response))
   }
 
   return (
@@ -44,6 +53,8 @@ function SignIn() {
               name='username'
               autoComplete='username'
               autoFocus
+              value={username}
+              onChange={e => setUsername(e.target.value)}
             />
             <TextField
               variant='outlined'
@@ -55,6 +66,8 @@ function SignIn() {
               type='password'
               id='password'
               autoComplete='current-password'
+              value={password}
+              onChange={e => setPassword(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value='remember' color='primary' />}
@@ -98,7 +111,7 @@ const useStyles = makeStyles(theme => ({
     height: "100vh"
   },
   image: {
-    backgroundImage: "url(https://source.unsplash.com/random)",
+    backgroundImage: `url(${Logo})`,
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "dark"
