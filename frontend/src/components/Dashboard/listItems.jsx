@@ -3,6 +3,7 @@ import ListItem from "@material-ui/core/ListItem"
 import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
 import PersonIcon from "@material-ui/icons/Person"
+import AddIcon from "@material-ui/icons/Add"
 import { TechContext } from "../../context/context"
 
 const MainListItems = () => {
@@ -19,6 +20,12 @@ const MainListItems = () => {
             <ListItemText primary={tech.name} />
           </ListItem>
         ))}
+      <ListItem button align='center'>
+        <ListItemIcon>
+          <AddIcon />
+        </ListItemIcon>
+        <ListItemText primary='New Tech' />
+      </ListItem>
     </div>
   )
 }
