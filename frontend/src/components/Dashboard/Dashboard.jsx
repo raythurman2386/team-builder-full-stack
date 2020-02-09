@@ -9,23 +9,20 @@ import Toolbar from "@material-ui/core/Toolbar"
 import Typography from "@material-ui/core/Typography"
 import Divider from "@material-ui/core/Divider"
 import IconButton from "@material-ui/core/IconButton"
-import Badge from "@material-ui/core/Badge"
 import Container from "@material-ui/core/Container"
 import Grid from "@material-ui/core/Grid"
 import Paper from "@material-ui/core/Paper"
 import MenuIcon from "@material-ui/icons/Menu"
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
-import NotificationsIcon from "@material-ui/icons/Notifications"
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline"
 import MainListItems from "./listItems"
 import Copyright from "../Copyright/Copyright"
 import Jobs from "./Jobs"
+import useToggle from "../../hooks/useToggle"
 
 function Dashboard() {
   const classes = useStyles()
-  const [open, setOpen] = React.useState(true)
-  const handleDrawer = () => {
-    setOpen(!open)
-  }
+  const [open, handleOpen] = useToggle()
 
   return (
     <div className={classes.root}>
@@ -39,7 +36,7 @@ function Dashboard() {
             edge='start'
             color='inherit'
             aria-label='open drawer'
-            onClick={handleDrawer}
+            onClick={handleOpen}
             className={clsx(
               classes.menuButton,
               open && classes.menuButtonHidden
@@ -57,9 +54,10 @@ function Dashboard() {
             Dashboard
           </Typography>
           <IconButton color='inherit'>
-            <Badge badgeContent={4} color='secondary'>
-              <NotificationsIcon />
-            </Badge>
+            <Typography className={classes.title} color='inherit' noWrap>
+              Add Job
+            </Typography>
+            <AddCircleOutlineIcon color='secondary' />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -71,7 +69,7 @@ function Dashboard() {
         open={open}
       >
         <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawer}>
+          <IconButton onClick={handleOpen}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
@@ -106,7 +104,8 @@ const useStyles = makeStyles(theme => ({
     display: "flex"
   },
   toolbar: {
-    paddingRight: 24 // keep right padding when drawer closed
+    paddingRight: 24, // keep right padding when drawer closed
+    background: "#333"
   },
   toolbarIcon: {
     display: "flex",
@@ -137,7 +136,8 @@ const useStyles = makeStyles(theme => ({
     display: "none"
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    paddingRight: "4px"
   },
   drawerPaper: {
     position: "relative",
