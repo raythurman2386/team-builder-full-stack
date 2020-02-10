@@ -18,7 +18,7 @@ exports.up = async function(knex) {
       .inTable('users')
       .onDelete('CASCADE')
       .onUpdate('CASCADE')
-      .notNullable()
+      .unsigned()
   })
 }
 

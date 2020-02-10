@@ -14,7 +14,7 @@ function AddJob({ open, handleOpen }) {
     machine: "",
     complaint: "",
     serial_number: "",
-    technician_name: ""
+    tech_id: 0
   })
 
   const handleChange = e => {
@@ -85,9 +85,9 @@ function AddJob({ open, handleOpen }) {
             fullWidth
             id='tech_name'
             label='Technician Name'
-            name='technician_name'
+            name='tech_id'
             autoComplete='name'
-            value={job.technician_name}
+            value={job.tech_id}
             onChange={e => handleChange(e)}
           />
           <Button
