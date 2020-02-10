@@ -7,6 +7,7 @@ import ListItemText from "@material-ui/core/ListItemText"
 import TextField from "@material-ui/core/TextField"
 import AddIcon from "@material-ui/icons/Add"
 import SpringModal from "../../utils/SpringModal"
+import { axiosWithAuth as axios } from "../../utils/axiosConfig"
 
 function AddTech({ open, handleOpen }) {
   const [name, setName] = React.useState("")
@@ -14,6 +15,11 @@ function AddTech({ open, handleOpen }) {
 
   const handleSubmit = e => {
     e.preventDefault()
+
+    axios()
+      .post("http://localhost:4000/api/technicians", { name })
+      .then(res => handleOpen())
+      .catch(err => console.log(err.response))
   }
 
   return (
@@ -25,7 +31,7 @@ function AddTech({ open, handleOpen }) {
         <ListItemText primary='New Tech' />
       </ListItem>
       <SpringModal open={open} handleOpen={handleOpen}>
-        <form className={classes.paper} handleSubmit={handleSubmit}>
+        <form className={classes.paper} onSubmit={handleSubmit}>
           <h2 id='spring-modal-title'>Add Tech</h2>
           <TextField
             variant='outlined'
