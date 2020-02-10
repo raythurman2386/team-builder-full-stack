@@ -14,13 +14,12 @@ import Grid from "@material-ui/core/Grid"
 import Paper from "@material-ui/core/Paper"
 import MenuIcon from "@material-ui/icons/Menu"
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline"
 import MainListItems from "./listItems"
 import Copyright from "../Copyright/Copyright"
 import Jobs from "./Jobs"
 import useToggle from "../../hooks/useToggle"
 import { MessageContext } from "../../context/context"
-import SpringModal from "../../utils/SpringModal"
+import AddJob from "../Modal/AddJob"
 
 function Dashboard(props) {
   const classes = useStyles()
@@ -62,14 +61,7 @@ function Dashboard(props) {
           >
             {message}
           </Typography>
-          <SpringModal open={open} handleOpen={handleOpen}>
-            <IconButton color='inherit' onClick={handleOpen}>
-              <Typography className={classes.title} color='inherit' noWrap>
-                Add Job
-              </Typography>
-              <AddCircleOutlineIcon color='secondary' />
-            </IconButton>
-          </SpringModal>
+          <AddJob open={open} handleOpen={handleOpen} />
           <IconButton color='inherit' onClick={handleLogout}>
             <Typography className={classes.title} color='inherit' noWrap>
               Logout
