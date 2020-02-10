@@ -13,9 +13,11 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    border: "none",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3)
+    padding: theme.spacing(2, 4, 3),
+    width: "800px",
+    height: "600px"
   }
 }))
 
@@ -55,7 +57,6 @@ export default function SpringModal({ open, handleOpen, children }) {
 
   return (
     <div>
-      {children}
       <Modal
         aria-labelledby='spring-modal-title'
         aria-describedby='spring-modal-description'
@@ -68,12 +69,7 @@ export default function SpringModal({ open, handleOpen, children }) {
           timeout: 500
         }}
       >
-        <Fade in={open}>
-          <div className={classes.paper}>
-            <h2 id='spring-modal-title'>Spring modal</h2>
-            <p id='spring-modal-description'>react-spring animates me.</p>
-          </div>
-        </Fade>
+        <Fade in={open}>{children}</Fade>
       </Modal>
     </div>
   )
