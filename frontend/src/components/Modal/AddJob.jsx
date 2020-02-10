@@ -5,29 +5,29 @@ import TextField from "@material-ui/core/TextField"
 import IconButton from "@material-ui/core/IconButton"
 import Typography from "@material-ui/core/Typography"
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline"
+import { axiosWithAuth as axios } from "../../utils/axiosConfig"
 import SpringModal from "../../utils/SpringModal"
-
-const useStyles = makeStyles(theme => ({
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: "none",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-    width: "800px",
-    height: "600px"
-  }
-}))
 
 function AddJob({ open, handleOpen }) {
   const classes = useStyles()
+  const [job, setJob] = React.useState({
+    machine: "",
+    complaint: "",
+    serial_number: "",
+    technician_name: ""
+  })
+
+  const handleChange = e => {
+    setJob({ ...job, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = e => {
     e.preventDefault()
+
+    axios()
+      .post("http://localhost:4000/api/jobs", job)
+      .then(res => handleOpen())
+      .catch(err => console.log(err.response))
   }
 
   return (
@@ -39,7 +39,7 @@ function AddJob({ open, handleOpen }) {
         <AddCircleOutlineIcon color='secondary' />
       </IconButton>
       <SpringModal open={open} handleOpen={handleOpen}>
-        <form className={classes.paper} handleSubmit={handleSubmit}>
+        <form className={classes.paper} onSubmit={handleSubmit}>
           <h2 id='spring-modal-title'>Add Job</h2>
           <TextField
             variant='outlined'
@@ -51,8 +51,8 @@ function AddJob({ open, handleOpen }) {
             name='machine'
             autoComplete='machine'
             autoFocus
-            // value={name}
-            // onChange={e => setName(e.target.value)}
+            value={job.machine}
+            onChange={e => handleChange(e)}
           />
           <TextField
             variant='outlined'
@@ -63,8 +63,8 @@ function AddJob({ open, handleOpen }) {
             label='Complaint'
             name='complaint'
             autoComplete='complaint'
-            // value={name}
-            // onChange={e => setName(e.target.value)}
+            value={job.complaint}
+            onChange={e => handleChange(e)}
           />
           <TextField
             variant='outlined'
@@ -75,8 +75,8 @@ function AddJob({ open, handleOpen }) {
             label='Serial Number'
             name='serial_number'
             autoComplete='serial number'
-            // value={name}
-            // onChange={e => setName(e.target.value)}
+            value={job.serial_number}
+            onChange={e => handleChange(e)}
           />
           <TextField
             variant='outlined'
@@ -85,10 +85,10 @@ function AddJob({ open, handleOpen }) {
             fullWidth
             id='tech_name'
             label='Technician Name'
-            name='tech_name'
+            name='technician_name'
             autoComplete='name'
-            // value={name}
-            // onChange={e => setName(e.target.value)}
+            value={job.technician_name}
+            onChange={e => handleChange(e)}
           />
           <Button
             type='submit'
@@ -106,3 +106,19 @@ function AddJob({ open, handleOpen }) {
 }
 
 export default AddJob
+
+const useStyles = makeStyles(theme => ({
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: "none",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    width: "800px",
+    height: "600px"
+  }
+}))
