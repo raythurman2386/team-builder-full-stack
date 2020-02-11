@@ -25,7 +25,7 @@ function Register(props) {
     let user = { name, username, password, email }
 
     axios()
-      .post("http://localhost:4000/api/auth/register", user)
+      .post("/auth/register", user)
       .then(res => props.history.push("/login"))
       .catch(err => console.log(err.response))
   }

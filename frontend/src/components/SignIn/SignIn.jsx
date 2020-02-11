@@ -26,7 +26,7 @@ function SignIn(props) {
   const handleSubmit = e => {
     e.preventDefault()
     axios()
-      .post("http://localhost:4000/api/auth/login", { username, password })
+      .post("/auth/login", { username, password })
       .then(res => {
         localStorage.setItem("token", res.data.token)
         localStorage.setItem("message", res.data.message)
