@@ -5,12 +5,10 @@ import Context from "./context"
 
 function App(props) {
   return (
-    <div className='App'>
-      <Context>
-        <CssBaseline />
-        <Router />
-      </Context>
-    </div>
+    <Context>
+      <CssBaseline />
+      <Router />
+    </Context>
   )
 }
 
