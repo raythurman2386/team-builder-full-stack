@@ -9,7 +9,7 @@ module.exports = server => {
   server.use(
     cors({
       origin: '*',
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      methods: 'GET,PUT,POST,DELETE',
       preflightContinue: false
     })
   )
