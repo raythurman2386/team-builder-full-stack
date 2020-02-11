@@ -18,7 +18,7 @@ function Jobs() {
     setJobs(jobs.filter(job => job.id !== id))
 
     axios()
-      .delete(`http://localhost:4000/api/jobs/${id}`)
+      .delete(`/jobs/${id}`)
       .then(res => console.log(res))
       .catch(err => console.log(err.response))
   }

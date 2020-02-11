@@ -25,7 +25,7 @@ function AddJob({ open, handleOpen }) {
     e.preventDefault()
 
     axios()
-      .post("http://localhost:4000/api/jobs", job)
+      .post("/jobs", job)
       .then(res => handleOpen())
       .catch(err => console.log(err.response))
   }

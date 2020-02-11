@@ -17,7 +17,7 @@ function AddTech({ open, handleOpen }) {
     e.preventDefault()
 
     axios()
-      .post("http://localhost:4000/api/technicians", { name })
+      .post("/technicians", { name })
       .then(res => handleOpen())
       .catch(err => console.log(err.response))
   }
