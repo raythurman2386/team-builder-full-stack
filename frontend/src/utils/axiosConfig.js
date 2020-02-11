@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const axiosWithAuth = () => {
   return axios.create({
-    baseUrl: "http://localhost:4000/api",
+    baseURL: "https://team-builder-pg.herokuapp.com/api",
     headers: {
       Authorization: localStorage.getItem("token")
     }
