@@ -1,5 +1,5 @@
 const jobsRouter = require('express').Router()
-const { Job } = require('../models/Model')
+const { Job, Tech } = require('../models/Model')
 
 jobsRouter
   .get('/', async (req, res, next) => {
@@ -20,7 +20,14 @@ jobsRouter
   })
   .post('/', async (req, res, next) => {
     try {
-      const id = await Job.add(req.body)
+      const { tech_name } = req.body;
+      const tech = await Tech.findBy({ name: tech_name })
+      const job = {
+        ...req.body,
+        tech_id: tech.id,
+        created_by: req.userId
+      }
+      const id = await Job.add(job)
       return res.status(201).json(id)
     } catch (error) {
       next(error)
@@ -28,7 +35,13 @@ jobsRouter
   })
   .put('/:id', async (req, res, next) => {
     try {
-      const updated = await Job.update(req.params.id, req.body)
+      const { tech_name } = req.body;
+      const tech = await Tech.findBy({ name: tech_name })
+      const job = {
+        ...req.body,
+        tech_id: tech.id
+      }
+      const updated = await Job.update(req.params.id, job)
       return res.status(200).json(req.body)
     } catch (error) {
       next(error)
