@@ -3,11 +3,8 @@ import { useAxios } from "../hooks/useAxios"
 import { TechProvider, JobProvider, MessageProvider } from "../context/context"
 
 const Context = ({ children }) => {
-  const [techs, setTechs] = useAxios(
-    "techs",
-    "http://localhost:4000/api/technicians"
-  )
-  const [jobs, setJobs] = useAxios("jobs", "http://localhost:4000/api/jobs")
+  const [techs, setTechs] = useAxios("techs", "/technicians")
+  const [jobs, setJobs] = useAxios("jobs", "/jobs")
   const [message, setMessage] = React.useState(
     localStorage.getItem("message") || ""
   )
