@@ -19,7 +19,7 @@ authRouter
       next(error)
     }
   })
-  .post('/login', async (req, res, next) => {
+  .post('/login', validateLogin(), async (req, res, next) => {
     try {
       const { username, password } = req.body
       const user = await User.findBy({ username })
