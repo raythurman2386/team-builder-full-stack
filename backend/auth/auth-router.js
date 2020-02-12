@@ -1,6 +1,6 @@
 const authRouter = require('express').Router()
-const { validateRegister, hashPassword } = require("../middleware/validateRegister")
-const { validateLogin, verifyPassword } = require("../middleware/validateLogin")
+const { validateRegister, hashPassword } = require("../middleware/auth/validateRegister")
+const { validateLogin, verifyPassword } = require("../middleware/auth/validateLogin")
 const sendgrid = require("../utils/sendgrid")
 
 authRouter

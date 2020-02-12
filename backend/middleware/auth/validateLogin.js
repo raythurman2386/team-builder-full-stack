@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
-const { User } = require("../models/Model")
-const generateToken = require("../token/generateToken")
+const { User } = require("../../models/Model")
+const generateToken = require("../../token/generateToken")
 
 function validateLogin() {
   return async (req, res, next) => {

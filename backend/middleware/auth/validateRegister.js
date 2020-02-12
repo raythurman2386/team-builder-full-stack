@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs')
-const { User } = require("../models/Model")
+const { User } = require("../../models/Model")
 
 function validateRegister() {
   return async (req, res, next) => {
