@@ -35,7 +35,30 @@ function validateRegister() {
   }
 }
 
-function validateLogin() { }
+function validateLogin() {
+  return async (req, res, next) => {
+    try {
+      const user = await User.findBy({ username: req.body.username })
+
+      if (!req.body.username) {
+        return res.status(400).json({ message: "Please provide a username" })
+      }
+
+      if (!req.body.password) {
+        return res.status(400).json({ message: "Please provide a password" })
+      }
+
+      if (!user) {
+        return res.status(400).json({ message: "That username does not exist" })
+      }
+
+      next()
+
+    } catch (error) {
+      next(error)
+    }
+  }
+}
 
 module.exports = {
   validateRegister,
