@@ -23,7 +23,9 @@ jobsRouter
       const { tech_name } = req.body;
       const tech = await Tech.findBy({ name: tech_name })
       const job = {
-        ...req.body,
+        machine: req.body.machine,
+        complaint: req.body.complaint,
+        serial_number: req.body.serial_number,
         tech_id: tech.id,
         created_by: req.userId
       }
@@ -38,8 +40,11 @@ jobsRouter
       const { tech_name } = req.body;
       const tech = await Tech.findBy({ name: tech_name })
       const job = {
-        ...req.body,
-        tech_id: tech.id
+        machine: req.body.machine,
+        complaint: req.body.complaint,
+        serial_number: req.body.serial_number,
+        tech_id: tech.id,
+        created_by: req.userId
       }
       const updated = await Job.update(req.params.id, job)
       return res.status(200).json(req.body)
