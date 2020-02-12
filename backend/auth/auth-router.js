@@ -17,11 +17,9 @@ authRouter
   })
   .post('/login', validateLogin(), verifyPassword(), async (req, res, next) => {
     try {
-      const user = await User.findBy({ username })
-      const token = generateToken(user)
       return res.status(200).json({
-        message: `Welcome ${user.name}`,
-        token
+        message: `Welcome ${req.name}`,
+        token: req.token
       })
     } catch (error) {
       next(error)

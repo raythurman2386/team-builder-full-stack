@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs')
 const { User } = require("../models/Model")
+const generateToken = require("../token/generateToken")
 
 function validateRegister() {
   return async (req, res, next) => {
@@ -80,6 +81,9 @@ function verifyPassword() {
       const verify = await bcrypt.compare(password, user.password)
 
       if (user && verify) {
+        let token = generateToken(user)
+        req.name = user.name
+        req.token = token
         next()
       } else {
         return res.status(401).json({ message: 'Invalid Credentials' })
