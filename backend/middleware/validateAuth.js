@@ -36,6 +36,17 @@ function validateRegister() {
   }
 }
 
+function hashPassword() {
+  return async (req, res, next) => {
+    let user = req.body
+    let hashPw = await bcrypt.hash(user.password, 12)
+    user.password = hashPw
+
+    await User.add(user)
+    next()
+  }
+}
+
 function validateLogin() {
   return async (req, res, next) => {
     try {
@@ -69,7 +80,6 @@ function verifyPassword() {
       const verify = await bcrypt.compare(password, user.password)
 
       if (user && verify) {
-        req.user = user
         next()
       } else {
         return res.status(401).json({ message: 'Invalid Credentials' })
@@ -83,6 +93,7 @@ function verifyPassword() {
 
 module.exports = {
   validateRegister,
+  hashPassword,
   validateLogin,
   verifyPassword
 }
