@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs')
 const { User } = require("../models/Model")
 
 function validateRegister() {
@@ -60,7 +61,28 @@ function validateLogin() {
   }
 }
 
+function verifyPassword() {
+  return async (req, res, next) => {
+    try {
+      const { username, password } = req.body
+      const user = await User.findBy({ username })
+      const verify = await bcrypt.compare(password, user.password)
+
+      if (user && verify) {
+        req.user = user
+        next()
+      } else {
+        return res.status(401).json({ message: 'Invalid Credentials' })
+      }
+
+    } catch (error) {
+      next(error)
+    }
+  }
+}
+
 module.exports = {
   validateRegister,
-  validateLogin
+  validateLogin,
+  verifyPassword
 }

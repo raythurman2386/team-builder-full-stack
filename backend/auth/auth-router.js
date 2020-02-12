@@ -2,7 +2,7 @@ const authRouter = require('express').Router()
 const bcrypt = require('bcryptjs')
 const generateToken = require('../token/generateToken')
 const { User } = require('../models/Model')
-const { validateRegister, validateLogin } = require("../middleware/validateAuth")
+const { validateRegister, validateLogin, verifyPassword } = require("../middleware/validateAuth")
 
 authRouter
   .post('/register', validateRegister(), async (req, res, next) => {
@@ -19,21 +19,13 @@ authRouter
       next(error)
     }
   })
-  .post('/login', validateLogin(), async (req, res, next) => {
+  .post('/login', validateLogin(), verifyPassword(), (req, res, next) => {
     try {
-      const { username, password } = req.body
-      const user = await User.findBy({ username })
-      const verify = await bcrypt.compare(password, user.password)
-
-      if (user && verify) {
-        const token = generateToken(user)
-        return res.status(200).json({
-          message: `Welcome ${user.username}`,
-          token
-        })
-      } else {
-        return res.status(401).json({ message: 'Invalid Credentials' })
-      }
+      const token = generateToken(req.user)
+      return res.status(200).json({
+        message: `Welcome ${req.user.name}`,
+        token
+      })
     } catch (error) {
       next(error)
     }
