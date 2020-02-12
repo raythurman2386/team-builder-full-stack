@@ -38,12 +38,16 @@ function validateRegister() {
 
 function hashPassword() {
   return async (req, res, next) => {
-    let user = req.body
-    let hashPw = await bcrypt.hash(user.password, 12)
-    user.password = hashPw
+    try {
+      let user = req.body
+      let hashPw = await bcrypt.hash(user.password, 12)
+      user.password = hashPw
 
-    await User.add(user)
-    next()
+      await User.add(user)
+      next()
+    } catch (error) {
+      next(error)
+    }
   }
 }
 
