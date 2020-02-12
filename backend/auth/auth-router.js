@@ -2,9 +2,10 @@ const authRouter = require('express').Router()
 const bcrypt = require('bcryptjs')
 const generateToken = require('../token/generateToken')
 const { User } = require('../models/Model')
+const { validateRegister, validateLogin } = require("../middleware/validateAuth")
 
 authRouter
-  .post('/register', async (req, res, next) => {
+  .post('/register', validateRegister(), async (req, res, next) => {
     try {
       let user = req.body
       let hashPw = await bcrypt.hash(user.password, 12)
