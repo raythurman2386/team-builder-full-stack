@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs')
 const generateToken = require('../token/generateToken')
 const { User } = require('../models/Model')
 const { validateRegister, validateLogin, verifyPassword } = require("../middleware/validateAuth")
+const sendgrid = require("../utils/sendgrid")
 
 authRouter
   .post('/register', validateRegister(), async (req, res, next) => {
@@ -30,8 +31,9 @@ authRouter
       next(error)
     }
   })
-  .post('/initial-reset', async (req, res, next) => {
+  .post('/initial-reset', sendgrid, (req, res, next) => {
     try {
+      return res.status(200).json({ message: 'Check your email' })
     } catch (error) {
       next(error)
     }
