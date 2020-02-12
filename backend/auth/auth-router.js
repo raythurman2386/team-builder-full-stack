@@ -2,17 +2,12 @@ const authRouter = require('express').Router()
 const bcrypt = require('bcryptjs')
 const generateToken = require('../token/generateToken')
 const { User } = require('../models/Model')
-const { validateRegister, validateLogin, verifyPassword } = require("../middleware/validateAuth")
+const { validateRegister, hashPassword, validateLogin, verifyPassword } = require("../middleware/validateAuth")
 const sendgrid = require("../utils/sendgrid")
 
 authRouter
-  .post('/register', validateRegister(), async (req, res, next) => {
+  .post('/register', validateRegister(), hashPassword(), (req, res, next) => {
     try {
-      let user = req.body
-      let hashPw = await bcrypt.hash(user.password, 12)
-      user.password = hashPw
-
-      await User.add(user)
       return res
         .status(201)
         .json({ message: 'You have been successfully registered' })
@@ -20,11 +15,12 @@ authRouter
       next(error)
     }
   })
-  .post('/login', validateLogin(), verifyPassword(), (req, res, next) => {
+  .post('/login', validateLogin(), verifyPassword(), async (req, res, next) => {
     try {
-      const token = generateToken(req.user)
+      const user = await User.findBy({ username })
+      const token = generateToken(user)
       return res.status(200).json({
-        message: `Welcome ${req.user.name}`,
+        message: `Welcome ${user.name}`,
         token
       })
     } catch (error) {
