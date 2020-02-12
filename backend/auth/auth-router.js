@@ -1,8 +1,6 @@
 const authRouter = require('express').Router()
-const bcrypt = require('bcryptjs')
-const generateToken = require('../token/generateToken')
-const { User } = require('../models/Model')
-const { validateRegister, hashPassword, validateLogin, verifyPassword } = require("../middleware/validateAuth")
+const { validateRegister, hashPassword } = require("../middleware/validateRegister")
+const { validateLogin, verifyPassword } = require("../middleware/validateLogin")
 const sendgrid = require("../utils/sendgrid")
 
 authRouter
