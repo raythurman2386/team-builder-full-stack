@@ -2,13 +2,32 @@ const supertest = require('supertest')
 const server = require('../api/server')
 const db = require('../data/db')
 
-beforeEach(async () => {
+beforeEach(async done => {
   await db.seed.run()
+  done()
+})
+
+let token = ''
+
+beforeAll(done => {
+  supertest(server)
+    .post('/api/auth/login')
+    .send({ username: 'test1', password: 'test' })
+    .end((err, res) => {
+      if (err) {
+        console.log(err)
+      } else {
+        token = res.body.token
+        done()
+      }
+    })
 })
 
 describe('tech routes', () => {
   test('get techs route', async () => {
-    const res = await supertest(server).get('/api/technicians')
+    const res = await supertest(server)
+      .get('/api/technicians')
+      .set('authorization', token)
 
     expect(res.status).toBe(200)
     expect(res.type).toBe('application/json')
@@ -24,7 +43,9 @@ describe('tech routes', () => {
   })
 
   test('get tech jobs', async () => {
-    const res = await supertest(server).get('/api/technicians/1/jobs')
+    const res = await supertest(server)
+      .get('/api/technicians/1/jobs')
+      .set('authorization', token)
 
     expect(res.status).toBe(200)
     expect(res.type).toBe('application/json')
@@ -36,6 +57,7 @@ describe('tech routes', () => {
     const res = await supertest(server)
       .post('/api/technicians')
       .send(tech)
+      .set('authorization', token)
 
     expect(res.status).toBe(200)
     expect(res.type).toBe('application/json')

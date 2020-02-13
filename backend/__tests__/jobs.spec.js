@@ -2,13 +2,32 @@ const supertest = require('supertest')
 const server = require('../api/server')
 const db = require('../data/db')
 
-beforeEach(async () => {
+beforeEach(async done => {
   await db.seed.run()
+  done()
+})
+
+let token = ''
+
+beforeAll(done => {
+  supertest(server)
+    .post('/api/auth/login')
+    .send({ username: 'test1', password: 'test' })
+    .end((err, res) => {
+      if (err) {
+        console.log(err)
+      } else {
+        token = res.body.token
+        done()
+      }
+    })
 })
 
 describe('job routes', () => {
   test('get jobs route', async () => {
-    const res = await supertest(server).get('/api/jobs')
+    const res = await supertest(server)
+      .get('/api/jobs')
+      .set('authorization', token)
 
     expect(res.status).toBe(200)
     expect(res.type).toBe('application/json')
@@ -16,7 +35,9 @@ describe('job routes', () => {
   })
 
   test('get job by id', async () => {
-    const res = await supertest(server).get('/api/jobs/1')
+    const res = await supertest(server)
+      .get('/api/jobs/1')
+      .set('authorization', token)
 
     expect(res.status).toBe(200)
     expect(res.type).toBe('application/json')
@@ -33,6 +54,7 @@ describe('job routes', () => {
     const res = await supertest(server)
       .post('/api/jobs')
       .send(job)
+      .set('authorization', token)
 
     expect(res.status).toBe(201)
     expect(res.type).toBe('application/json')
@@ -50,6 +72,7 @@ describe('job routes', () => {
     const res = await supertest(server)
       .put('/api/jobs/1')
       .send(updated)
+      .set('authorization', token)
 
     expect(res.status).toBe(200)
     expect(res.type).toBe('application/json')
@@ -57,7 +80,9 @@ describe('job routes', () => {
   })
 
   test('delete job', async () => {
-    const res = await supertest(server).delete('/api/jobs/1')
+    const res = await supertest(server)
+      .delete('/api/jobs/1')
+      .set('authorization', token)
 
     expect(res.status).toBe(200)
     expect(res.type).toBe('application/json')
