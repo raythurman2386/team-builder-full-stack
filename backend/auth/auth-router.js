@@ -6,18 +6,18 @@ const sendgrid = require("../utils/sendgrid")
 
 authRouter
   .post('/register', validateRegister(), hashPassword(), (req, res, next) => {
-    return res
+    res
       .status(201)
       .json({ message: 'You have been successfully registered' })
   })
   .post('/login', validateLogin(), verifyPassword(), (req, res, next) => {
-    return res.status(200).json({
+    res.json({
       message: `Welcome ${req.name}`,
       token: req.token
     })
   })
   .post('/initial-reset', sendgrid, (req, res, next) => {
-    return res.status(200).json({ message: 'Check your email' })
+    res.json({ message: 'Check your email' })
   })
   .post('/reset-password', (req, res, next) => {
     try {
@@ -29,7 +29,7 @@ authRouter
         password: hashPw
       }
       await Parents.update(user.id, updatedParent)
-      return res.status(200).json({ message: 'Password successfully updated' })
+      res.json({ message: 'Password successfully updated' })
     } catch (error) {
       next(er)
     }
