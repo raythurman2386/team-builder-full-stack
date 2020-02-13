@@ -2,6 +2,10 @@ const supertest = require('supertest')
 const server = require('../api/server')
 const db = require('../data/db')
 
+beforeEach(async () => {
+  await db.seed.run()
+})
+
 describe('tech routes', () => {
   test('get techs route', async () => {
     const res = await supertest(server).get('/api/technicians')
