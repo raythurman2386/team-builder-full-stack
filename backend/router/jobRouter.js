@@ -12,7 +12,7 @@ jobsRouter
   .post('/', validateJobInputs(), (req, res) => {
     res.status(201).json(req.newJob)
   })
-  .put('/:id', validateJobId(), validateUpdate(), (req, res, next) => {
+  .put('/:id', validateJobId(), validateUpdate(), (req, res) => {
     res.json({ message: "Job updated successfully" })
   })
   .delete('/:id', validateJobId(), validateDelete(), (req, res) => {
