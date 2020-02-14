@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs')
 const { User } = require("../../models/Model")
 
 function handleReset() {
-  return (req, res, next) => {
+  return async (req, res, next) => {
     try {
       const { email, new_password } = req.body
       let user = await User.findBy({ email })

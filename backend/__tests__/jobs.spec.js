@@ -41,14 +41,16 @@ describe('job routes', () => {
 
     expect(res.status).toBe(200)
     expect(res.type).toBe('application/json')
-    expect(res.body.machine).toBe('259d')
+    expect(res.body.machine).toMatch(/259d/i)
   })
 
   test('add job', async () => {
     const job = {
       machine: 'test',
       complaint: 'test',
-      tech_id: 1
+      tech_name: 'Herb',
+      serial_number: 'ababababab',
+      created_by: 1
     }
 
     const res = await supertest(server)
@@ -58,25 +60,25 @@ describe('job routes', () => {
 
     expect(res.status).toBe(201)
     expect(res.type).toBe('application/json')
-    expect(res.body.id).toBe(18)
+    expect(res.body[0].id).toBe(12)
   })
 
   test('update job', async () => {
-    const updated = {
-      id: 1,
+    const job = {
       machine: 'testing',
-      complaint: 'testing',
-      tech_id: 1
+      complaint: 'test',
+      tech_name: 'Herb',
+      created_by: 1
     }
 
     const res = await supertest(server)
       .put('/api/jobs/1')
-      .send(updated)
+      .send(job)
       .set('authorization', token)
 
     expect(res.status).toBe(200)
     expect(res.type).toBe('application/json')
-    expect(res.body.machine).toBe('testing')
+    expect(res.body.message).toContain('updated')
   })
 
   test('delete job', async () => {

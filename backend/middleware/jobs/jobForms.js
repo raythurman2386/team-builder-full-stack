@@ -1,4 +1,4 @@
-const { Job, Tech } = require('../models/Model')
+const { Job, Tech } = require('../../models/Model')
 
 function validateJobInputs() {
   return async (req, res, next) => {

@@ -1,4 +1,4 @@
-const { Tech } = require('../models/Model')
+const { Tech } = require('../../models/Model')
 
 function validateTechId() {
   return async (req, res, next) => {
