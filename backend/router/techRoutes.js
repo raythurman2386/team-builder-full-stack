@@ -1,40 +1,18 @@
 const techRouter = require('express').Router()
-const { Tech } = require('../models/Model')
+const { validateTechId, validateTechName, validateTechs, validateTechJobs } = require('../middleware/tech/validateTech')
 
 techRouter
-  .get('/', async (req, res, next) => {
-    try {
-      const techs = await Tech.find()
-      return res.status(200).json(techs)
-    } catch (error) {
-      console.log(error)
-      next(error)
-    }
+  .get('/', validateTechs(), (req, res, next) => {
+    res.json(req.techs)
   })
-  .get('/:id', async (req, res, next) => {
-    try {
-      const tech = await Tech.findBy({ id: req.params.id })
-      return res.status(200).json(tech)
-    } catch (error) {
-      console.log(error)
-      next(error)
-    }
+  .get('/:id', validateTechId(), (req, res, next) => {
+    res.json(req.tech)
   })
-  .get('/:id/jobs', async (req, res, next) => {
-    try {
-      const jobs = await Tech.findTechJobs(req.params.id)
-      return res.status(200).json(jobs)
-    } catch (error) {
-      next(error)
-    }
+  .get('/:id/jobs', validateTechId(), validateTechJobs(), (req, res, next) => {
+    res.json(req.jobs)
   })
-  .post('/', async (req, res, next) => {
-    try {
-      const newTech = await Tech.add(req.body)
-      return res.status(200).json(newTech)
-    } catch (error) {
-      next(error)
-    }
+  .post('/', validateTechName(), async (req, res, next) => {
+    res.status(201).json({ message: "Technician added" })
   })
 
 module.exports = techRouter
