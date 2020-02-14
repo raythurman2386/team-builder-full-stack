@@ -30,4 +30,15 @@ function validateJobId() {
   }
 }
 
-module.exports = { validateJobs, validateJobId }
+function validateDelete() {
+  return (req, res, next) => {
+    try {
+      Job.remove(req.job.id)
+      next()
+    } catch (error) {
+      next(error)
+    }
+  }
+}
+
+module.exports = { validateJobs, validateJobId, validateDelete }

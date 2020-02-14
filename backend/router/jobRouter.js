@@ -1,22 +1,12 @@
 const jobsRouter = require('express').Router()
-const { Job, Tech } = require('../models/Model')
+const { validateJobs, validateJobId, validateDelete } = require('../middleware/jobs/validateJobs')
 
 jobsRouter
-  .get('/', async (req, res, next) => {
-    try {
-      const jobs = await Job.find()
-      return res.status(200).json(jobs)
-    } catch (error) {
-      next(error)
-    }
+  .get('/', validateJobs(), (req, res) => {
+    res.json(req.jobs)
   })
-  .get('/:id', async (req, res, next) => {
-    try {
-      const job = await Job.findBy({ id: req.params.id })
-      return res.status(200).json(job)
-    } catch (error) {
-      next(error)
-    }
+  .get('/:id', validateJobId(), (req, res) => {
+    res.json(req.job)
   })
   .post('/', async (req, res, next) => {
     try {
@@ -35,7 +25,7 @@ jobsRouter
       next(error)
     }
   })
-  .put('/:id', async (req, res, next) => {
+  .put('/:id', validateJobId(), async (req, res, next) => {
     try {
       const { tech_name } = req.body;
       const tech = await Tech.findBy({ name: tech_name })
@@ -52,13 +42,8 @@ jobsRouter
       next(error)
     }
   })
-  .delete('/:id', async (req, res, next) => {
-    try {
-      const deleted = await Job.remove(req.params.id)
-      return res.status(200).json({ message: 'Deleted' })
-    } catch (error) {
-      next(error)
-    }
+  .delete('/:id', validateJobId(), validateDelete(), (req, res) => {
+    res.json({ message: "Job deleted successfully" })
   })
 
 module.exports = jobsRouter
