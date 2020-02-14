@@ -48,7 +48,7 @@ function validateTechJobs() {
         return res.status(400).json({ message: "This tech has no jobs" })
       }
 
-      req.jobs = jobs
+      req.techJobs = jobs
       next()
     } catch (error) {
       next(error)
