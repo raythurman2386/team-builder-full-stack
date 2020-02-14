@@ -27,4 +27,33 @@ function validateTechName() {
   }
 }
 
-module.exports = { validateTechId, validateTechName }
+function validateTechs() {
+  return async (req, res, next) => {
+    try {
+      const techs = await Tech.find()
+      req.techs = techs
+      next()
+    } catch (error) {
+      next(error)
+    }
+  }
+}
+
+function validateTechJobs() {
+  return async (req, res, next) => {
+    try {
+      const jobs = await Tech.findTechJobs(req.tech.id)
+
+      if (!jobs) {
+        return res.status(400).json({ message: "This tech has no jobs" })
+      }
+
+      req.jobs = jobs
+      next()
+    } catch (error) {
+      next(error)
+    }
+  }
+}
+
+module.exports = { validateTechId, validateTechName, validateTechs, validateTechJobs }
