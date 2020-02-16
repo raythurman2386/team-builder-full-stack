@@ -73,6 +73,43 @@ describe('job routes', () => {
     expect(res.body[0].id).toBe(12)
   })
 
+  test('add job fail', async () => {
+    const job = {
+      complaint: 'test',
+      tech_name: 'Herb',
+      serial_number: 'ababababab',
+      created_by: 1
+    }
+
+    const res = await supertest(server)
+      .post('/api/jobs')
+      .send(job)
+      .set('authorization', token)
+
+    expect(res.status).toBe(400)
+    expect(res.type).toBe('application/json')
+    expect(res.body.message).toContain('Please provide')
+  })
+
+  test('add job fail by tech name', async () => {
+    const job = {
+      machine: 'testing',
+      complaint: 'test',
+      tech_name: 'bob',
+      serial_number: 'ababababab',
+      created_by: 1
+    }
+
+    const res = await supertest(server)
+      .post('/api/jobs')
+      .send(job)
+      .set('authorization', token)
+
+    expect(res.status).toBe(404)
+    expect(res.type).toBe('application/json')
+    expect(res.body.message).toContain('no tech')
+  })
+
   test('update job', async () => {
     const job = {
       machine: 'testing',
@@ -89,6 +126,24 @@ describe('job routes', () => {
     expect(res.status).toBe(200)
     expect(res.type).toBe('application/json')
     expect(res.body.message).toContain('updated')
+  })
+
+  test('update job fail', async () => {
+    const job = {
+      machine: 'testing',
+      complaint: 'test',
+      tech_name: 'bob',
+      created_by: 1
+    }
+
+    const res = await supertest(server)
+      .put('/api/jobs/1')
+      .send(job)
+      .set('authorization', token)
+
+    expect(res.status).toBe(404)
+    expect(res.type).toBe('application/json')
+    expect(res.body.message).toContain('no tech')
   })
 
   test('delete job', async () => {
