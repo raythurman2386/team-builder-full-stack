@@ -26,7 +26,7 @@ function AddJob({ open, handleOpen }) {
 
     axios()
       .post("/jobs", job)
-      .then(res => handleOpen())
+      .then(res => console.log(res))
       .catch(err => console.log(err.response))
   }
 
