@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import Button from "@material-ui/core/Button"
 import TextField from "@material-ui/core/TextField"
@@ -6,9 +6,11 @@ import IconButton from "@material-ui/core/IconButton"
 import Typography from "@material-ui/core/Typography"
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline"
 import { axiosWithAuth as axios } from "../../utils/axiosConfig"
+import { JobContext } from "../../context/context"
 import SpringModal from "../../utils/SpringModal"
 
 function AddJob({ open, handleOpen }) {
+  const { jobs, setJobs } = useContext(JobContext)
   const classes = useStyles()
   const [job, setJob] = React.useState({
     machine: "",
@@ -23,10 +25,18 @@ function AddJob({ open, handleOpen }) {
 
   const handleSubmit = e => {
     e.preventDefault()
+    setJobs([...jobs, job])
 
     axios()
       .post("/jobs", job)
-      .then(res => console.log(res))
+      .then(res =>
+        setJob({
+          machine: "",
+          complaint: "",
+          serial_number: "",
+          tech_name: ""
+        }))
+      .then(data => handleOpen())
       .catch(err => console.log(err.response))
   }
 
