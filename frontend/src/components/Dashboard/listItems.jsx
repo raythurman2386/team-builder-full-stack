@@ -4,12 +4,12 @@ import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
 import PersonIcon from "@material-ui/icons/Person"
 import { TechContext } from "../../context/context"
-import useToggle from "../../hooks/useToggle"
-import AddTech from "../Modal/AddTech"
+// import useToggle from "../../hooks/useToggle"
+// import AddTech from "../Modal/AddTech"
 
 const MainListItems = () => {
   const { techs } = useContext(TechContext)
-  const [open, handleOpen] = useToggle()
+  // const [open, handleOpen] = useToggle()
 
   return (
     <div>
@@ -22,7 +22,7 @@ const MainListItems = () => {
             <ListItemText primary={tech.name} />
           </ListItem>
         ))}
-      <AddTech open={open} handleOpen={handleOpen} />
+      {/* <AddTech open={open} handleOpen={handleOpen} /> */}
     </div>
   )
 }
