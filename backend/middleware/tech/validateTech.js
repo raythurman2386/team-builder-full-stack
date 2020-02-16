@@ -48,7 +48,7 @@ function validateTechJobs() {
     try {
       const jobs = await Tech.findTechJobs(req.tech.id)
 
-      if (!jobs) {
+      if (jobs.length === 0) {
         return res.status(400).json({ message: "This tech has no jobs" })
       }
 

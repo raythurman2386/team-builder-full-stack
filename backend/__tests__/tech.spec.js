@@ -42,6 +42,14 @@ describe('tech routes', () => {
     expect(res.body.name).toMatch(/herb/i)
   })
 
+  test('get tech by id fail', async () => {
+    const res = await supertest(server).get('/api/technicians/100').set('authorization', token)
+
+    expect(res.status).toBe(404)
+    expect(res.type).toBe('application/json')
+    expect(res.body.message).toContain('There is no tech')
+  })
+
   test('get tech jobs', async () => {
     const res = await supertest(server)
       .get('/api/technicians/1/jobs')
@@ -50,6 +58,16 @@ describe('tech routes', () => {
     expect(res.status).toBe(200)
     expect(res.type).toBe('application/json')
     expect(res.body.length).toBeGreaterThan(0)
+  })
+
+  test('get no tech jobs', async () => {
+    const res = await supertest(server)
+      .get('/api/technicians/6/jobs')
+      .set('authorization', token)
+
+    expect(res.status).toBe(400)
+    expect(res.type).toBe('application/json')
+    expect(res.body.message).toContain('no jobs')
   })
 
   test('add tech', async () => {
@@ -61,6 +79,18 @@ describe('tech routes', () => {
 
     expect(res.status).toBe(201)
     expect(res.type).toBe('application/json')
-    // expect(res.body[0]).toBe(7)
+    expect(res.body.message).toMatch(/technician added/i)
+  })
+
+  test('add tech error', async () => {
+    const tech = {}
+    const res = await supertest(server)
+      .post('/api/technicians')
+      .send(tech)
+      .set('authorization', token)
+
+    expect(res.status).toBe(400)
+    expect(res.type).toBe('application/json')
+    expect(res.body.message).toContain('tech name')
   })
 })
