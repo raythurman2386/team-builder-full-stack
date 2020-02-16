@@ -31,9 +31,9 @@ function validateJobId() {
 }
 
 function validateDelete() {
-  return (req, res, next) => {
+  return async (req, res, next) => {
     try {
-      Job.remove(req.job.id)
+      await Job.remove(req.job.id)
       next()
     } catch (error) {
       next(error)
