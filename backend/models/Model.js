@@ -16,6 +16,7 @@ class Model {
   }
 
   add(newItem) {
+    console.log(this.tableName, newItem)
     return db(this.tableName)
       .insert(newItem)
       .returning('*')

@@ -4,6 +4,10 @@ function validateTechId() {
   return async (req, res, next) => {
     try {
       const tech = await Tech.findBy({ id: req.params.id })
+
+      if (!tech) {
+        return res.status(404).json({ message: "There is no tech with that id" })
+      }
       req.tech = tech
       next()
     } catch (error) {
