@@ -17,13 +17,13 @@ function validateTechId() {
 }
 
 function validateTechName() {
-  return (req, res, next) => {
+  return async (req, res, next) => {
     try {
       if (!req.body.name) {
         return res.status(400).json({ message: "Please provide a tech name" })
       }
 
-      Tech.add(req.body)
+      await Tech.add(req.body)
       next()
     } catch (error) {
       next(error)
