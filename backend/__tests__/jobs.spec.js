@@ -44,6 +44,16 @@ describe('job routes', () => {
     expect(res.body.machine).toMatch(/259d/i)
   })
 
+  test('get job by id fail', async () => {
+    const res = await supertest(server)
+      .get('/api/jobs/100')
+      .set('authorization', token)
+
+    expect(res.status).toBe(404)
+    expect(res.type).toBe('application/json')
+    expect(res.body.message).toContain('Job not found')
+  })
+
   test('add job', async () => {
     const job = {
       machine: 'test',
@@ -89,6 +99,16 @@ describe('job routes', () => {
     expect(res.status).toBe(200)
     expect(res.type).toBe('application/json')
     expect(res.body.message).toMatch(/deleted/i)
+  })
+
+  test('delete job fail', async () => {
+    const res = await supertest(server)
+      .delete('/api/jobs/100')
+      .set('authorization', token)
+
+    expect(res.status).toBe(404)
+    expect(res.type).toBe('application/json')
+    expect(res.body.message).toContain('Job not found')
   })
 })
 
