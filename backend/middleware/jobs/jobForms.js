@@ -8,6 +8,7 @@ function validateJobInputs() {
       }
 
       const tech = await Tech.findBy({ name: req.body.tech_name })
+
       if (!tech) {
         return res.status(400).json({ message: "There is no tech by that name" })
       }
