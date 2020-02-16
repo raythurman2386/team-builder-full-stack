@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const useToggle = () => {
+export const useToggle = () => {
   const [value, setValue] = useState(false)
 
   const handleChange = () => {
@@ -9,5 +9,3 @@ const useToggle = () => {
 
   return [value, handleChange]
 }
-
-export default useToggle
