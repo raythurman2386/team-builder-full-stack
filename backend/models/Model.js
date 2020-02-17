@@ -48,9 +48,21 @@ class Technician extends Model {
   }
 }
 
+class Jobs extends Model {
+  constructor(tablename) {
+    super(tablename)
+    this.tableName = tablename
+  }
+
+  find() {
+    return db(this.tableName)
+      .join('technicians', 'technicians.id', '=', 'jobs.tech_id')
+  }
+}
+
 const User = new Model('users')
 const Tech = new Technician('technicians')
-const Job = new Model('jobs')
+const Job = new Jobs('jobs')
 
 module.exports = {
   User,
