@@ -15,7 +15,7 @@ function handleReset() {
 
       next()
     } catch (error) {
-      next(er)
+      next(error)
     }
   }
 }

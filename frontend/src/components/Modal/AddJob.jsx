@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useState, useContext } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import Button from "@material-ui/core/Button"
 import TextField from "@material-ui/core/TextField"
@@ -12,7 +12,7 @@ import SpringModal from "../../utils/SpringModal"
 function AddJob({ open, handleOpen }) {
   const { jobs, setJobs } = useContext(JobContext)
   const classes = useStyles()
-  const [job, setJob] = React.useState({
+  const [job, setJob] = useState({
     machine: "",
     complaint: "",
     serial_number: "",
