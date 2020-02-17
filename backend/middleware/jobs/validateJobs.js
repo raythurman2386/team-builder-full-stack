@@ -33,7 +33,7 @@ function validateJobId() {
 function validateDelete() {
   return async (req, res, next) => {
     try {
-      await Job.remove(req.job.id)
+      await Job.remove(req.params.id)
       next()
     } catch (error) {
       next(error)
