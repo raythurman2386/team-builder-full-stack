@@ -63,7 +63,7 @@ class Jobs extends Model {
 
 const User = new Model('users')
 const Tech = new Technician('technicians')
-const Job = new Jobs('jobs')
+const Job = new Model('jobs')
 
 module.exports = {
   User,
