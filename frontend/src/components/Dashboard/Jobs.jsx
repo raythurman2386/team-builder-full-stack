@@ -28,10 +28,11 @@ function Jobs() {
       <Table size='small'>
         <TableHead>
           <TableRow>
-            <TableCell>Machine</TableCell>
-            <TableCell>Complaint</TableCell>
-            <TableCell>Serial Number</TableCell>
+            <TableCell align='center'>Machine</TableCell>
+            <TableCell align='center'>Complaint</TableCell>
+            <TableCell align='center'>Serial Number</TableCell>
             <TableCell align='center'>Technician</TableCell>
+            <TableCell align='center'>Created</TableCell>
             <TableCell align='center'>Complete</TableCell>
           </TableRow>
         </TableHead>
@@ -39,10 +40,11 @@ function Jobs() {
           {jobs &&
             jobs.map(job => (
               <TableRow key={job.id}>
-                <TableCell>{job.machine}</TableCell>
-                <TableCell>{job.complaint}</TableCell>
-                <TableCell>{job.serial_number}</TableCell>
-                <TableCell align='center'>{job.tech_id}</TableCell>
+                <TableCell align='center'>{job.machine}</TableCell>
+                <TableCell align='center'>{job.complaint}</TableCell>
+                <TableCell align='center'>{job.serial_number}</TableCell>
+                <TableCell align='center'>{job.name}</TableCell>
+                <TableCell align='center'>{job.created_at}</TableCell>
                 <TableCell
                   align='center'
                   className={classes.delete}

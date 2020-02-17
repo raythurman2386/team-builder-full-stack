@@ -16,7 +16,7 @@ function AddJob({ open, handleOpen }) {
     machine: "",
     complaint: "",
     serial_number: "",
-    tech_name: ""
+    name: ""
   })
 
   const handleChange = e => {
@@ -34,7 +34,7 @@ function AddJob({ open, handleOpen }) {
           machine: "",
           complaint: "",
           serial_number: "",
-          tech_name: ""
+          name: ""
         }))
       .then(data => handleOpen())
       .catch(err => console.log(err.response))
@@ -93,11 +93,11 @@ function AddJob({ open, handleOpen }) {
             margin='normal'
             required
             fullWidth
-            id='tech_name'
+            id='name'
             label='Technician Name'
-            name='tech_name'
+            name='name'
             autoComplete='name'
-            value={job.tech_name}
+            value={job.name}
             onChange={e => handleChange(e)}
           />
           <Button

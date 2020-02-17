@@ -58,7 +58,7 @@ describe('job routes', () => {
     const job = {
       machine: 'test',
       complaint: 'test',
-      tech_name: 'Herb',
+      name: 'Herb',
       serial_number: 'ababababab',
       created_by: 1
     }
@@ -76,7 +76,7 @@ describe('job routes', () => {
   test('add job fail', async () => {
     const job = {
       complaint: 'test',
-      tech_name: 'Herb',
+      name: 'Herb',
       serial_number: 'ababababab',
       created_by: 1
     }
@@ -95,7 +95,7 @@ describe('job routes', () => {
     const job = {
       machine: 'testing',
       complaint: 'test',
-      tech_name: 'bob',
+      name: 'bob',
       serial_number: 'ababababab',
       created_by: 1
     }
@@ -114,7 +114,7 @@ describe('job routes', () => {
     const job = {
       machine: 'testing',
       complaint: 'test',
-      tech_name: 'Herb',
+      name: 'Herb',
       created_by: 1
     }
 
@@ -132,7 +132,7 @@ describe('job routes', () => {
     const job = {
       machine: 'testing',
       complaint: 'test',
-      tech_name: 'bob',
+      name: 'bob',
       created_by: 1
     }
 
