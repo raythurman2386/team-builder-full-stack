@@ -57,6 +57,7 @@ class Jobs extends Model {
   find() {
     return db(this.tableName)
       .join('technicians', 'technicians.id', '=', 'jobs.tech_id')
+      .select('jobs.id', 'jobs.machine', 'jobs.complaint', 'jobs.serial_number', 'jobs.tech_id', 'technician.name')
   }
 }
 

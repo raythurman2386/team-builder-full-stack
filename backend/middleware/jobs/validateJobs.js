@@ -17,6 +17,7 @@ function validateJobId() {
   return async (req, res, next) => {
     try {
       const job = await Job.findBy({ id: req.params.id })
+      console.log(job)
 
       if (!job) {
         return res.status(404).json({ message: "Job not found" })
