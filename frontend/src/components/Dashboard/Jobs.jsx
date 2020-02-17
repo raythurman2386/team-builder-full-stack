@@ -15,11 +15,10 @@ function Jobs() {
   const classes = useStyles()
 
   const handleDelete = id => {
-    setJobs(jobs.filter(job => job.id !== id))
 
     axios()
       .delete(`/jobs/${id}`)
-      .then(res => console.log(res))
+      .then(res => setJobs(jobs.filter(job => job.id !== id)))
       .catch(err => console.log(err.response))
   }
 
