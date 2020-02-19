@@ -166,5 +166,3 @@ describe('job routes', () => {
     expect(res.body.message).toContain('Job not found')
   })
 })
-
-
