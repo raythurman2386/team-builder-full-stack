@@ -41,7 +41,7 @@ describe('job routes', () => {
 
     expect(res.status).toBe(200)
     expect(res.type).toBe('application/json')
-    expect(res.body.machine).toMatch(/259d/i)
+    expect(res.body.machine).toMatch(/305e/i)
   })
 
   test('get job by id fail', async () => {
