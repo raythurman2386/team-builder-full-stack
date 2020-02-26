@@ -1,14 +1,14 @@
 import React from "react"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import Router from "./router"
-import Context from "./context"
+import GlobalProvider from "./context"
 
 function App(props) {
   return (
-    <Context>
+    <GlobalProvider>
       <CssBaseline />
       <Router />
-    </Context>
+    </GlobalProvider>
   )
 }
 
