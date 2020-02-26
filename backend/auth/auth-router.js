@@ -1,14 +1,18 @@
 const authRouter = require('express').Router()
-const { validateRegister, hashPassword } = require("../middleware/auth/validateRegister")
-const { validateLogin, verifyPassword } = require("../middleware/auth/validateLogin")
-const { handleReset } = require("../middleware/auth/validateReset")
-const sendgrid = require("../utils/sendgrid")
+const {
+  validateRegister,
+  hashPassword
+} = require('../middleware/auth/validateRegister')
+const {
+  validateLogin,
+  verifyPassword
+} = require('../middleware/auth/validateLogin')
+const { handleReset } = require('../middleware/auth/validateReset')
+const sendgrid = require('../utils/sendgrid')
 
 authRouter
   .post('/register', validateRegister(), hashPassword(), (req, res) => {
-    res
-      .status(201)
-      .json({ message: 'You have been successfully registered' })
+    res.status(201).json({ message: 'You have been successfully registered' })
   })
   .post('/login', validateLogin(), verifyPassword(), (req, res) => {
     res.json({

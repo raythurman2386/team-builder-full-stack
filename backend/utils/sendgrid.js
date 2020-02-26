@@ -6,7 +6,7 @@ function sendgrid() {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
     if (!req.body.email) {
-      return res.status(400).json({ message: "Please supply your email" })
+      return res.status(400).json({ message: 'Please supply your email' })
     }
 
     const msg = {

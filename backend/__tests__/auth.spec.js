@@ -10,13 +10,15 @@ beforeAll(async done => {
 describe('register routes', () => {
   test('Register new user', async () => {
     const user = {
-      name: "Test",
-      username: "test",
-      email: "test@test.com",
-      password: "test"
+      name: 'Test',
+      username: 'test',
+      email: 'test@test.com',
+      password: 'test'
     }
 
-    const res = await supertest(server).post('/api/auth/register').send(user)
+    const res = await supertest(server)
+      .post('/api/auth/register')
+      .send(user)
 
     expect(res.status).toBe(201)
     expect(res.type).toBe('application/json')
@@ -24,12 +26,14 @@ describe('register routes', () => {
   })
   test('Register user fail name', async () => {
     const user = {
-      username: "test",
-      email: "test@test.com",
-      password: "test"
+      username: 'test',
+      email: 'test@test.com',
+      password: 'test'
     }
 
-    const res = await supertest(server).post('/api/auth/register').send(user)
+    const res = await supertest(server)
+      .post('/api/auth/register')
+      .send(user)
 
     expect(res.status).toBe(400)
     expect(res.type).toBe('application/json')
@@ -37,12 +41,14 @@ describe('register routes', () => {
   })
   test('Register user fail username', async () => {
     const user = {
-      name: "Test",
-      email: "test@test.com",
-      password: "test"
+      name: 'Test',
+      email: 'test@test.com',
+      password: 'test'
     }
 
-    const res = await supertest(server).post('/api/auth/register').send(user)
+    const res = await supertest(server)
+      .post('/api/auth/register')
+      .send(user)
 
     expect(res.status).toBe(400)
     expect(res.type).toBe('application/json')
@@ -50,12 +56,14 @@ describe('register routes', () => {
   })
   test('Register user fail email', async () => {
     const user = {
-      name: "Test",
-      username: "test",
-      password: "test"
+      name: 'Test',
+      username: 'test',
+      password: 'test'
     }
 
-    const res = await supertest(server).post('/api/auth/register').send(user)
+    const res = await supertest(server)
+      .post('/api/auth/register')
+      .send(user)
 
     expect(res.status).toBe(400)
     expect(res.type).toBe('application/json')
@@ -63,12 +71,14 @@ describe('register routes', () => {
   })
   test('Register user fail password', async () => {
     const user = {
-      name: "Test",
-      username: "test",
-      email: "test@test.com"
+      name: 'Test',
+      username: 'test',
+      email: 'test@test.com'
     }
 
-    const res = await supertest(server).post('/api/auth/register').send(user)
+    const res = await supertest(server)
+      .post('/api/auth/register')
+      .send(user)
 
     expect(res.status).toBe(400)
     expect(res.type).toBe('application/json')

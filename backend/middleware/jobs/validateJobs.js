@@ -20,7 +20,7 @@ function validateJobId() {
       console.log(job)
 
       if (!job) {
-        return res.status(404).json({ message: "Job not found" })
+        return res.status(404).json({ message: 'Job not found' })
       }
 
       req.job = job

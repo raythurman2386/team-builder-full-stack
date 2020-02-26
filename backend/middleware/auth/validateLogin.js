@@ -1,21 +1,19 @@
 const bcrypt = require('bcryptjs')
-const { User } = require("../../models/Model")
-const generateToken = require("../../token/generateToken")
+const { User } = require('../../models/Model')
+const generateToken = require('../../token/generateToken')
 
 function validateLogin() {
   return async (req, res, next) => {
     try {
-
       if (!req.body.username) {
-        return res.status(400).json({ message: "Please provide a username" })
+        return res.status(400).json({ message: 'Please provide a username' })
       }
 
       if (!req.body.password) {
-        return res.status(400).json({ message: "Please provide a password" })
+        return res.status(400).json({ message: 'Please provide a password' })
       }
 
       next()
-
     } catch (error) {
       next(error)
     }
@@ -37,7 +35,6 @@ function verifyPassword() {
       } else {
         return res.status(401).json({ message: 'Invalid Credentials' })
       }
-
     } catch (error) {
       next(error)
     }

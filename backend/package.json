@@ -7,6 +7,7 @@
     "start": "node index.js",
     "server": "cross-env NODE_ENV=production nodemon index.js",
     "test": "cross-env NODE_ENV=production jest --watch --verbose --runInBand --coverage",
+    "format": "prettier \"**/*.{js,jsx,html}\" --write",
     "migrate": "cross-env NODE_ENV=development knex migrate:latest",
     "rollback": "cross-env NODE_ENV=development knex migrate:rollback",
     "migrate:prod": "cross-env NODE_ENV=production knex migrate:latest",
@@ -44,6 +45,7 @@
     "knex-cleaner": "^1.3.0",
     "morgan": "^1.9.1",
     "pg": "^7.17.1",
+    "prettier": "^1.19.1",
     "sqlite3": "^4.1.1"
   },
   "jest": {

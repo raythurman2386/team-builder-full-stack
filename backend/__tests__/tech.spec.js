@@ -35,7 +35,9 @@ describe('tech routes', () => {
   })
 
   test('get tech by id', async () => {
-    const res = await supertest(server).get('/api/technicians/1').set('authorization', token)
+    const res = await supertest(server)
+      .get('/api/technicians/1')
+      .set('authorization', token)
 
     expect(res.status).toBe(200)
     expect(res.type).toBe('application/json')
@@ -43,7 +45,9 @@ describe('tech routes', () => {
   })
 
   test('get tech by id fail', async () => {
-    const res = await supertest(server).get('/api/technicians/100').set('authorization', token)
+    const res = await supertest(server)
+      .get('/api/technicians/100')
+      .set('authorization', token)
 
     expect(res.status).toBe(404)
     expect(res.type).toBe('application/json')

@@ -6,7 +6,9 @@ function validateTechId() {
       const tech = await Tech.findBy({ id: req.params.id })
 
       if (!tech) {
-        return res.status(404).json({ message: "There is no tech with that id" })
+        return res
+          .status(404)
+          .json({ message: 'There is no tech with that id' })
       }
       req.tech = tech
       next()
@@ -20,7 +22,7 @@ function validateTechName() {
   return async (req, res, next) => {
     try {
       if (!req.body.name) {
-        return res.status(400).json({ message: "Please provide a tech name" })
+        return res.status(400).json({ message: 'Please provide a tech name' })
       }
 
       await Tech.add(req.body)
@@ -49,7 +51,7 @@ function validateTechJobs() {
       const jobs = await Tech.findTechJobs(req.tech.id)
 
       if (jobs.length === 0) {
-        return res.status(400).json({ message: "This tech has no jobs" })
+        return res.status(400).json({ message: 'This tech has no jobs' })
       }
 
       req.techJobs = jobs
@@ -60,4 +62,9 @@ function validateTechJobs() {
   }
 }
 
-module.exports = { validateTechId, validateTechName, validateTechs, validateTechJobs }
+module.exports = {
+  validateTechId,
+  validateTechName,
+  validateTechs,
+  validateTechJobs
+}

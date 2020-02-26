@@ -1,5 +1,10 @@
 const techRouter = require('express').Router()
-const { validateTechId, validateTechName, validateTechs, validateTechJobs } = require('../middleware/tech/validateTech')
+const {
+  validateTechId,
+  validateTechName,
+  validateTechs,
+  validateTechJobs
+} = require('../middleware/tech/validateTech')
 
 techRouter
   .get('/', validateTechs(), (req, res) => {
@@ -12,7 +17,7 @@ techRouter
     res.json(req.techJobs)
   })
   .post('/', validateTechName(), (req, res) => {
-    res.status(201).json({ message: "Technician added" })
+    res.status(201).json({ message: 'Technician added' })
   })
 
 module.exports = techRouter

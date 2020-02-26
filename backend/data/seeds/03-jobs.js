@@ -1,4 +1,4 @@
-exports.seed = async function (knex) {
+exports.seed = async function(knex) {
   await knex('jobs').insert([
     {
       machine: '305E',
