@@ -7,20 +7,11 @@ import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined"
 import Title from "./Title"
-import { JobContext } from "../../context/context"
-import { axiosWithAuth as axios } from "../../utils/axiosConfig"
+import { GlobalContext } from "../../context"
 
 function Jobs() {
-  let { jobs, setJobs } = useContext(JobContext)
+  let { jobs, deleteJob } = useContext(GlobalContext)
   const classes = useStyles()
-
-  const handleDelete = id => {
-
-    axios()
-      .delete(`/jobs/${id}`)
-      .then(res => setJobs(jobs.filter(job => job.id !== id)))
-      .catch(err => console.log(err.response))
-  }
 
   return (
     <React.Fragment>
@@ -48,7 +39,7 @@ function Jobs() {
                 <TableCell
                   align='center'
                   className={classes.delete}
-                  onClick={e => handleDelete(job.id)}
+                  onClick={e => deleteJob(job.id)}
                 >
                   <DeleteForeverOutlinedIcon color='secondary' />
                 </TableCell>

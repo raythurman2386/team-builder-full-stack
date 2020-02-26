@@ -18,12 +18,12 @@ import MainListItems from "./listItems"
 import Copyright from "../Copyright/Copyright"
 import Jobs from "./Jobs"
 import { useToggle } from "../../hooks/useToggle"
-import { MessageContext } from "../../context/context"
+import { GlobalContext } from "../../context"
 import AddJob from "../Modal/AddJob"
 
 function Dashboard(props) {
   const classes = useStyles()
-  const { message } = useContext(MessageContext)
+  const { message } = useContext(GlobalContext)
   const [openSide, handleOpenSide] = useToggle()
   const [open, handleOpen] = useToggle()
 
