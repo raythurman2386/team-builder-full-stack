@@ -64,6 +64,51 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  async function getTechs() {
+    try {
+      const res = await axios().get("/api/techs")
+      dispatch({
+        type: "GET_TECHS",
+        payload: res.data.data
+      })
+    } catch (err) {
+      dispatch({
+        type: "TECH_ERROR",
+        payload: err.response.data.error
+      })
+    }
+  }
+
+  async function deleteTech(id) {
+    try {
+      await axios().delete(`/api/techs/${id}`)
+      dispatch({
+        type: "DELETE_TECH",
+        payload: id
+      })
+    } catch (err) {
+      dispatch({
+        type: "TECH_ERROR",
+        payload: err.response.data.error
+      })
+    }
+  }
+
+  async function addTech(tech) {
+    try {
+      const res = await axios().post("/api/techs", tech)
+      dispatch({
+        type: "ADD_TECH",
+        payload: res.data.data
+      })
+    } catch (err) {
+      dispatch({
+        type: "TECH_ERROR",
+        payload: err.response.data.error
+      })
+    }
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -74,7 +119,10 @@ export const GlobalProvider = ({ children }) => {
         loading: state.loading,
         getJobs,
         deleteJob,
-        addJob
+        addJob,
+        getTechs,
+        deleteTech,
+        addTech
       }}
     >
       {children}
