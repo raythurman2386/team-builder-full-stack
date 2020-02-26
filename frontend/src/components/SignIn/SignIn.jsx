@@ -13,11 +13,9 @@ import { makeStyles } from "@material-ui/core/styles"
 import Copyright from "../Copyright/Copyright"
 import Logo from "../../assets/dozer5.jpg"
 import { axiosWithAuth as axios } from "../../utils/axiosConfig"
-import { MessageContext } from "../../context/context"
 
 function SignIn(props) {
   const classes = useStyles()
-  const { setMessage } = useContext(MessageContext)
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
@@ -28,7 +26,6 @@ function SignIn(props) {
       .then(res => {
         localStorage.setItem("token", res.data.token)
         localStorage.setItem("message", res.data.message)
-        setMessage(res.data.message)
       })
       .then(data => props.history.push("/dashboard"))
       .catch(err => console.log(err.response))

@@ -5,12 +5,11 @@ import TextField from "@material-ui/core/TextField"
 import IconButton from "@material-ui/core/IconButton"
 import Typography from "@material-ui/core/Typography"
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline"
-import { axiosWithAuth as axios } from "../../utils/axiosConfig"
-import { JobContext } from "../../context/context"
+import { GlobalContext } from "../../context"
 import SpringModal from "../../utils/SpringModal"
 
 function AddJob({ open, handleOpen }) {
-  const { jobs, setJobs } = useContext(JobContext)
+  const { addJob } = useContext(GlobalContext)
   const classes = useStyles()
   const [job, setJob] = useState({
     machine: "",
@@ -25,20 +24,14 @@ function AddJob({ open, handleOpen }) {
 
   const handleSubmit = e => {
     e.preventDefault()
-    setJobs([...jobs, job])
-
-    axios()
-      .post("/jobs", job)
-      .then(res =>
-        setJob({
-          machine: "",
-          complaint: "",
-          serial_number: "",
-          name: ""
-        })
-      )
-      .then(data => handleOpen())
-      .catch(err => console.log(err.response))
+    addJob(job)
+    setJob({
+      machine: "",
+      complaint: "",
+      serial_number: "",
+      name: ""
+    })
+    handleOpen()
   }
 
   return (

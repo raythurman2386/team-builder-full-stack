@@ -6,7 +6,7 @@ import { axiosWithAuth as axios } from "../utils/axiosConfig"
 const initialState = {
   jobs: [],
   techs: [],
-  message: "",
+  message: localStorage.getItem("message") || "",
   error: null,
   loading: true
 }
