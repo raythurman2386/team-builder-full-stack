@@ -35,7 +35,8 @@ function AddJob({ open, handleOpen }) {
           complaint: "",
           serial_number: "",
           name: ""
-        }))
+        })
+      )
       .then(data => handleOpen())
       .catch(err => console.log(err.response))
   }
