@@ -3,12 +3,12 @@ import ListItem from "@material-ui/core/ListItem"
 import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
 import PersonIcon from "@material-ui/icons/Person"
-import { TechContext } from "../../context/context"
+import { GlobalContext } from "../../context"
 // import useToggle from "../../hooks/useToggle"
 // import AddTech from "../Modal/AddTech"
 
 const MainListItems = () => {
-  const { techs } = useContext(TechContext)
+  const { techs } = useContext(GlobalContext)
   // const [open, handleOpen] = useToggle()
 
   return (

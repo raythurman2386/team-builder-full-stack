@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from "react"
 import AppReducer from "../reducer"
-import axios from "axios"
+import { axiosWithAuth as axios } from "../utils/axiosConfig"
 
 // Initial state
 const initialState = {
@@ -21,7 +21,7 @@ export const GlobalProvider = ({ children }) => {
   // Actions
   async function getJobs() {
     try {
-      const res = await axios.get("/api/jobs")
+      const res = await axios().get("/api/jobs")
       dispatch({
         type: "GET_JOBS",
         payload: res.data.data
@@ -36,7 +36,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function deleteJob(id) {
     try {
-      await axios.delete(`/api/jobs/${id}`)
+      await axios().delete(`/api/jobs/${id}`)
       dispatch({
         type: "DELETE_JOB",
         payload: id
@@ -50,13 +50,8 @@ export const GlobalProvider = ({ children }) => {
   }
 
   async function addJob(job) {
-    const config = {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }
     try {
-      const res = await axios.post("/api/jobs", job, config)
+      const res = await axios().post("/api/jobs", job)
       dispatch({
         type: "ADD_JOB",
         payload: res.data.data
@@ -76,7 +71,10 @@ export const GlobalProvider = ({ children }) => {
         techs: state.techs,
         message: state.message,
         error: state.error,
-        loading: state.loading
+        loading: state.loading,
+        getJobs,
+        deleteJob,
+        addJob
       }}
     >
       {children}
