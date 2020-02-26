@@ -1,27 +1,85 @@
-import React from "react"
-import { useAxios } from "../hooks/useAxios"
-import { useToggle } from "../hooks/useToggle"
-import { TechProvider, JobProvider, MessageProvider, LoadingProvider } from "../context/context"
+import React, { createContext, useReducer } from "react"
+import AppReducer from "../reducer"
+import axios from "axios"
 
-const Context = ({ children }) => {
-  const [techs, setTechs] = useAxios("techs", "/technicians")
-  const [jobs, setJobs] = useAxios("jobs", "/jobs")
-  const [loading, handleLoading] = useToggle()
-  const [message, setMessage] = React.useState(
-    localStorage.getItem("message") || ""
-  )
-
-  return (
-    <TechProvider value={{ techs, setTechs }}>
-      <JobProvider value={{ jobs, setJobs }}>
-        <MessageProvider value={{ message, setMessage }}>
-          <LoadingProvider value={{ loading, handleLoading }}>
-            {children}
-          </LoadingProvider>
-        </MessageProvider>
-      </JobProvider>
-    </TechProvider>
-  )
+// Initial state
+const initialState = {
+  jobs: [],
+  techs: [],
+  message: "",
+  error: null,
+  loading: true
 }
 
-export default Context
+// Create context
+export const GlobalContext = createContext(initialState)
+
+// Provider component
+export const GlobalProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(AppReducer, initialState)
+
+  // Actions
+  async function getJobs() {
+    try {
+      const res = await axios.get("/api/jobs")
+      dispatch({
+        type: "GET_JOBS",
+        payload: res.data.data
+      })
+    } catch (err) {
+      dispatch({
+        type: "JOB_ERROR",
+        payload: err.response.data.error
+      })
+    }
+  }
+
+  async function deleteJob(id) {
+    try {
+      await axios.delete(`/api/jobs/${id}`)
+      dispatch({
+        type: "DELETE_JOB",
+        payload: id
+      })
+    } catch (err) {
+      dispatch({
+        type: "JOB_ERROR",
+        payload: err.response.data.error
+      })
+    }
+  }
+
+  async function addJob(job) {
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+    try {
+      const res = await axios.post("/api/jobs", job, config)
+      dispatch({
+        type: "ADD_JOB",
+        payload: res.data.data
+      })
+    } catch (err) {
+      dispatch({
+        type: "JOB_ERROR",
+        payload: err.response.data.error
+      })
+    }
+  }
+
+  return (
+    <GlobalContext.Provider
+      value={{
+        jobs: state.jobs,
+        techs: state.techs,
+        message: state.message,
+        error: state.error,
+        loading: state.loading
+      }}
+    >
+      {children}
+    </GlobalContext.Provider>
+  )
+}
