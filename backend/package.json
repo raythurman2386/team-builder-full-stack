@@ -1,5 +1,5 @@
 {
-  "name": "webapi-i-challenge",
+  "name": "team-builder",
   "version": "1.0.0",
   "description": "Project that tracks technicians and jobs",
   "main": "index.js",
@@ -17,16 +17,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LambdaSchool/webapi-i-challenge.git"
+    "url": "git+https://github.com/raythurman2386/team-builder-full-stack/tree/master/backend.git"
   },
   "keywords": [
     "react, context, node, express"
   ],
   "author": "Ray Thurman",
   "bugs": {
-    "url": "https://github.com/LambdaSchool/webapi-i-challenge/issues"
+    "url": "https://github.com/raythurman2386/team-builder-full-stack/tree/master/backend/issues"
   },
-  "homepage": "https://github.com/LambdaSchool/webapi-i-challenge#readme",
+  "homepage": "https://github.com/raythurman2386/team-builder-full-stack/tree/master/backend#readme",
   "devDependencies": {
     "jest": "^25.1.0",
     "nodemon": "^1.19.4",
