@@ -21,7 +21,7 @@ export const GlobalProvider = ({ children }) => {
   // Actions
   async function getJobs() {
     try {
-      const res = await axios().get("/api/jobs")
+      const res = await axios().get("/jobs")
       dispatch({
         type: "GET_JOBS",
         payload: res.data.data
@@ -36,7 +36,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function deleteJob(id) {
     try {
-      await axios().delete(`/api/jobs/${id}`)
+      await axios().delete(`/jobs/${id}`)
       dispatch({
         type: "DELETE_JOB",
         payload: id
@@ -51,7 +51,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function addJob(job) {
     try {
-      const res = await axios().post("/api/jobs", job)
+      const res = await axios().post("/jobs", job)
       dispatch({
         type: "ADD_JOB",
         payload: res.data.data
@@ -66,7 +66,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function getTechs() {
     try {
-      const res = await axios().get("/api/techs")
+      const res = await axios().get("/techs")
       dispatch({
         type: "GET_TECHS",
         payload: res.data.data
@@ -81,7 +81,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function deleteTech(id) {
     try {
-      await axios().delete(`/api/techs/${id}`)
+      await axios().delete(`/techs/${id}`)
       dispatch({
         type: "DELETE_TECH",
         payload: id
@@ -96,7 +96,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function addTech(tech) {
     try {
-      const res = await axios().post("/api/techs", tech)
+      const res = await axios().post("/techs", tech)
       dispatch({
         type: "ADD_TECH",
         payload: res.data.data
