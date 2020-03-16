@@ -9,17 +9,27 @@ import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined"
 import Title from "./Title"
 
 // Apollo Deps
-import { useQuery } from "@apollo/react-hooks"
-import { GET_JOBS } from "../../queries"
+import { useQuery, useMutation } from "@apollo/react-hooks"
+import { GET_JOBS, DELETE_JOB } from "../../queries"
 
 function Jobs() {
   const { loading, error, data } = useQuery(GET_JOBS)
+  const [deleteJob] = useMutation(DELETE_JOB, {
+    update(cache, { data: { deleteJob } }) {
+      const { jobs } = cache.readQuery({ query: GET_JOBS })
+      console.log(deleteJob);
+      cache.writeQuery({
+        query: GET_JOBS,
+        data: { jobs: jobs.filter(job => job.id !== deleteJob.id) }
+      })
+    }
+  })
 
   const classes = useStyles()
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
-  console.log(data.jobs)
+
   return (
     <React.Fragment>
       <Title>Recent Jobs</Title>
@@ -46,7 +56,7 @@ function Jobs() {
                 <TableCell
                   align='center'
                   className={classes.delete}
-                // onClick={e => deleteJob(job.id)}
+                  onClick={e => deleteJob({ variables: { id: job.id } })}
                 >
                   <DeleteForeverOutlinedIcon color='secondary' />
                 </TableCell>

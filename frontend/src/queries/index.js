@@ -56,4 +56,12 @@ mutation addJob($machine: String!, $complaint: String!, $tech_id: ID!){
     }
   }
 }
-`;
+`
+
+export const DELETE_JOB = gql`
+  mutation deleteJob($id: ID!) {
+    deleteJob(id: $id){
+      id
+    }
+  }
+`
