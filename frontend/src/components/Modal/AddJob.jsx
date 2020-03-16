@@ -6,9 +6,21 @@ import IconButton from "@material-ui/core/IconButton"
 import Typography from "@material-ui/core/Typography"
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline"
 import SpringModal from "../../utils/SpringModal"
+import { useMutation } from '@apollo/react-hooks'
+import { ADD_JOB, GET_JOBS } from "../../queries"
 
 function AddJob({ open, handleOpen }) {
   const classes = useStyles()
+  const [addJob] = useMutation(ADD_JOB, {
+    update(cache, { data: { addJob } }) {
+      const { jobs } = cache.readQuery({ query: GET_JOBS })
+      cache.writeQuery({
+        query: GET_JOBS,
+        data: { jobs: jobs.concat([addJob]) }
+      })
+    }
+  })
+
   const [job, setJob] = useState({
     machine: "",
     complaint: "",
@@ -21,11 +33,16 @@ function AddJob({ open, handleOpen }) {
 
   const handleSubmit = e => {
     e.preventDefault()
+    addJob({ variables: { machine: job.machine, complaint: job.complaint, tech_id: "1" } })
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err))
+
     setJob({
       machine: "",
       complaint: "",
       name: ""
     })
+
     handleOpen()
   }
 
