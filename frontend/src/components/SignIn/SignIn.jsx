@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState } from "react"
 import Avatar from "@material-ui/core/Avatar"
 import Button from "@material-ui/core/Button"
 import CssBaseline from "@material-ui/core/CssBaseline"
@@ -12,20 +12,30 @@ import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
 import Copyright from "../Copyright/Copyright"
 import Logo from "../../assets/dozer5.jpg"
-import { axiosWithAuth as axios } from "../../utils/axiosConfig"
+
+// Apollo deps
+import { useMutation } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
+
+const LOGIN = gql`
+    mutation login($email: String!, $password: String!) {
+      login(email: $email, password: $password){
+        token
+      }
+    }
+  `
 
 function SignIn(props) {
   const classes = useStyles()
-  const [username, setUsername] = useState("")
+  const [login] = useMutation(LOGIN);
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
   const handleSubmit = e => {
     e.preventDefault()
-    axios()
-      .post("/auth/login", { username, password })
+    login({ variables: { email: email, password: password } })
       .then(res => {
-        localStorage.setItem("token", res.data.token)
-        localStorage.setItem("message", res.data.message)
+        localStorage.setItem("token", res.data.login.token)
       })
       .then(data => props.history.push("/dashboard"))
       .catch(err => console.log(err.response))
@@ -49,13 +59,13 @@ function SignIn(props) {
               margin='normal'
               required
               fullWidth
-              id='username'
-              label='Username'
-              name='username'
-              autoComplete='username'
+              id='email'
+              label='Email'
+              name='email'
+              autoComplete='email'
               autoFocus
-              value={username}
-              onChange={e => setUsername(e.target.value)}
+              value={email}
+              onChange={e => setEmail(e.target.value)}
             />
             <TextField
               variant='outlined'
