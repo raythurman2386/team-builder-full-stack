@@ -7,7 +7,6 @@ import ListItemText from "@material-ui/core/ListItemText"
 import TextField from "@material-ui/core/TextField"
 import AddIcon from "@material-ui/icons/Add"
 import SpringModal from "../../utils/SpringModal"
-import { axiosWithAuth as axios } from "../../utils/axiosConfig"
 
 function AddTech({ open, handleOpen }) {
   const [name, setName] = React.useState("")
@@ -15,11 +14,6 @@ function AddTech({ open, handleOpen }) {
 
   const handleSubmit = e => {
     e.preventDefault()
-
-    axios()
-      .post("/technicians", { name })
-      .then(res => handleOpen())
-      .catch(err => console.log(err.response))
   }
 
   return (

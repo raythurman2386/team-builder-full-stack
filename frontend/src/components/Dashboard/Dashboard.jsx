@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React from "react"
 import clsx from "clsx"
 import { makeStyles } from "@material-ui/core/styles"
 import CssBaseline from "@material-ui/core/CssBaseline"
@@ -18,12 +18,10 @@ import MainListItems from "./listItems"
 import Copyright from "../Copyright/Copyright"
 import Jobs from "./Jobs"
 import { useToggle } from "../../hooks/useToggle"
-import { GlobalContext } from "../../context"
 import AddJob from "../Modal/AddJob"
 
 function Dashboard(props) {
   const classes = useStyles()
-  const { message } = useContext(GlobalContext)
   const [openSide, handleOpenSide] = useToggle()
   const [open, handleOpen] = useToggle()
 
@@ -59,7 +57,7 @@ function Dashboard(props) {
             noWrap
             className={classes.title}
           >
-            {message}
+            Welcome
           </Typography>
           <AddJob open={open} handleOpen={handleOpen} />
           <IconButton color='inherit' onClick={handleLogout}>

@@ -9,30 +9,30 @@ import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined"
 import Title from "./Title"
 
 // Apollo Deps
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+import { useQuery } from "@apollo/react-hooks"
+import { gql } from "apollo-boost"
 
 const GET_JOBS = gql`
   {
-    jobs{
+    jobs {
       id
       machine
       complaint
-      tech{
+      tech {
         name
       }
     }
   }
-`;
+`
 
 function Jobs() {
-  const { loading, error, data } = useQuery(GET_JOBS);
+  const { loading, error, data } = useQuery(GET_JOBS)
 
   const classes = useStyles()
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-  console.log(data.jobs);
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error :(</p>
+  console.log(data.jobs)
   return (
     <React.Fragment>
       <Title>Recent Jobs</Title>
@@ -51,7 +51,11 @@ function Jobs() {
               <TableRow key={job.id}>
                 <TableCell align='center'>{job.machine}</TableCell>
                 <TableCell align='center'>{job.complaint}</TableCell>
-                {job.tech ? <TableCell align='center'>{job.tech.name}</TableCell> : <TableCell align='center'>Needs Tech</TableCell>}
+                {job.tech ? (
+                  <TableCell align='center'>{job.tech.name}</TableCell>
+                ) : (
+                    <TableCell align='center'>Needs Tech</TableCell>
+                  )}
                 <TableCell
                   align='center'
                   className={classes.delete}

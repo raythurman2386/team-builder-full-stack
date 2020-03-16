@@ -13,24 +13,24 @@ import Container from "@material-ui/core/Container"
 import Copyright from "../Copyright/Copyright"
 
 // Apollo deps
-import { useMutation } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+import { useMutation } from "@apollo/react-hooks"
+import { gql } from "apollo-boost"
 
 const SIGN_UP = gql`
-    mutation signup($name: String!, $email: String!, $password: String!) {
-      signup(name: $name, email: $email, password: $password){
-        token
-        user{
-          name
-          email
-        }
+  mutation signup($name: String!, $email: String!, $password: String!) {
+    signup(name: $name, email: $email, password: $password) {
+      token
+      user {
+        name
+        email
       }
     }
-  `
+  }
+`
 
 function Register(props) {
   const classes = useStyles()
-  const [signup] = useMutation(SIGN_UP);
+  const [signup] = useMutation(SIGN_UP)
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
@@ -39,11 +39,11 @@ function Register(props) {
     e.preventDefault()
     signup({ variables: { name: name, email: email, password: password } })
       .then(res => {
-        localStorage.setItem('token', res.data.signup.token)
+        localStorage.setItem("token", res.data.signup.token)
         // console.log(res.data.signup.token, 'data');
       })
       .then(data => {
-        props.history.push('/dashboard')
+        props.history.push("/dashboard")
       })
   }
 

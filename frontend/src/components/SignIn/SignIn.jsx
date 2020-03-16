@@ -14,20 +14,20 @@ import Copyright from "../Copyright/Copyright"
 import Logo from "../../assets/dozer5.jpg"
 
 // Apollo deps
-import { useMutation } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+import { useMutation } from "@apollo/react-hooks"
+import { gql } from "apollo-boost"
 
 const LOGIN = gql`
-    mutation login($email: String!, $password: String!) {
-      login(email: $email, password: $password){
-        token
-      }
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
     }
-  `
+  }
+`
 
 function SignIn(props) {
   const classes = useStyles()
-  const [login] = useMutation(LOGIN);
+  const [login] = useMutation(LOGIN)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 

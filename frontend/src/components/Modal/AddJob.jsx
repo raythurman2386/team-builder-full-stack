@@ -1,20 +1,17 @@
-import React, { useState, useContext } from "react"
+import React, { useState } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import Button from "@material-ui/core/Button"
 import TextField from "@material-ui/core/TextField"
 import IconButton from "@material-ui/core/IconButton"
 import Typography from "@material-ui/core/Typography"
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline"
-import { GlobalContext } from "../../context"
 import SpringModal from "../../utils/SpringModal"
 
 function AddJob({ open, handleOpen }) {
-  const { addJob } = useContext(GlobalContext)
   const classes = useStyles()
   const [job, setJob] = useState({
     machine: "",
     complaint: "",
-    serial_number: "",
     name: ""
   })
 
@@ -24,11 +21,9 @@ function AddJob({ open, handleOpen }) {
 
   const handleSubmit = e => {
     e.preventDefault()
-    addJob(job)
     setJob({
       machine: "",
       complaint: "",
-      serial_number: "",
       name: ""
     })
     handleOpen()
@@ -68,18 +63,6 @@ function AddJob({ open, handleOpen }) {
             name='complaint'
             autoComplete='complaint'
             value={job.complaint}
-            onChange={e => handleChange(e)}
-          />
-          <TextField
-            variant='outlined'
-            margin='normal'
-            required
-            fullWidth
-            id='serial_number'
-            label='Serial Number'
-            name='serial_number'
-            autoComplete='serial number'
-            value={job.serial_number}
             onChange={e => handleChange(e)}
           />
           <TextField
