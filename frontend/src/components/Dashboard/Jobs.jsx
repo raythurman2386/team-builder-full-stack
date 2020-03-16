@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import Table from "@material-ui/core/Table"
 import TableBody from "@material-ui/core/TableBody"
@@ -7,12 +7,32 @@ import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined"
 import Title from "./Title"
-import { GlobalContext } from "../../context"
+
+// Apollo Deps
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
+
+const GET_JOBS = gql`
+  {
+    jobs{
+      id
+      machine
+      complaint
+      tech{
+        name
+      }
+    }
+  }
+`;
 
 function Jobs() {
-  let { jobs, deleteJob } = useContext(GlobalContext)
+  const { loading, error, data } = useQuery(GET_JOBS);
+
   const classes = useStyles()
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+  console.log(data.jobs);
   return (
     <React.Fragment>
       <Title>Recent Jobs</Title>
@@ -21,25 +41,21 @@ function Jobs() {
           <TableRow>
             <TableCell align='center'>Machine</TableCell>
             <TableCell align='center'>Complaint</TableCell>
-            <TableCell align='center'>Serial Number</TableCell>
             <TableCell align='center'>Technician</TableCell>
-            <TableCell align='center'>Created</TableCell>
             <TableCell align='center'>Complete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {jobs &&
-            jobs.map(job => (
+          {data.jobs &&
+            data.jobs.map(job => (
               <TableRow key={job.id}>
                 <TableCell align='center'>{job.machine}</TableCell>
                 <TableCell align='center'>{job.complaint}</TableCell>
-                <TableCell align='center'>{job.serial_number}</TableCell>
-                <TableCell align='center'>{job.name}</TableCell>
-                <TableCell align='center'>{job.created_at}</TableCell>
+                {job.tech ? <TableCell align='center'>{job.tech.name}</TableCell> : <TableCell align='center'>Needs Tech</TableCell>}
                 <TableCell
                   align='center'
                   className={classes.delete}
-                  onClick={e => deleteJob(job.id)}
+                // onClick={e => deleteJob(job.id)}
                 >
                   <DeleteForeverOutlinedIcon color='secondary' />
                 </TableCell>
