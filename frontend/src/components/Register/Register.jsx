@@ -11,23 +11,40 @@ import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
 import Container from "@material-ui/core/Container"
 import Copyright from "../Copyright/Copyright"
-import { axiosWithAuth as axios } from "../../utils/axiosConfig"
+
+// Apollo deps
+import { useMutation } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
+
+const SIGN_UP = gql`
+    mutation signup($name: String!, $email: String!, $password: String!) {
+      signup(name: $name, email: $email, password: $password){
+        token
+        user{
+          name
+          email
+        }
+      }
+    }
+  `
 
 function Register(props) {
   const classes = useStyles()
+  const [signup] = useMutation(SIGN_UP);
   const [name, setName] = useState("")
-  const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
 
   const handleSubmit = e => {
     e.preventDefault()
-    let user = { name, username, password, email }
-
-    axios()
-      .post("/auth/register", user)
-      .then(res => props.history.push("/login"))
-      .catch(err => console.log(err.response))
+    signup({ variables: { name: name, email: email, password: password } })
+      .then(res => {
+        localStorage.setItem('token', res.data.signup.token)
+        // console.log(res.data.signup.token, 'data');
+      })
+      .then(data => {
+        props.history.push('/dashboard')
+      })
   }
 
   return (
@@ -53,19 +70,6 @@ function Register(props) {
             autoFocus
             value={name}
             onChange={e => setName(e.target.value)}
-          />
-          <TextField
-            variant='outlined'
-            margin='normal'
-            required
-            fullWidth
-            id='username'
-            label='Username'
-            name='username'
-            autoComplete='username'
-            autoFocus
-            value={username}
-            onChange={e => setUsername(e.target.value)}
           />
           <TextField
             variant='outlined'
