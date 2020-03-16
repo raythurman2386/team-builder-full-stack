@@ -24,6 +24,7 @@ function Dashboard(props) {
   const classes = useStyles()
   const [openSide, handleOpenSide] = useToggle()
   const [open, handleOpen] = useToggle()
+  const [message] = React.useState(localStorage.getItem('name') || 'to the shop')
 
   const handleLogout = () => {
     localStorage.removeItem("token")
@@ -57,7 +58,7 @@ function Dashboard(props) {
             noWrap
             className={classes.title}
           >
-            Welcome
+            Welcome {message}
           </Typography>
           <AddJob open={open} handleOpen={handleOpen} />
           <IconButton color='inherit' onClick={handleLogout}>
