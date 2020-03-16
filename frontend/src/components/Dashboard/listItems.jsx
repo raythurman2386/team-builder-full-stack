@@ -1,12 +1,12 @@
-import React from "react"
-import ListItem from "@material-ui/core/ListItem"
-import ListItemIcon from "@material-ui/core/ListItemIcon"
-import ListItemText from "@material-ui/core/ListItemText"
-import PersonIcon from "@material-ui/icons/Person"
+import React from 'react'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import PersonIcon from '@material-ui/icons/Person'
 
 // Apollo Deps
-import { useQuery } from "@apollo/react-hooks"
-import { GET_TECHS } from "../../queries"
+import { useQuery } from '@apollo/react-hooks'
+import { GET_TECHS } from '../../queries'
 
 const MainListItems = () => {
   const { loading, error, data } = useQuery(GET_TECHS)

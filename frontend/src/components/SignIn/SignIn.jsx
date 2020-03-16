@@ -1,36 +1,36 @@
-import React, { useState } from "react"
-import Avatar from "@material-ui/core/Avatar"
-import Button from "@material-ui/core/Button"
-import CssBaseline from "@material-ui/core/CssBaseline"
-import TextField from "@material-ui/core/TextField"
-import Link from "@material-ui/core/Link"
-import Paper from "@material-ui/core/Paper"
-import Box from "@material-ui/core/Box"
-import Grid from "@material-ui/core/Grid"
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
-import Typography from "@material-ui/core/Typography"
-import { makeStyles } from "@material-ui/core/styles"
-import Copyright from "../Copyright/Copyright"
-import Logo from "../../assets/dozer5.jpg"
+import React, { useState } from 'react'
+import Avatar from '@material-ui/core/Avatar'
+import Button from '@material-ui/core/Button'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import TextField from '@material-ui/core/TextField'
+import Link from '@material-ui/core/Link'
+import Paper from '@material-ui/core/Paper'
+import Box from '@material-ui/core/Box'
+import Grid from '@material-ui/core/Grid'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/core/styles'
+import Copyright from '../Copyright/Copyright'
+import Logo from '../../assets/dozer5.jpg'
 
 // Apollo deps
-import { useMutation } from "@apollo/react-hooks"
-import { LOGIN } from "../../queries"
+import { useMutation } from '@apollo/react-hooks'
+import { LOGIN } from '../../queries'
 
 function SignIn(props) {
   const classes = useStyles()
   const [login] = useMutation(LOGIN)
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSubmit = e => {
     e.preventDefault()
     login({ variables: { email: email, password: password } })
       .then(res => {
-        localStorage.setItem("token", res.data.login.token)
-        localStorage.setItem("name", res.data.login.user.name)
+        localStorage.setItem('token', res.data.login.token)
+        localStorage.setItem('name', res.data.login.user.name)
       })
-      .then(data => props.history.push("/dashboard"))
+      .then(data => props.history.push('/dashboard'))
       .catch(err => console.log(err.response))
   }
 
@@ -108,30 +108,30 @@ export default SignIn
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: "100vh"
+    height: '100vh'
   },
   image: {
     backgroundImage: `url(${Logo})`,
-    backgroundRepeat: "no-repeat",
+    backgroundRepeat: 'no-repeat',
     backgroundColor:
-      theme.palette.type === "dark"
+      theme.palette.type === 'dark'
         ? theme.palette.grey[900]
         : theme.palette.grey[50],
-    backgroundSize: "cover",
-    backgroundPosition: "center"
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
   },
   paper: {
     margin: theme.spacing(8, 4),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1)
   },
   submit: {

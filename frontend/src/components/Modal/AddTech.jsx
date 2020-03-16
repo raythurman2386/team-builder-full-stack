@@ -1,15 +1,15 @@
-import React from "react"
-import { makeStyles } from "@material-ui/core/styles"
-import Button from "@material-ui/core/Button"
-import ListItem from "@material-ui/core/ListItem"
-import ListItemIcon from "@material-ui/core/ListItemIcon"
-import ListItemText from "@material-ui/core/ListItemText"
-import TextField from "@material-ui/core/TextField"
-import AddIcon from "@material-ui/icons/Add"
-import SpringModal from "../../utils/SpringModal"
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import TextField from '@material-ui/core/TextField'
+import AddIcon from '@material-ui/icons/Add'
+import SpringModal from '../../utils/SpringModal'
 
 function AddTech({ open, handleOpen }) {
-  const [name, setName] = React.useState("")
+  const [name, setName] = React.useState('')
   const classes = useStyles()
 
   const handleSubmit = e => {
@@ -59,20 +59,20 @@ export default AddTech
 
 const useStyles = makeStyles(theme => ({
   modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: "none",
+    border: 'none',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
-    width: "800px",
-    height: "400px"
+    width: '800px',
+    height: '400px'
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1)
   },
   submit: {

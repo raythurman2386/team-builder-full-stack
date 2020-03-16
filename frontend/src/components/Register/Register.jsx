@@ -1,38 +1,37 @@
-import React, { useState } from "react"
-import Avatar from "@material-ui/core/Avatar"
-import Button from "@material-ui/core/Button"
-import CssBaseline from "@material-ui/core/CssBaseline"
-import TextField from "@material-ui/core/TextField"
-import Link from "@material-ui/core/Link"
-import Grid from "@material-ui/core/Grid"
-import Box from "@material-ui/core/Box"
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
-import Typography from "@material-ui/core/Typography"
-import { makeStyles } from "@material-ui/core/styles"
-import Container from "@material-ui/core/Container"
-import Copyright from "../Copyright/Copyright"
+import React, { useState } from 'react'
+import Avatar from '@material-ui/core/Avatar'
+import Button from '@material-ui/core/Button'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import TextField from '@material-ui/core/TextField'
+import Link from '@material-ui/core/Link'
+import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/core/styles'
+import Container from '@material-ui/core/Container'
+import Copyright from '../Copyright/Copyright'
 
 // Apollo deps
-import { useMutation } from "@apollo/react-hooks"
-import { SIGN_UP } from "../../queries"
-
+import { useMutation } from '@apollo/react-hooks'
+import { SIGN_UP } from '../../queries'
 
 function Register(props) {
   const classes = useStyles()
   const [signup] = useMutation(SIGN_UP)
-  const [name, setName] = useState("")
-  const [password, setPassword] = useState("")
-  const [email, setEmail] = useState("")
+  const [name, setName] = useState('')
+  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
 
   const handleSubmit = e => {
     e.preventDefault()
     signup({ variables: { name: name, email: email, password: password } })
       .then(res => {
-        localStorage.setItem("token", res.data.signup.token)
-        localStorage.setItem("name", res.data.signup.user.name)
+        localStorage.setItem('token', res.data.signup.token)
+        localStorage.setItem('name', res.data.signup.user.name)
       })
       .then(data => {
-        props.history.push("/dashboard")
+        props.history.push('/dashboard')
       })
   }
 
@@ -98,7 +97,7 @@ function Register(props) {
           <Grid container>
             <Grid item>
               <Link href='/login' variant='body2'>
-                {"Already have an account? Log In"}
+                {'Already have an account? Log In'}
               </Link>
             </Grid>
           </Grid>
@@ -116,16 +115,16 @@ export default Register
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1)
   },
   submit: {

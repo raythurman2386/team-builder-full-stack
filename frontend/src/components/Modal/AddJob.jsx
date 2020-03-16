@@ -1,13 +1,13 @@
-import React, { useState } from "react"
-import { makeStyles } from "@material-ui/core/styles"
-import Button from "@material-ui/core/Button"
-import TextField from "@material-ui/core/TextField"
-import IconButton from "@material-ui/core/IconButton"
-import Typography from "@material-ui/core/Typography"
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline"
-import SpringModal from "../../utils/SpringModal"
+import React, { useState } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+import IconButton from '@material-ui/core/IconButton'
+import Typography from '@material-ui/core/Typography'
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
+import SpringModal from '../../utils/SpringModal'
 import { useMutation } from '@apollo/react-hooks'
-import { ADD_JOB, GET_JOBS } from "../../queries"
+import { ADD_JOB, GET_JOBS } from '../../queries'
 
 function AddJob({ open, handleOpen }) {
   const classes = useStyles()
@@ -22,9 +22,9 @@ function AddJob({ open, handleOpen }) {
   })
 
   const [job, setJob] = useState({
-    machine: "",
-    complaint: "",
-    name: ""
+    machine: '',
+    complaint: '',
+    name: ''
   })
 
   const handleChange = e => {
@@ -33,14 +33,20 @@ function AddJob({ open, handleOpen }) {
 
   const handleSubmit = e => {
     e.preventDefault()
-    addJob({ variables: { machine: job.machine, complaint: job.complaint, tech_id: "1" } })
+    addJob({
+      variables: {
+        machine: job.machine,
+        complaint: job.complaint,
+        tech_id: '1'
+      }
+    })
       .then(res => console.log(res.data))
       .catch(err => console.log(err))
 
     setJob({
-      machine: "",
-      complaint: "",
-      name: ""
+      machine: '',
+      complaint: '',
+      name: ''
     })
 
     handleOpen()
@@ -113,16 +119,16 @@ export default AddJob
 
 const useStyles = makeStyles(theme => ({
   modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: "none",
+    border: 'none',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
-    width: "800px",
-    height: "600px"
+    width: '800px',
+    height: '600px'
   }
 }))

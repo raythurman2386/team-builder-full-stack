@@ -1,14 +1,14 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import ApolloClient from "apollo-boost"
-import { ApolloProvider } from "@apollo/react-hooks"
-import { BrowserRouter as Router, withRouter } from "react-router-dom"
-import App from "./App"
+import React from 'react'
+import ReactDOM from 'react-dom'
+import ApolloClient from 'apollo-boost'
+import { ApolloProvider } from '@apollo/react-hooks'
+import { BrowserRouter as Router, withRouter } from 'react-router-dom'
+import App from './App'
 
 const AppWithRouter = withRouter(App)
 
 const client = new ApolloClient({
-  uri: "https://graphql-teambuilder.herokuapp.com/"
+  uri: 'https://graphql-teambuilder.herokuapp.com/'
 })
 
 ReactDOM.render(
@@ -17,5 +17,5 @@ ReactDOM.render(
       <AppWithRouter />
     </ApolloProvider>
   </Router>,
-  document.getElementById("root")
+  document.getElementById('root')
 )
