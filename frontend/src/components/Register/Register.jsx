@@ -14,19 +14,8 @@ import Copyright from "../Copyright/Copyright"
 
 // Apollo deps
 import { useMutation } from "@apollo/react-hooks"
-import { gql } from "apollo-boost"
+import { SIGN_UP } from "../../queries"
 
-const SIGN_UP = gql`
-  mutation signup($name: String!, $email: String!, $password: String!) {
-    signup(name: $name, email: $email, password: $password) {
-      token
-      user {
-        name
-        email
-      }
-    }
-  }
-`
 
 function Register(props) {
   const classes = useStyles()
@@ -40,7 +29,7 @@ function Register(props) {
     signup({ variables: { name: name, email: email, password: password } })
       .then(res => {
         localStorage.setItem("token", res.data.signup.token)
-        // console.log(res.data.signup.token, 'data');
+        localStorage.setItem("name", res.data.signup.user.name)
       })
       .then(data => {
         props.history.push("/dashboard")

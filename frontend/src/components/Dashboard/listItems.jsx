@@ -6,16 +6,7 @@ import PersonIcon from "@material-ui/icons/Person"
 
 // Apollo Deps
 import { useQuery } from "@apollo/react-hooks"
-import { gql } from "apollo-boost"
-
-const GET_TECHS = gql`
-  {
-    techs {
-      id
-      name
-    }
-  }
-`
+import { GET_TECHS } from "../../queries"
 
 const MainListItems = () => {
   const { loading, error, data } = useQuery(GET_TECHS)

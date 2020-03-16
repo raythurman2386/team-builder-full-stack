@@ -10,20 +10,7 @@ import Title from "./Title"
 
 // Apollo Deps
 import { useQuery } from "@apollo/react-hooks"
-import { gql } from "apollo-boost"
-
-const GET_JOBS = gql`
-  {
-    jobs {
-      id
-      machine
-      complaint
-      tech {
-        name
-      }
-    }
-  }
-`
+import { GET_JOBS } from "../../queries"
 
 function Jobs() {
   const { loading, error, data } = useQuery(GET_JOBS)
