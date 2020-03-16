@@ -1,20 +1,24 @@
-import React, { useContext } from "react"
-import ListItem from "@material-ui/core/ListItem"
-import ListItemIcon from "@material-ui/core/ListItemIcon"
-import ListItemText from "@material-ui/core/ListItemText"
-import PersonIcon from "@material-ui/icons/Person"
-import { GlobalContext } from "../../context"
-// import useToggle from "../../hooks/useToggle"
-// import AddTech from "../Modal/AddTech"
+import React from 'react'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import PersonIcon from '@material-ui/icons/Person'
+
+// Apollo Deps
+import { useQuery } from '@apollo/react-hooks'
+import { GET_TECHS } from '../../queries'
 
 const MainListItems = () => {
-  const { techs } = useContext(GlobalContext)
+  const { loading, error, data } = useQuery(GET_TECHS)
   // const [open, handleOpen] = useToggle()
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error :(</p>
 
   return (
     <div>
-      {techs &&
-        techs.map(tech => (
+      {data.techs &&
+        data.techs.map(tech => (
           <ListItem key={tech.id} button align='center'>
             <ListItemIcon>
               <PersonIcon />
