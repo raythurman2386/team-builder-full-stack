@@ -5,12 +5,17 @@ import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
+import InputLabel from '@material-ui/core/InputLabel'
+import MenuItem from '@material-ui/core/MenuItem'
+import FormControl from '@material-ui/core/FormControl'
+import Select from '@material-ui/core/Select'
 import SpringModal from '../../utils/SpringModal'
-import { useMutation } from '@apollo/react-hooks'
-import { ADD_JOB, GET_JOBS } from '../../queries'
+import { useMutation, useQuery } from '@apollo/react-hooks'
+import { ADD_JOB, GET_JOBS, GET_TECHS } from '../../queries'
 
 function AddJob({ open, handleOpen }) {
   const classes = useStyles()
+  const { loading, error, data } = useQuery(GET_TECHS)
   const [addJob] = useMutation(ADD_JOB, {
     update(cache, { data: { addJob } }) {
       const { jobs } = cache.readQuery({ query: GET_JOBS })
@@ -24,7 +29,7 @@ function AddJob({ open, handleOpen }) {
   const [job, setJob] = useState({
     machine: '',
     complaint: '',
-    name: ''
+    tech_id: 0
   })
 
   const handleChange = e => {
@@ -37,7 +42,7 @@ function AddJob({ open, handleOpen }) {
       variables: {
         machine: job.machine,
         complaint: job.complaint,
-        tech_id: '1'
+        tech_id: job.tech_id
       }
     })
       .then(res => console.log(res.data))
@@ -46,7 +51,7 @@ function AddJob({ open, handleOpen }) {
     setJob({
       machine: '',
       complaint: '',
-      name: ''
+      tech_id: 0
     })
 
     handleOpen()
@@ -88,18 +93,33 @@ function AddJob({ open, handleOpen }) {
             value={job.complaint}
             onChange={e => handleChange(e)}
           />
-          <TextField
-            variant='outlined'
-            margin='normal'
-            required
+          <FormControl
             fullWidth
-            id='name'
-            label='Technician Name'
-            name='name'
-            autoComplete='name'
-            value={job.name}
-            onChange={e => handleChange(e)}
-          />
+            variant='outlined'
+            className={classes.formControl}
+          >
+            <InputLabel id='techs'>Tech</InputLabel>
+            <Select
+              labelId='techs'
+              value={job.tech_id}
+              name='tech_id'
+              onChange={e => handleChange(e)}
+            >
+              {loading && (
+                <MenuItem value={job.tech_id}>Loading . . .</MenuItem>
+              )}
+              {error && (
+                <MenuItem value={job.tech_id}>There's been an error</MenuItem>
+              )}
+              <MenuItem value={job.tech_id}>Select a Tech</MenuItem>
+              {data &&
+                data.techs.map(tech => (
+                  <MenuItem key={tech.id} value={tech.id}>
+                    {tech.name}
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
           <Button
             type='submit'
             fullWidth
@@ -130,5 +150,11 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2, 4, 3),
     width: '800px',
     height: '600px'
+  },
+  formControl: {
+    margin: '20px auto 20px'
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2)
   }
 }))
