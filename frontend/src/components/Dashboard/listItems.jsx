@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -19,12 +20,14 @@ const MainListItems = () => {
     <div>
       {data.techs &&
         data.techs.map(tech => (
-          <ListItem key={tech.id} button align='center'>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText primary={tech.name} />
-          </ListItem>
+          <Link to={`/dashboard/tech/${tech.id}`}>
+            <ListItem key={tech.id} button align='center'>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText primary={tech.name} />
+            </ListItem>
+          </Link>
         ))}
       {/* <AddTech open={open} handleOpen={handleOpen} /> */}
     </div>
