@@ -1,40 +1,40 @@
-import React, { useState } from 'react'
-import Avatar from '@material-ui/core/Avatar'
-import Button from '@material-ui/core/Button'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import TextField from '@material-ui/core/TextField'
-import Link from '@material-ui/core/Link'
-import Grid from '@material-ui/core/Grid'
-import Box from '@material-ui/core/Box'
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
-import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
-import Container from '@material-ui/core/Container'
-import Copyright from '../Copyright/Copyright'
+import React, { useState } from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Copyright from '../Copyright/Copyright';
 
 // Apollo deps
-import { useMutation } from '@apollo/react-hooks'
-import { SIGN_UP } from '../../queries'
+import { useMutation } from '@apollo/react-hooks';
+import { SIGN_UP } from '../../queries';
 
 function Register(props) {
-  const classes = useStyles()
-  const [signup] = useMutation(SIGN_UP)
-  const [name, setName] = useState('')
-  const [password, setPassword] = useState('')
-  const [email, setEmail] = useState('')
+  const classes = useStyles();
+  const [signup] = useMutation(SIGN_UP);
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
 
   const handleSubmit = e => {
-    e.preventDefault()
+    e.preventDefault();
     signup({ variables: { name: name, email: email, password: password } })
       .then(res => {
-        localStorage.setItem('token', res.data.signup.token)
-        localStorage.setItem('name', res.data.signup.user.name)
+        localStorage.setItem('token', res.data.signup.token);
+        localStorage.setItem('name', res.data.signup.user.name);
       })
       .then(data => {
-        props.history.push('/dashboard')
+        props.history.push('/dashboard');
       })
-      .catch(err => console.error(err))
-  }
+      .catch(err => console.error(err));
+  };
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -108,10 +108,10 @@ function Register(props) {
         <Copyright />
       </Box>
     </Container>
-  )
+  );
 }
 
-export default Register
+export default Register;
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -131,4 +131,4 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2)
   }
-}))
+}));

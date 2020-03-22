@@ -1,43 +1,43 @@
-import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
-import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
-import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select'
-import SpringModal from '../../utils/SpringModal'
-import { useMutation, useQuery } from '@apollo/react-hooks'
-import { ADD_JOB, GET_JOBS, GET_TECHS } from '../../queries'
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import SpringModal from '../../utils/SpringModal';
+import { useMutation, useQuery } from '@apollo/react-hooks';
+import { ADD_JOB, GET_JOBS, GET_TECHS } from '../../queries';
 
 function AddJob({ open, handleOpen }) {
-  const classes = useStyles()
-  const { loading, error, data } = useQuery(GET_TECHS)
+  const classes = useStyles();
+  const { loading, error, data } = useQuery(GET_TECHS);
   const [addJob] = useMutation(ADD_JOB, {
     update(cache, { data: { addJob } }) {
-      const { jobs } = cache.readQuery({ query: GET_JOBS })
+      const { jobs } = cache.readQuery({ query: GET_JOBS });
       cache.writeQuery({
         query: GET_JOBS,
         data: { jobs: jobs.concat([addJob]) }
-      })
+      });
     }
-  })
+  });
 
   const [job, setJob] = useState({
     machine: '',
     complaint: '',
     tech_id: 0
-  })
+  });
 
   const handleChange = e => {
-    setJob({ ...job, [e.target.name]: e.target.value })
-  }
+    setJob({ ...job, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = e => {
-    e.preventDefault()
+    e.preventDefault();
     addJob({
       variables: {
         machine: job.machine,
@@ -46,16 +46,16 @@ function AddJob({ open, handleOpen }) {
       }
     })
       .then(res => console.log(res.data))
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
 
     setJob({
       machine: '',
       complaint: '',
       tech_id: 0
-    })
+    });
 
-    handleOpen()
-  }
+    handleOpen();
+  };
 
   return (
     <div>
@@ -132,10 +132,10 @@ function AddJob({ open, handleOpen }) {
         </form>
       </SpringModal>
     </div>
-  )
+  );
 }
 
-export default AddJob
+export default AddJob;
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -157,4 +157,4 @@ const useStyles = makeStyles(theme => ({
   selectEmpty: {
     marginTop: theme.spacing(2)
   }
-}))
+}));

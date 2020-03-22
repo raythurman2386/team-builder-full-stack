@@ -1,9 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { makeStyles } from '@material-ui/core/styles'
-import Modal from '@material-ui/core/Modal'
-import Backdrop from '@material-ui/core/Backdrop'
-import { useSpring, animated } from 'react-spring/web.cjs' // web.cjs is required for IE 11 support
+import React from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import { useSpring, animated } from 'react-spring/web.cjs'; // web.cjs is required for IE 11 support
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -19,41 +19,41 @@ const useStyles = makeStyles(theme => ({
     width: '800px',
     height: '600px'
   }
-}))
+}));
 
 const Fade = React.forwardRef(function Fade(props, ref) {
-  const { in: open, children, onEnter, onExited, ...other } = props
+  const { in: open, children, onEnter, onExited, ...other } = props;
   const style = useSpring({
     from: { opacity: 0 },
     to: { opacity: open ? 1 : 0 },
     onStart: () => {
       if (open && onEnter) {
-        onEnter()
+        onEnter();
       }
     },
     onRest: () => {
       if (!open && onExited) {
-        onExited()
+        onExited();
       }
     }
-  })
+  });
 
   return (
     <animated.div ref={ref} style={style} {...other}>
       {children}
     </animated.div>
-  )
-})
+  );
+});
 
 Fade.propTypes = {
   children: PropTypes.element,
   in: PropTypes.bool.isRequired,
   onEnter: PropTypes.func,
   onExited: PropTypes.func
-}
+};
 
 export default function SpringModal({ open, handleOpen, children }) {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <div>
@@ -72,5 +72,5 @@ export default function SpringModal({ open, handleOpen, children }) {
         <Fade in={open}>{children}</Fade>
       </Modal>
     </div>
-  )
+  );
 }

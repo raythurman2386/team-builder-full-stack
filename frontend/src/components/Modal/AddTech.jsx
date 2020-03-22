@@ -1,20 +1,20 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import TextField from '@material-ui/core/TextField'
-import AddIcon from '@material-ui/icons/Add'
-import SpringModal from '../../utils/SpringModal'
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import TextField from '@material-ui/core/TextField';
+import AddIcon from '@material-ui/icons/Add';
+import SpringModal from '../../utils/SpringModal';
 
 function AddTech({ open, handleOpen }) {
-  const [name, setName] = React.useState('')
-  const classes = useStyles()
+  const [name, setName] = React.useState('');
+  const classes = useStyles();
 
   const handleSubmit = e => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+  };
 
   return (
     <div>
@@ -52,10 +52,10 @@ function AddTech({ open, handleOpen }) {
         </form>
       </SpringModal>
     </div>
-  )
+  );
 }
 
-export default AddTech
+export default AddTech;
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -78,4 +78,4 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2)
   }
-}))
+}));

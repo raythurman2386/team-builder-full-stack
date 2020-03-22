@@ -1,34 +1,34 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined'
-import Title from './Title'
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
+import Title from './Title';
 
 // Apollo Deps
-import { useQuery, useMutation } from '@apollo/react-hooks'
-import { GET_JOBS, DELETE_JOB } from '../../queries'
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { GET_JOBS, DELETE_JOB } from '../../queries';
 
 function Jobs() {
-  const { loading, error, data } = useQuery(GET_JOBS)
+  const { loading, error, data } = useQuery(GET_JOBS);
   const [deleteJob] = useMutation(DELETE_JOB, {
     update(cache, { data: { deleteJob } }) {
-      const { jobs } = cache.readQuery({ query: GET_JOBS })
-      console.log(deleteJob)
+      const { jobs } = cache.readQuery({ query: GET_JOBS });
+      console.log(deleteJob);
       cache.writeQuery({
         query: GET_JOBS,
         data: { jobs: jobs.filter(job => job.id !== deleteJob.id) }
-      })
+      });
     }
-  })
+  });
 
-  const classes = useStyles()
+  const classes = useStyles();
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error :(</p>
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
 
   return (
     <React.Fragment>
@@ -65,13 +65,13 @@ function Jobs() {
         </TableBody>
       </Table>
     </React.Fragment>
-  )
+  );
 }
 
-export default Jobs
+export default Jobs;
 
 const useStyles = makeStyles(theme => ({
   delete: {
     cursor: 'pointer'
   }
-}))
+}));

@@ -1,4 +1,4 @@
-import { gql } from 'apollo-boost'
+import { gql } from 'apollo-boost';
 
 export const SIGN_UP = gql`
   mutation signup($name: String!, $email: String!, $password: String!) {
@@ -10,7 +10,7 @@ export const SIGN_UP = gql`
       }
     }
   }
-`
+`;
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -21,7 +21,7 @@ export const LOGIN = gql`
       }
     }
   }
-`
+`;
 
 export const GET_JOBS = gql`
   {
@@ -34,7 +34,7 @@ export const GET_JOBS = gql`
       }
     }
   }
-`
+`;
 
 export const GET_TECHS = gql`
   {
@@ -43,7 +43,7 @@ export const GET_TECHS = gql`
       name
     }
   }
-`
+`;
 
 export const ADD_JOB = gql`
   mutation addJob($machine: String!, $complaint: String!, $tech_id: ID!) {
@@ -56,7 +56,7 @@ export const ADD_JOB = gql`
       }
     }
   }
-`
+`;
 
 export const DELETE_JOB = gql`
   mutation deleteJob($id: ID!) {
@@ -64,4 +64,4 @@ export const DELETE_JOB = gql`
       id
     }
   }
-`
+`;

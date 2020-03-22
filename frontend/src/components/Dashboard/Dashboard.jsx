@@ -1,37 +1,37 @@
-import React from 'react'
-import clsx from 'clsx'
-import { makeStyles } from '@material-ui/core/styles'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Drawer from '@material-ui/core/Drawer'
-import Box from '@material-ui/core/Box'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import Divider from '@material-ui/core/Divider'
-import IconButton from '@material-ui/core/IconButton'
-import Container from '@material-ui/core/Container'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import MenuIcon from '@material-ui/icons/Menu'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import MainListItems from './listItems'
-import Copyright from '../Copyright/Copyright'
-import Jobs from './Jobs'
-import { useToggle } from '../../hooks/useToggle'
-import AddJob from '../Modal/AddJob'
+import React from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Drawer from '@material-ui/core/Drawer';
+import Box from '@material-ui/core/Box';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import MainListItems from './listItems';
+import Copyright from '../Copyright/Copyright';
+import Jobs from './Jobs';
+import { useToggle } from '../../hooks/useToggle';
+import AddJob from '../Modal/AddJob';
 
 function Dashboard(props) {
-  const classes = useStyles()
-  const [openSide, handleOpenSide] = useToggle()
-  const [open, handleOpen] = useToggle()
+  const classes = useStyles();
+  const [openSide, handleOpenSide] = useToggle();
+  const [open, handleOpen] = useToggle();
   const [message] = React.useState(
     localStorage.getItem('name') || 'to the shop'
-  )
+  );
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
-    props.history.push('/login')
-  }
+    localStorage.removeItem('token');
+    props.history.push('/login');
+  };
 
   return (
     <div className={classes.root}>
@@ -104,12 +104,12 @@ function Dashboard(props) {
         </Container>
       </main>
     </div>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;
 
-const drawerWidth = 240
+const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -190,4 +190,4 @@ const useStyles = makeStyles(theme => ({
   fixedHeight: {
     height: 240
   }
-}))
+}));
