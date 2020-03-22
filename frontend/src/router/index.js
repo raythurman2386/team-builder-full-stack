@@ -11,6 +11,8 @@ const Router = () => (
     <Route exact path='/login' component={SignIn} />
     <Route exact path='/register' component={Register} />
     <ProtectedRoute exact path='/dashboard' component={Dashboard} />
+    {/* <ProtectedRoute exact path='/dashboard/tech/:id' component={Tech} /> */}
+    {/* <ProtectedRoute exact path='/dashboard/job/id' component={Job} /> */}
   </Switch>
 );
 
