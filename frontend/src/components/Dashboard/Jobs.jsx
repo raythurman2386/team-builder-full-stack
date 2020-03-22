@@ -17,7 +17,6 @@ function Jobs() {
   const [deleteJob] = useMutation(DELETE_JOB, {
     update(cache, { data: { deleteJob } }) {
       const { jobs } = cache.readQuery({ query: GET_JOBS });
-      console.log(deleteJob);
       cache.writeQuery({
         query: GET_JOBS,
         data: { jobs: jobs.filter(job => job.id !== deleteJob.id) }
