@@ -25,13 +25,13 @@ function SignIn(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    login({ variables: { email: email, password: password } })
+    login({ variables: { email, password } })
       .then(res => {
         localStorage.setItem('token', res.data.login.token);
         localStorage.setItem('name', res.data.login.user.name);
       })
       .then(data => props.history.push('/dashboard'))
-      .catch(err => console.log(err.response));
+      .catch(err => alert(err.message));
   };
 
   return (

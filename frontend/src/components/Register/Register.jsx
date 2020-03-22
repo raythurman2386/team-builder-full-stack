@@ -33,7 +33,7 @@ function Register(props) {
       .then(data => {
         props.history.push('/dashboard');
       })
-      .catch(err => console.error(err));
+      .catch(err => alert(err.message));
   };
 
   return (
