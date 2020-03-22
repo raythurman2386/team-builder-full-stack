@@ -6,7 +6,12 @@ function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
-      <Link color='inherit' href='https://raythurman.com' target="__blank" rel="noreferrer">
+      <Link
+        color='inherit'
+        href='https://raythurman.com'
+        target='__blank'
+        rel='noreferrer'
+      >
         Ray Thurman
       </Link>{' '}
       {new Date().getFullYear()}
