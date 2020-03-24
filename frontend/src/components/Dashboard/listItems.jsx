@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -10,6 +11,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { GET_TECHS } from '../../queries';
 
 const MainListItems = () => {
+  const classes = useStyles();
   const { loading, error, data } = useQuery(GET_TECHS);
   // const [open, handleOpen] = useToggle()
 
@@ -20,8 +22,12 @@ const MainListItems = () => {
     <div>
       {data.techs &&
         data.techs.map(tech => (
-          <Link to={`/dashboard/tech/${tech.id}`}>
-            <ListItem key={tech.id} button align='center'>
+          <Link
+            className={classes.link}
+            key={tech.id}
+            to={`/dashboard/tech/${tech.id}`}
+          >
+            <ListItem button align='center'>
               <ListItemIcon>
                 <PersonIcon />
               </ListItemIcon>
@@ -35,3 +41,10 @@ const MainListItems = () => {
 };
 
 export default MainListItems;
+
+const useStyles = makeStyles(theme => ({
+  link: {
+    textDecoration: 'none',
+    color: 'inherit'
+  }
+}));
