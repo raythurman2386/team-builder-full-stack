@@ -45,14 +45,14 @@ function AddJob({ open, handleOpen }) {
         tech_id: job.tech_id
       }
     })
-      .then(res => console.log(res.data))
-      .catch(err => console.log(err));
-
-    setJob({
-      machine: '',
-      complaint: '',
-      tech_id: 0
-    });
+      .then(res =>
+        setJob({
+          machine: '',
+          complaint: '',
+          tech_id: 0
+        })
+      )
+      .catch(err => alert(err.message));
 
     handleOpen();
   };
