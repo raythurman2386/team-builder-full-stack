@@ -12,7 +12,7 @@ import Title from './Title';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { GET_JOBS, DELETE_JOB } from '../../queries';
 
-function Jobs() {
+function Jobs({ props }) {
   const { loading, error, data } = useQuery(GET_JOBS);
   const [deleteJob] = useMutation(DELETE_JOB, {
     update(cache, { data: { deleteJob } }) {
@@ -47,7 +47,7 @@ function Jobs() {
               <TableRow
                 key={job.id}
                 className={classes.row}
-                onClick={() => console.log(`clicked ${job.id}`)}
+                onClick={() => props.history.push(`/job/${job.id}`)}
               >
                 <TableCell align='center'>{job.machine}</TableCell>
                 <TableCell align='center'>{job.complaint}</TableCell>

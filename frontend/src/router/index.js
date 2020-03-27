@@ -4,6 +4,7 @@ import SignIn from '../components/SignIn/SignIn';
 import Register from '../components/Register/Register';
 import Dashboard from '../components/Dashboard/Dashboard';
 import ProtectedRoute from '../utils/ProtectedRoute';
+import UpdateJob from '../components/Modal/UpdateJob';
 
 const Router = () => (
   <Switch>
@@ -12,7 +13,7 @@ const Router = () => (
     <Route exact path='/register' component={Register} />
     <ProtectedRoute exact path='/dashboard' component={Dashboard} />
     {/* <ProtectedRoute exact path='/dashboard/tech/:id' component={Tech} /> */}
-    {/* <ProtectedRoute exact path='/dashboard/job/id' component={Job} /> */}
+    <ProtectedRoute exact path='/dashboard/job/:id' component={UpdateJob} />
   </Switch>
 );
 

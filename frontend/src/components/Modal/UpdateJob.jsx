@@ -17,7 +17,7 @@ function UpdateJob(props, { open, handleOpen }) {
   const classes = useStyles();
   const { loading, error, data } = useQuery(GET_TECHS);
   const [updateJob] = useMutation(UPDATE_JOB, {
-    update(cache, { data: { addJob } }) {
+    update(cache, { data: { updateJob } }) {
       const { jobs } = cache.readQuery({ query: GET_JOBS });
       let newJobs = jobs.filter(job => job.id !== props.match.params.id);
       cache.writeQuery({
@@ -28,9 +28,9 @@ function UpdateJob(props, { open, handleOpen }) {
   });
 
   const [job, setJob] = useState({
-    machine: props.machine,
-    complaint: props.complaint,
-    tech_id: props.tech_id
+    machine: props.job.machine,
+    complaint: props.job.complaint,
+    tech_id: props.job.tech_id
   });
 
   const handleChange = e => {
