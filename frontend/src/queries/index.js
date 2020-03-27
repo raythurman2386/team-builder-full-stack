@@ -58,6 +58,29 @@ export const ADD_JOB = gql`
   }
 `;
 
+export const UPDATE_JOB = gql`
+  mutation updateJob(
+    $id: Int!
+    $machine: String!
+    $complaint: String!
+    $tech_id: ID!
+  ) {
+    updateJob(
+      id: $id
+      machine: $machine
+      complaint: $complaint
+      tech_id: $tech_id
+    ) {
+      id
+      machine
+      complaint
+      tech {
+        name
+      }
+    }
+  }
+`;
+
 export const DELETE_JOB = gql`
   mutation deleteJob($id: ID!) {
     deleteJob(id: $id) {
