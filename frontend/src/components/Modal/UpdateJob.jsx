@@ -11,25 +11,26 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import SpringModal from '../../utils/SpringModal';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { ADD_JOB, GET_JOBS, GET_TECHS } from '../../queries';
+import { UPDATE_JOB, GET_JOBS, GET_TECHS } from '../../queries';
 
-function AddJob({ open, handleOpen }) {
+function UpdateJob(props, { open, handleOpen }) {
   const classes = useStyles();
   const { loading, error, data } = useQuery(GET_TECHS);
-  const [addJob] = useMutation(ADD_JOB, {
+  const [updateJob] = useMutation(UPDATE_JOB, {
     update(cache, { data: { addJob } }) {
       const { jobs } = cache.readQuery({ query: GET_JOBS });
+      let newJobs = jobs.filter(job => job.id !== props.match.params.id);
       cache.writeQuery({
         query: GET_JOBS,
-        data: { jobs: jobs.concat([addJob]) }
+        data: { jobs: newJobs.concat([updateJob]) }
       });
     }
   });
 
   const [job, setJob] = useState({
-    machine: '',
-    complaint: '',
-    tech_id: 0
+    machine: props.machine,
+    complaint: props.complaint,
+    tech_id: props.tech_id
   });
 
   const handleChange = e => {
@@ -38,23 +39,15 @@ function AddJob({ open, handleOpen }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    addJob({
+    updateJob({
       variables: {
         machine: job.machine,
         complaint: job.complaint,
         tech_id: job.tech_id
       }
     })
-      .then(res =>
-        setJob({
-          machine: '',
-          complaint: '',
-          tech_id: 0
-        })
-      )
+      .then(res => handleOpen())
       .catch(err => alert(err.message));
-
-    handleOpen();
   };
 
   return (
@@ -135,7 +128,7 @@ function AddJob({ open, handleOpen }) {
   );
 }
 
-export default AddJob;
+export default UpdateJob;
 
 const useStyles = makeStyles(theme => ({
   modal: {
