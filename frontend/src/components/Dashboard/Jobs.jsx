@@ -44,7 +44,11 @@ function Jobs() {
         <TableBody>
           {data.jobs &&
             data.jobs.map(job => (
-              <TableRow key={job.id}>
+              <TableRow
+                key={job.id}
+                className={classes.row}
+                onClick={() => console.log(`clicked ${job.id}`)}
+              >
                 <TableCell align='center'>{job.machine}</TableCell>
                 <TableCell align='center'>{job.complaint}</TableCell>
                 {job.tech ? (
@@ -72,5 +76,11 @@ export default Jobs;
 const useStyles = makeStyles(theme => ({
   delete: {
     cursor: 'pointer'
+  },
+  row: {
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: 'rgb(7, 177, 77, 0.42)'
+    }
   }
 }));
