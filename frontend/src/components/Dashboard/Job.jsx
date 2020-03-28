@@ -6,7 +6,7 @@ import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined'
 import { useMutation } from '@apollo/react-hooks';
 import { GET_JOBS, DELETE_JOB } from '../../queries';
 
-const Job = ({ job, props }) => {
+const Job = ({ job }, props) => {
   const classes = useStyles();
   const [deleteJob] = useMutation(DELETE_JOB, {
     update(cache, { data: { deleteJob } }) {

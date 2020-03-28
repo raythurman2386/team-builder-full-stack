@@ -11,7 +11,7 @@ import Job from './Job';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_JOBS } from '../../queries';
 
-function Jobs({ props }) {
+function Jobs(props) {
   const { loading, error, data } = useQuery(GET_JOBS);
 
   if (loading) return <p>Loading...</p>;
@@ -30,8 +30,7 @@ function Jobs({ props }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.jobs &&
-            data.jobs.map(job => <Job key={job.id} job={job} props={props} />)}
+          {data.jobs && data.jobs.map(job => <Job key={job.id} job={job} />)}
         </TableBody>
       </Table>
     </React.Fragment>
