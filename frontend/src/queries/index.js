@@ -60,10 +60,10 @@ export const ADD_JOB = gql`
 
 export const UPDATE_JOB = gql`
   mutation updateJob(
-    $id: Int!
+    $id: ID!
     $machine: String!
     $complaint: String!
-    $tech_id: ID!
+    $tech_id: Int!
   ) {
     updateJob(
       id: $id

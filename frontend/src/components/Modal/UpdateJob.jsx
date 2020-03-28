@@ -38,18 +38,19 @@ function UpdateJob({ props }) {
     e.preventDefault();
     updateJob({
       variables: {
+        id: props.match.params.id,
         machine: job.machine,
         complaint: job.complaint,
         tech_id: job.tech_id
       }
     })
-      .then(res => console.log(res))
+      .then(res => props.history.push('/dashboard'))
       .catch(err => alert(err.message));
   };
 
   return (
     <Layout>
-      <form className={classes.paper} onSubmit={handleSubmit} fullWidth>
+      <form className={classes.paper} onSubmit={handleSubmit}>
         <h2 id='spring-modal-title'>Update Job</h2>
         <TextField
           variant='outlined'
