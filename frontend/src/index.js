@@ -8,7 +8,8 @@ import App from './App';
 const AppWithRouter = withRouter(App);
 
 const client = new ApolloClient({
-  uri: 'https://graphql-teambuilder.herokuapp.com/'
+  // uri: 'https://graphql-teambuilder.herokuapp.com/'
+  uri: 'http://localhost:8000/'
 });
 
 ReactDOM.render(
