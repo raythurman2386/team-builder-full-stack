@@ -14,21 +14,21 @@ import Copyright from '../Copyright/Copyright';
 
 // Apollo deps
 import { useMutation } from '@apollo/react-hooks';
-import { SIGN_UP } from '../../queries';
+import { REGISTER } from '../../queries';
 
 function Register(props) {
   const classes = useStyles();
-  const [signup] = useMutation(SIGN_UP);
+  const [register] = useMutation(REGISTER);
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-    signup({ variables: { name: name, email: email, password: password } })
+    register({ variables: { name: name, email: email, password: password } })
       .then(res => {
-        localStorage.setItem('token', res.data.signup.token);
-        localStorage.setItem('name', res.data.signup.user.name);
+        localStorage.setItem('token', res.data.register.token);
+        localStorage.setItem('name', res.data.register.user.name);
       })
       .then(data => {
         props.history.push('/dashboard');
