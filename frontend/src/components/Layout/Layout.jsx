@@ -28,7 +28,7 @@ function Layout(props) {
   );
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('accessToken');
     props.history.push('/login');
   };
 

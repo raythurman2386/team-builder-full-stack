@@ -29,7 +29,7 @@ function AddJob({ open, handleOpen }) {
   const [job, setJob] = useState({
     machine: '',
     complaint: '',
-    tech_id: 0
+    tech: ''
   });
 
   const handleChange = e => {
@@ -42,14 +42,14 @@ function AddJob({ open, handleOpen }) {
       variables: {
         machine: job.machine,
         complaint: job.complaint,
-        tech_id: job.tech_id
+        tech: job.tech
       }
     })
       .then(res =>
         setJob({
           machine: '',
           complaint: '',
-          tech_id: 0
+          tech: ''
         })
       )
       .catch(err => alert(err.message));
@@ -101,20 +101,18 @@ function AddJob({ open, handleOpen }) {
             <InputLabel id='techs'>Tech</InputLabel>
             <Select
               labelId='techs'
-              value={job.tech_id}
-              name='tech_id'
+              value={job.tech}
+              name='tech'
               onChange={e => handleChange(e)}
             >
-              {loading && (
-                <MenuItem value={job.tech_id}>Loading . . .</MenuItem>
-              )}
+              {loading && <MenuItem value={job.tech}>Loading . . .</MenuItem>}
               {error && (
-                <MenuItem value={job.tech_id}>There's been an error</MenuItem>
+                <MenuItem value={job.tech}>There's been an error</MenuItem>
               )}
-              <MenuItem value={job.tech_id}>Select a Tech</MenuItem>
+              <MenuItem value={job.tech}>Select a Tech</MenuItem>
               {data &&
                 data.techs.map(tech => (
-                  <MenuItem key={tech.id} value={tech.id}>
+                  <MenuItem key={tech.id} value={tech.name}>
                     {tech.name}
                   </MenuItem>
                 ))}

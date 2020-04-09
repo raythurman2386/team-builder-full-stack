@@ -39,8 +39,8 @@ export const GET_TECHS = gql`
 `;
 
 export const ADD_JOB = gql`
-  mutation addJob($machine: String!, $complaint: String!, $tech_id: ID!) {
-    addJob(machine: $machine, complaint: $complaint, tech_id: $tech_id) {
+  mutation addJob($machine: String!, $complaint: String!, $tech: String!) {
+    addJob(machine: $machine, complaint: $complaint, tech: $tech) {
       id
       machine
       complaint
