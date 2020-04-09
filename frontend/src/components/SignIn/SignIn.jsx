@@ -27,8 +27,7 @@ function SignIn(props) {
     e.preventDefault();
     login({ variables: { email, password } })
       .then(res => {
-        localStorage.setItem('token', res.data.login.token);
-        localStorage.setItem('name', res.data.login.user.name);
+        localStorage.setItem('accessToken', res.data.login.accessToken);
       })
       .then(data => props.history.push('/dashboard'))
       .catch(err => alert(err.message));
