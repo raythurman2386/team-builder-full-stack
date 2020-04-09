@@ -9,7 +9,7 @@ const AppWithRouter = withRouter(App);
 
 const client = new ApolloClient({
   // uri: 'https://graphql-teambuilder.herokuapp.com/'
-  uri: 'http://localhost:8000/'
+  uri: 'http://localhost:8000/graphql'
 });
 
 ReactDOM.render(

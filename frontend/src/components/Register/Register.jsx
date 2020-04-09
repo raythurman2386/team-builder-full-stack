@@ -27,13 +27,16 @@ function Register(props) {
     e.preventDefault();
     register({ variables: { name: name, email: email, password: password } })
       .then(res => {
-        localStorage.setItem('token', res.data.register.token);
-        localStorage.setItem('name', res.data.register.user.name);
+        localStorage.setItem('accessToken', res.data.register.accessToken);
+        // localStorage.setItem('name', res.data.register.user.name);
       })
       .then(data => {
         props.history.push('/dashboard');
       })
-      .catch(err => alert(err.message));
+      .catch(err => {
+        console.log(err);
+        alert(err.message);
+      });
   };
 
   return (
