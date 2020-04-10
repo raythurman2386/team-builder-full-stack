@@ -65,3 +65,20 @@ export const DELETE_JOB = gql`
     }
   }
 `;
+
+export const ADD_TECH = gql`
+  mutation addTech($name: String!) {
+    addTech(name: $name) {
+      id
+      name
+    }
+  }
+`;
+
+export const DELETE_TECH = gql`
+  mutation deleteTech($id: ID!) {
+    deleteTech(id: $id) {
+      id
+    }
+  }
+`;
