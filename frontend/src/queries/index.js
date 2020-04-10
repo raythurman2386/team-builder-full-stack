@@ -58,6 +58,29 @@ export const ADD_JOB = gql`
   }
 `;
 
+export const UPDATE_JOB = gql`
+  mutation updateJob(
+    $id: ID!
+    $machine: String!
+    $complaint: String!
+    $tech_id: ID!
+  ) {
+    updateJob(
+      id: $id
+      machine: $machine
+      complaint: $complaint
+      tech_id: $tech_id
+    ) {
+      id
+      machine
+      complaint
+      tech {
+        name
+      }
+    }
+  }
+`;
+
 export const DELETE_JOB = gql`
   mutation deleteJob($id: ID!) {
     deleteJob(id: $id) {
@@ -69,6 +92,15 @@ export const DELETE_JOB = gql`
 export const ADD_TECH = gql`
   mutation addTech($name: String!) {
     addTech(name: $name) {
+      id
+      name
+    }
+  }
+`;
+
+export const UPDATE_TECH = gql`
+  mutation updateTech($id: ID!, $name: String!) {
+    updateTech(id: $id, name: $name) {
       id
       name
     }
