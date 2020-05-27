@@ -114,3 +114,15 @@ export const DELETE_TECH = gql`
     }
   }
 `;
+
+export const INITIATE = gql`
+  mutation initiateReset($email: String!) {
+    initiateReset(email: $email)
+  }
+`;
+
+export const VALIDATE = gql`
+  mutation validateReset($email: String!, $password: String!) {
+    validateReset(email: $email, password: $password)
+  }
+`;
